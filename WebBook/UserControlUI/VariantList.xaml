@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="WebBook.UserControlUI.VariantList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WebBook.UserControlUI" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" Margin="10">
+    <Grid>
+        <DockPanel HorizontalAlignment="Left"  
+                   x:Name="FFF">
+
+            <Border Height="55"
+                    x:Name="BorderLed"    
+                    Background="{DynamicResource SecundaryBackgroundColor}"  
+                    CornerRadius="15">
+
+                <DockPanel LastChildFill="False">
+
+                   
+                    <CheckBox VerticalAlignment="Center"
+                              x:Name="CbCheck"      
+                              Background="Transparent"
+                              Margin="5"
+                              BorderBrush="{DynamicResource TertiaryBackgroundColor}"
+                              Checked="CbCheck_Checked_1" 
+                              Unchecked="CbCheck_Unchecked_1"/>
+
+
+
+                    <xctk:WatermarkTextBox 
+                        x:Name="AnswerV"  
+                        Height="55"                 
+                        Watermark="Введите вариант"                                         
+                        Foreground="{DynamicResource PrimaryTextColor}"                       
+                        FontSize="20"
+                        Margin="5 0 0 0"
+                        VerticalContentAlignment="Center" 
+                        BorderThickness="0"
+                        Background="Transparent"               
+                        BorderBrush="Transparent"/>
+
+                    <Border Background="{DynamicResource PrimaryBackgroundColor}"
+                                    Width="32"
+                                    Height="32" 
+                                    CornerRadius="10"
+                            x:Name="BtDelAnsw"
+                                    DockPanel.Dock="Right"
+                                    Margin="5"
+                            MouseLeftButtonDown="BtDelAnsw_MouseLeftButtonDown">
+
+                        <Image Source="{DynamicResource Delete}" 
+                                       Width="22" 
+                                       Height="22"
+                                       Style="{StaticResource ImageApp}"/>
+                    </Border>
+                </DockPanel>
+            </Border>
+        </DockPanel>
+    </Grid>
+</UserControl>

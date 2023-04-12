@@ -1,0 +1,126 @@
+﻿<Window x:Class="WebBook.WindowForm.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebBook.WindowForm"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Height="832" Width="1280" Background="{DynamicResource PrimaryBackgroundColor}"   WindowStartupLocation="CenterOwner" >
+    
+ 
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" 
+                CornerRadius="0 15 15 0"
+                Background="{DynamicResource SecundaryBackgroundColor}">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" 
+                            Grid.Row="0">
+                    <Image Source="/Resources/WebBooNoText.png" 
+                           Width="40"
+                           Height="40"
+                           Margin="10"
+                           VerticalAlignment="Center"/>
+
+                    <TextBlock Text="WebBook"
+                               VerticalAlignment="Center"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource PrimaryTextColor}"/>
+
+                </StackPanel>
+
+
+
+
+                <StackPanel Grid.Row="1">
+                    <RadioButton x:Name="RbHome"
+                                 Content="Главная" 
+                                 Style="{DynamicResource MenuRadioButtonStyle}"
+                                 Tag="{DynamicResource Home}" 
+                                 Margin="0 10 0 0"
+                                 Click="rdHome_Click" IsChecked="False" />
+                    <RadioButton x:Name="RbUser" 
+                                 Content="Профиль" 
+                                 Style="{DynamicResource MenuRadioButtonStyle}" 
+                                 Tag="{DynamicResource User}" Margin="0 10 0 0"
+                                 Click="rdUser_Click"  />
+                    <RadioButton x:Name="RbUsers"
+                                 Content="Пользователи" 
+                                 Style="{DynamicResource MenuRadioButtonStyle}" 
+                                 Tag="{DynamicResource Users}"
+                                 Margin="0 10 0 0" Click="rdUsers_Click"/>
+
+                    <RadioButton x:Name="RbRes"
+                                 Content="Результат " 
+                                 Style="{DynamicResource MenuRadioButtonStyle}" 
+                                 Tag="{DynamicResource Users}"
+                                 Margin="0 10 0 0" Click="RbRes_Click"/>
+                    <RadioButton x:Name="RbAddTopic"
+                                 Content="Добавить тему" 
+                                 Style="{DynamicResource MenuRadioButtonStyle}" 
+                                 Tag="{DynamicResource Answer}"
+                                 Margin="0 10 0 0" Click="RdAddTopic_Click"/>
+                    <RadioButton x:Name="RbAddTask"
+                                 Content="Добавить задание" 
+                                 Style="{DynamicResource MenuRadioButtonStyle}" 
+                                 Tag="{DynamicResource Question}"
+                                 Margin="0 10 0 0" Click="RdAddTask_Click"/>
+                    <RadioButton x:Name="RbAddTest"
+                                 Content="Добавить тест" 
+                                 Style="{DynamicResource MenuRadioButtonStyle}" 
+                                 Tag="{DynamicResource Question}"
+                                 Margin="0 10 0 0" Click="RdAddTest_Click"/>
+
+                    <Separator Margin="20" Background="{DynamicResource PrimaryBackgroundColor}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <RadioButton 
+                             VerticalAlignment="Bottom"
+                             x:Name="RbExit"
+                             Content="Выйти"
+                             Style="{DynamicResource MenuRadioButtonStyle}" 
+                             Tag="{DynamicResource Exit}"
+                             Margin="0 10 0 0" Click="rdExit_Click"/>
+                </StackPanel>
+            </Grid>
+
+        </Border>
+
+        <Grid Grid.Column="1">
+
+            <Frame x:Name="fContainer"
+                   NavigationUIVisibility="Hidden">
+
+            </Frame>
+
+
+
+
+        </Grid>
+
+
+   
+
+
+
+
+
+
+    </Grid>
+</Window>

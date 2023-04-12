@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="WebBook.UserControlUI.QuestionList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WebBook.UserControlUI" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="220" d:DesignWidth="700">
+    <Grid>
+        <StackPanel>
+            <StackPanel Margin="10">
+
+                <DockPanel LastChildFill="False" x:Name="DpContQuest">
+                    <TextBlock Text="Текст вопроса*"                                    
+                           Margin="12"                                   
+                           Foreground="{DynamicResource PrimaryTextColor}"                                    
+                           FontSize="20"/>
+
+                    <Border Background="{DynamicResource PrimaryBackgroundColor}"
+                                    Width="32"
+                                    Height="32" 
+                                    CornerRadius="10"
+                                    DockPanel.Dock="Right"
+                                    Margin="5" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
+
+                        <Image Source="{DynamicResource Delete}" 
+                                       Width="22" 
+                                       Height="22"
+                                       Style="{StaticResource ImageApp}"/>
+                    </Border>
+                </DockPanel>
+
+
+
+                <Border Height="55"
+                        Background="{DynamicResource SecundaryBackgroundColor}"  
+                        CornerRadius="15">
+
+                    <DockPanel>
+                        <xctk:WatermarkTextBox 
+                            x:Name="TitleQuestion"
+                            Height="55"                 
+                            Watermark="Введите текст вопроса"                                         
+                            Foreground="{DynamicResource PrimaryTextColor}"                       
+                            FontSize="20"  
+                            MaxLength="200"
+                            Margin="5 0 0 0"
+                            VerticalContentAlignment="Center"              
+                            Background="Transparent"   
+                            BorderThickness="0"
+                            BorderBrush="Transparent"/>
+
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+
+            
+            <StackPanel x:Name="ListVariant" Margin="10"/>
+
+
+
+            <Border Background="{DynamicResource SecundaryBackgroundColor}"
+                    HorizontalAlignment="Left"               
+                    Width="32"             
+                    Height="32"           
+                    CornerRadius="10"            
+                    Margin="10" 
+                    x:Name="BtAddVariant"
+                    MouseLeftButtonDown="Border_MouseLeftButtonDown"
+                    >
+
+                <Image Source="{DynamicResource Plus}"                
+                       Width="12" 
+                       Height="12"
+                       Style="{StaticResource ImageApp}"/>
+            </Border>
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>

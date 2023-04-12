@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище WebBookBDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnswerPractical">
+          <Key>
+            <PropertyRef Name="IdAnswer" />
+          </Key>
+          <Property Name="IdAnswer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PracricalAnswer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="TaskAnswer" Type="int" Nullable="false" />
+          <Property Name="GradeAnswer" Type="int" />
+        </EntityType>
+        <EntityType Name="Percent">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="PercentTopic" Type="int" />
+          <Property Name="PercentTest" Type="int" />
+          <Property Name="PercentTask" Type="int" />
+        </EntityType>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="IdResult" />
+          </Key>
+          <Property Name="IdResult" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="IdTest" Type="int" Nullable="false" />
+          <Property Name="TrueAnswerTest" Type="int" Nullable="false" />
+          <Property Name="FalseAnswerTest" Type="int" Nullable="false" />
+          <Property Name="GradeTest" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleRole" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="IDTask" />
+          </Key>
+          <Property Name="IDTask" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicTask" Type="int" Nullable="false" />
+          <Property Name="TitleTask" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PracticalTask" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="LastDateTask" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="IdTest" />
+          </Key>
+          <Property Name="IdTest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicTest" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="TitleTest" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="JsonFile" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="IDTopic" />
+          </Key>
+          <Property Name="IDTopic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleTopic" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DescriptionTopic" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="LectureTopic" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="UrlVideoTopic" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageUser" Type="image" />
+          <Property Name="NameUser" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SurnameUser" Type="nvarchar" MaxLength="500" />
+          <Property Name="PatronymicUser" Type="nvarchar" MaxLength="500" />
+          <Property Name="EmailUser" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PasswordUser" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="RoleUser" Type="int" Nullable="false" />
+          <Property Name="SecretWordUser" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK_Answer_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AnswerPractical" Type="Self.AnswerPractical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="AnswerPractical">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="IDRole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище WebBookBDModelContainer">
+          <EntitySet Name="AnswerPractical" EntityType="Self.AnswerPractical" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Percent" EntityType="Self.Percent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Results" EntityType="Self.Results" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Answer_User" Association="Self.FK_Answer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="AnswerPractical" EntitySet="AnswerPractical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_User" Association="Self.FK_Results_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebBookBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnswerPractical">
+          <Key>
+            <PropertyRef Name="IdAnswer" />
+          </Key>
+          <Property Name="IdAnswer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PracricalAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="TaskAnswer" Type="Int32" Nullable="false" />
+          <Property Name="GradeAnswer" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Answer_User" FromRole="AnswerPractical" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Percent">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="PercentTopic" Type="Int32" />
+          <Property Name="PercentTest" Type="Int32" />
+          <Property Name="PercentTask" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="IdResult" />
+          </Key>
+          <Property Name="IdResult" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IdTest" Type="Int32" Nullable="false" />
+          <Property Name="TrueAnswerTest" Type="Int32" Nullable="false" />
+          <Property Name="FalseAnswerTest" Type="Int32" Nullable="false" />
+          <Property Name="GradeTest" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Results_User" FromRole="Results" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="IDTask" />
+          </Key>
+          <Property Name="IDTask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicTask" Type="Int32" Nullable="false" />
+          <Property Name="TitleTask" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PracticalTask" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastDateTask" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="IdTest" />
+          </Key>
+          <Property Name="IdTest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicTest" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TitleTest" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JsonFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="IDTopic" />
+          </Key>
+          <Property Name="IDTopic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleTopic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DescriptionTopic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LectureTopic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrlVideoTopic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageUser" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="NameUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SurnameUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PatronymicUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmailUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleUser" Type="Int32" Nullable="false" />
+          <Property Name="SecretWordUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AnswerPractical" Relationship="Self.FK_Answer_User" FromRole="User" ToRole="AnswerPractical" />
+          <NavigationProperty Name="Results" Relationship="Self.FK_Results_User" FromRole="User" ToRole="Results" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_Answer_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AnswerPractical" Type="Self.AnswerPractical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="AnswerPractical">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="IDRole" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebBookBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnswerPractical" EntityType="Self.AnswerPractical" />
+          <EntitySet Name="Percent" EntityType="Self.Percent" />
+          <EntitySet Name="Results" EntityType="Self.Results" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Task" EntityType="Self.Task" />
+          <EntitySet Name="Test" EntityType="Self.Test" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_Answer_User" Association="Self.FK_Answer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="AnswerPractical" EntitySet="AnswerPractical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_User" Association="Self.FK_Results_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище WebBookBDModelContainer" CdmEntityContainer="WebBookBDEntities">
+          <EntitySetMapping Name="AnswerPractical">
+            <EntityTypeMapping TypeName="WebBookBDModel.AnswerPractical">
+              <MappingFragment StoreEntitySet="AnswerPractical">
+                <ScalarProperty Name="IdAnswer" ColumnName="IdAnswer" />
+                <ScalarProperty Name="PracricalAnswer" ColumnName="PracricalAnswer" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="TaskAnswer" ColumnName="TaskAnswer" />
+                <ScalarProperty Name="GradeAnswer" ColumnName="GradeAnswer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Percent">
+            <EntityTypeMapping TypeName="WebBookBDModel.Percent">
+              <MappingFragment StoreEntitySet="Percent">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="PercentTopic" ColumnName="PercentTopic" />
+                <ScalarProperty Name="PercentTest" ColumnName="PercentTest" />
+                <ScalarProperty Name="PercentTask" ColumnName="PercentTask" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="WebBookBDModel.Results">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="IdResult" ColumnName="IdResult" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdTest" ColumnName="IdTest" />
+                <ScalarProperty Name="TrueAnswerTest" ColumnName="TrueAnswerTest" />
+                <ScalarProperty Name="FalseAnswerTest" ColumnName="FalseAnswerTest" />
+                <ScalarProperty Name="GradeTest" ColumnName="GradeTest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="WebBookBDModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="TitleRole" ColumnName="TitleRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WebBookBDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task">
+            <EntityTypeMapping TypeName="WebBookBDModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="IDTask" ColumnName="IDTask" />
+                <ScalarProperty Name="TopicTask" ColumnName="TopicTask" />
+                <ScalarProperty Name="TitleTask" ColumnName="TitleTask" />
+                <ScalarProperty Name="PracticalTask" ColumnName="PracticalTask" />
+                <ScalarProperty Name="LastDateTask" ColumnName="LastDateTask" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test">
+            <EntityTypeMapping TypeName="WebBookBDModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="IdTest" ColumnName="IdTest" />
+                <ScalarProperty Name="TopicTest" ColumnName="TopicTest" />
+                <ScalarProperty Name="TitleTest" ColumnName="TitleTest" />
+                <ScalarProperty Name="JsonFile" ColumnName="JsonFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topic">
+            <EntityTypeMapping TypeName="WebBookBDModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="IDTopic" ColumnName="IDTopic" />
+                <ScalarProperty Name="TitleTopic" ColumnName="TitleTopic" />
+                <ScalarProperty Name="DescriptionTopic" ColumnName="DescriptionTopic" />
+                <ScalarProperty Name="LectureTopic" ColumnName="LectureTopic" />
+                <ScalarProperty Name="UrlVideoTopic" ColumnName="UrlVideoTopic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="WebBookBDModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="ImageUser" ColumnName="ImageUser" />
+                <ScalarProperty Name="NameUser" ColumnName="NameUser" />
+                <ScalarProperty Name="SurnameUser" ColumnName="SurnameUser" />
+                <ScalarProperty Name="PatronymicUser" ColumnName="PatronymicUser" />
+                <ScalarProperty Name="EmailUser" ColumnName="EmailUser" />
+                <ScalarProperty Name="PasswordUser" ColumnName="PasswordUser" />
+                <ScalarProperty Name="RoleUser" ColumnName="RoleUser" />
+                <ScalarProperty Name="SecretWordUser" ColumnName="SecretWordUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

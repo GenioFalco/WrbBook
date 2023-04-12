@@ -1,0 +1,187 @@
+﻿<Page x:Class="WebBook.PageWindow.AddEditTopicPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WebBook.PageWindow" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d" 
+      d:DesignHeight="832" d:DesignWidth="1280"
+      Background="{DynamicResource PrimaryBackgroundColor}"
+      Title="AddEditTopicPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="Добавление" 
+                       FontSize="24"
+                       x:Name="AddT"
+                       Visibility="Collapsed"
+                       Margin="35 0 0 0"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource PrimaryTextColor}"/>
+            <TextBlock Text="Редактирование"
+                       FontSize="24"
+                       Margin="35 0 0 0"
+                       x:Name="Edit"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource PrimaryTextColor}"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel HorizontalAlignment="Left"                                                                       
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Grid.Row="0"
+                        Visibility="Collapsed"
+                        Grid.Column="1">
+
+                <TextBlock Text="Видео урок"                                    
+                           Margin="12"                                   
+                           Foreground="{DynamicResource PrimaryTextColor}"                                    
+                           FontSize="20"/>
+
+                <Border Width="300"
+                        Height="55"
+                        
+                        Background="{DynamicResource SecundaryBackgroundColor}"
+                        CornerRadius="15">
+
+                    <DockPanel>
+                        <Button Content="Выберите видео урок"
+                                x:Name="OpenVideo"
+                                Style="{DynamicResource StuleButton}" Click="OpenVideo_Click"/>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right"                                                                       
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Grid.Row="0"
+                        Grid.Column="0">
+
+                <TextBlock Text="Наименование темы*"                                    
+                           Margin="12"                                   
+                           Foreground="{DynamicResource PrimaryTextColor}"                                    
+                           FontSize="20"/>
+
+                <Border Width="300"
+                        Height="55"
+                        Background="{DynamicResource SecundaryBackgroundColor}"
+                        CornerRadius="15">
+
+                    <DockPanel>
+                        <xctk:WatermarkTextBox 
+                            x:Name="Title1"
+                            Height="55"    
+                            Width="290"
+                            Watermark="Введите наименование"                                         
+                            Foreground="{DynamicResource PrimaryTextColor}"                       
+                            FontSize="20"                
+                            HorizontalAlignment="Left"               
+                            Margin="5 0 0 0"               
+                            VerticalContentAlignment="Center"              
+                            Background="Transparent"               
+                            BorderBrush="Transparent"
+                            BorderThickness="0"/>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel HorizontalAlignment="Right"                                                                       
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Grid.Row="1"
+                        Grid.Column="0">
+
+                <TextBlock Text="Описание*"                                    
+                           Margin="12"                                   
+                           Foreground="{DynamicResource PrimaryTextColor}"                                    
+                           FontSize="20"/>
+
+                <Border Width="300"
+                        Height="55"
+                        
+                        Background="{DynamicResource SecundaryBackgroundColor}"
+                        CornerRadius="15">
+
+                    <DockPanel>
+                        <xctk:WatermarkTextBox 
+                            x:Name="Description"
+                            Height="55"  
+                            Width="290"
+                            Watermark="Введите описани"                                         
+                            Foreground="{DynamicResource PrimaryTextColor}"                       
+                            FontSize="20"                
+                            HorizontalAlignment="Left"               
+                            Margin="5 0 0 0"               
+                            VerticalContentAlignment="Center"              
+                            Background="Transparent"               
+                            BorderBrush="Transparent"
+                            BorderThickness="0"/>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+
+            
+
+            <StackPanel HorizontalAlignment="Left"                                                                       
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Grid.Row="0"
+                        Grid.Column="1">
+
+                <TextBlock Text="Лекция*"                                    
+                           Margin="12"                                   
+                           Foreground="{DynamicResource PrimaryTextColor}"                                    
+                           FontSize="20"/>
+
+                <Border Width="300"
+                        Height="55"
+                        
+                        Background="{DynamicResource SecundaryBackgroundColor}"
+                        CornerRadius="15">
+
+                    <DockPanel>
+                        <Button Content="Выберите документ"
+                                x:Name="OpenDocument"
+                                Style="{DynamicResource StuleButton}" 
+                                Click="OpenDocument_Click"/>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+
+
+
+            <Button x:Name="BtSave"
+                    Content="Сохранить"
+                    HorizontalAlignment="Center"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="3"
+                    Margin="15"
+                    Visibility="Visible"
+                    Height="45"
+                    Width="150"
+                    Style="{DynamicResource StuleButton}"
+                    Click="BtSave_Click"/>
+        </Grid>
+
+
+    </Grid>
+</Page>

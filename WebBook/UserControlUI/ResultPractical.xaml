@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="WebBook.UserControlUI.ResultPractical"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WebBook.UserControlUI" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="832" Margin="5">
+    <Grid>
+        <Border CornerRadius="15"
+                x:Name="BdSelected"
+                Background="{StaticResource PrimaryBackgroundColor}"
+                Style="{StaticResource ImaApp}">
+            <DockPanel>
+
+              
+                <TextBlock x:Name="NameUserList"
+                           Text="Имя"
+                           VerticalAlignment="Center"
+                           Margin="10"
+                           Foreground="{DynamicResource PrimaryTextColor}"
+                           FontSize="24"/>
+
+               
+                
+                <TextBlock x:Name="PracticallUserList"
+                           Text="Практическая"
+                           VerticalAlignment="Center"
+                           Margin="10"
+                           Foreground="{DynamicResource PrimaryTextColor}"
+                           FontSize="24"/>
+
+                <Button Content="Скачать"
+                        Height="35" 
+                        Width="100"
+                        Margin="10"
+                        Style="{StaticResource StuleButton}" Click="Button_Click"/>
+
+                <Border Width="100"          
+                        Height="35"
+                        Background="{DynamicResource SecundaryBackgroundColor}"
+                        Margin="10"           
+                        CornerRadius="15">
+
+
+                    <DockPanel>
+
+                        <xctk:WatermarkTextBox 
+                                        x:Name="GraedPrac"
+                                        Height="35"   
+                                        Watermark="Оценка"                                         
+                                        Foreground="{DynamicResource PrimaryTextColor}"                       
+                                        FontSize="20"                 
+                                        HorizontalAlignment="Left"               
+                                        Margin="5 0 0 0"               
+                                        VerticalContentAlignment="Center"              
+                                        Background="Transparent"               
+                                        BorderBrush="Transparent"
+                                        BorderThickness="0"/>
+                    </DockPanel>
+                </Border>
+
+                <DockPanel LastChildFill="False"
+                           Margin="0 0 10 0" 
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center">
+
+                    <Border Background="{DynamicResource SecundaryBackgroundColor}"
+                            Width="32" Height="32" CornerRadius="10"
+                            DockPanel.Dock="Right"
+                            Margin="5" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
+                        <Image Source="{DynamicResource Delete}" 
+                               Width="22" Height="22"
+                               Style="{StaticResource ImageApp}"/>
+                    </Border>
+                    <Border Background="{DynamicResource SecundaryBackgroundColor}"
+                            Width="32" Height="32" CornerRadius="10"
+                            DockPanel.Dock="Right"
+                            Margin="5" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                        <Image Source="{DynamicResource Check}" 
+                               Width="22" Height="22"
+                               Style="{StaticResource ImageApp}"/>
+                    </Border>
+
+                </DockPanel>
+
+
+
+            </DockPanel>
+
+
+
+        </Border>
+    </Grid>
+</UserControl>

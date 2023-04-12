@@ -1,0 +1,248 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebBook"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WebBook.MainWindow"
+        mc:Ignorable="d"
+        Height="832" Width="1280" >
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+
+
+
+        <Image Source="{StaticResource Subtract__1_DrawingImage }"
+               Grid.Column="0"
+               HorizontalAlignment="Left"
+               Margin="-3 0 0 0"/>
+
+        <Image Source="{StaticResource SubtractDrawingImage }"
+               Grid.Column="0"
+               HorizontalAlignment="Left"/>
+
+
+
+        <Grid Grid.Column="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="Resources/WebBooNoText.png"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="1"
+                   Width="150"/>
+            <TextBlock Text="WebBook"
+                       FontSize="48"
+                       Foreground="White"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom" 
+                       FontWeight="Bold"/>
+
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="26"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+
+            <TextBlock
+                Grid.Row="0"
+                Text="Авторизация"
+                FontSize="36"   
+                FontWeight="Medium"    
+                Foreground="#003C61"     
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"/>
+
+
+
+
+            <StackPanel 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Grid.Row="1">
+
+
+                <TextBlock 
+                    Text="Почта"
+                    Margin="12"
+                    FontSize="20"/>
+                <Border 
+                    Width="406"
+                    Height="55"
+                    Background="#D9D9D9"
+                    CornerRadius="15">
+
+                    <DockPanel>
+
+                        <Image Source="{StaticResource EmailBlueDrawingImage}"
+                               DockPanel.Dock="Right"
+                               Height="32"
+                               Width="32"
+                               Margin="10"/>
+
+                        <xctk:WatermarkTextBox 
+                        Width="350"
+                        Height="55"
+                        Watermark="Введите почту"
+                        Foreground="#717171"
+                        FontSize="20"
+                        HorizontalAlignment="Left"
+                        Margin="5 0 0 0"
+                        VerticalContentAlignment="Center"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"/>
+                    </DockPanel>
+
+
+                </Border>
+
+            </StackPanel>
+
+            <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Grid.Row="3">
+
+                <TextBlock 
+                    Text="Пароль"
+                    Margin="12"
+                    FontSize="20"/>
+
+                <Border 
+                    Width="406"
+                    Height="55"
+                    Background="#D9D9D9"
+                    CornerRadius="15">
+
+                    <DockPanel LastChildFill="True">
+
+                        <CheckBox
+                            Checked="PassMask" 
+                            Unchecked="PassUnMask"
+                            DockPanel.Dock="Right"
+                            
+                            Style="{StaticResource  styleCustomCheckBox}"  />
+                        
+                        <xctk:WatermarkPasswordBox
+                            DockPanel.Dock="Left"
+                            Margin="5 0 0 0"
+                            x:Name="Password"
+                            Height="55"
+                            Watermark="Введите пароль"
+                            Foreground="#717171"
+                            FontSize="20"
+                            VerticalContentAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"/>
+
+                   
+                    </DockPanel>
+                    
+                </Border>
+
+                <TextBox x:Name="PasswordMask"
+                         FontSize="20"
+                         IsEnabled="True"
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         BorderThickness="0"
+                         Height="55"
+                         Width="340"
+                         HorizontalAlignment="Left"
+                         VerticalContentAlignment="Center"
+                         Margin="5 -54 0 0"/>
+
+
+            </StackPanel>
+
+            <StackPanel
+                HorizontalAlignment="Center"
+                Grid.Row="5"
+                Orientation="Horizontal">
+
+                <CheckBox 
+                    VerticalContentAlignment="Center"
+                    Content="Остаться в системе?"
+                    Foreground="#717171"
+                    FontSize="20"/>
+
+                <TextBlock
+                    Margin="50 0 0 0"
+                    Text="Зыбыли пароль?"    
+                    FontSize="20"
+                    Foreground="#003C61"/>
+            </StackPanel>
+
+            <Button Grid.Row="7"
+                    Width="406"
+                    Height="55"
+                    Content="Войти"
+                    FontSize="20"
+                    Foreground="White"
+                    Background="#003C61"/>
+
+            <StackPanel Grid.Row="8"
+           
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <TextBlock 
+                    Text="Нет учетной записи?"
+                    FontSize="20"
+                    Foreground="#717171"/>
+
+                <TextBlock 
+                    Text="Регистрация"
+                    FontSize="20"
+                    Foreground="#003C61"/>
+            </StackPanel>
+
+
+
+
+
+
+
+        </Grid>
+
+
+    </Grid>
+</Window>
