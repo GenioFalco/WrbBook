@@ -86,7 +86,7 @@
         <Button Grid.Row="3"
                 Width="406" 
                 Height="55"
-                Content="Проверить"
+                Content="Далее"
                 FontSize="20"
                 Visibility="Visible"
                 x:Name="BNext"  
@@ -96,12 +96,12 @@
         <StackPanel x:Name="SAnswerReset"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Visibility="Collapsed"
+                    Visibility="Visible"
                     Grid.Row="5">
 
 
             <TextBlock 
-                    Text="Секретное слово"
+                    Text="Код востановления"
                     Margin="12"
                     Foreground="{DynamicResource PrimaryTextColor}" 
                     FontSize="20"
@@ -124,7 +124,7 @@
                         x:Name="AnswerReset"
                         Width="350"
                         Height="55"
-                        Watermark="Введите слово"
+                        Watermark="Введите код"
                         Foreground="{DynamicResource PrimaryTextColor}" 
                         FontSize="20"
                         HorizontalAlignment="Left"
@@ -150,9 +150,9 @@
         <Button Grid.Row="7"
                     Width="406"
                     Height="55"
-                    Content="Войти"
+                    Content="Далее"
                     FontSize="20"
-                Visibility="Collapsed"
+                Visibility="Visible"
                 x:Name="BSingIN"
                     Style="{StaticResource StuleButton}" Click="BSingIN_Click"
                     />

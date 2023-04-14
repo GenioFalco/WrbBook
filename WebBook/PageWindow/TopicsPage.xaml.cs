@@ -1,32 +1,14 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Xml;
-using WebBook.ClassesApp;
 using WebBook.EntityFramework;
 using WebBook.WindowForm;
-using Xceed.Wpf.Toolkit.PropertyGrid.Editors;
 using Path = System.IO.Path;
 
 namespace WebBook.PageWindow
