@@ -11,6 +11,9 @@ using System.Net.Mime;
 using System.Text;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using WebBook.EntityFramework;
+using WebBook.ClassesApp;
+using MessageBox = System.Windows.MessageBox;
 
 namespace WebBook.PageWindow
 {
@@ -20,6 +23,7 @@ namespace WebBook.PageWindow
     public partial class ResetPage : Page
     {
 
+        int randomNumber;
 
         public ResetPage()
         {
@@ -34,9 +38,25 @@ namespace WebBook.PageWindow
 
         private void BNext_Click(object sender, RoutedEventArgs e)
         {
+            User user = DataBase.webBookEntities.User.FirstOrDefault(x => x.EmailUser == EmailReset.Text);
+            if (user == null)
+            {
+                MessageBox.Show("Учётная запись существует");
+                return;
+            }
+            else
+            {
+                SCodeReset.Visibility = Visibility.Visible;
+                BNextPass.Visibility = Visibility.Visible;
+
+                SPMail.Visibility = Visibility.Collapsed;
+                BNext.Visibility = Visibility.Collapsed;
+            }
+
+
             //string resetCode = GenerateResetCode();
             Random random = new Random();
-            int randomNumber = random.Next(100000, 999999);
+            randomNumber = random.Next(100000, 999999);
 
 
             SmtpClient Smtp = new SmtpClient("smtp.mail.ru", 25);
@@ -64,26 +84,49 @@ namespace WebBook.PageWindow
 
 
 
-        private string GenerateResetCode()
-        {
-            // генерируем случайный код из 6 символов
-            Random random = new Random();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, 6).Select(s => s[random.Next(s.Length)]).ToArray());
-        }
+
 
 
         private void BSingIN_Click(object sender, RoutedEventArgs e)
         {
 
-            //MainMenu mainMenu = new MainMenu();
-            //    mainMenu.Show();
-            //    var Closes = Authorization.GetWindow(this);
-            //    Closes.Close();
+            if (CodeReset.Text != randomNumber.ToString())
+            {
+                MessageBox.Show("Введён не верный код");
+                return;
+            }
+
+            SCodeReset.Visibility = Visibility.Collapsed;
+            BNextPass.Visibility = Visibility.Collapsed;
+
+            SPNewPass.Visibility = Visibility.Visible;
+            BSavesPass.Visibility = Visibility.Visible;
+
+
+
+
+
 
         }
 
+        private void Password_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
 
+        private void PasswordMask_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

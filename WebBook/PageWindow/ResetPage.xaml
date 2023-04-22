@@ -19,6 +19,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -36,7 +40,7 @@
 
 
 
-        <StackPanel 
+        <StackPanel x:Name="SPMail"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Grid.Row="1">
@@ -93,10 +97,10 @@
                 Style="{StaticResource StuleButton}" Click="BNext_Click"/>
 
 
-        <StackPanel x:Name="SAnswerReset"
+        <StackPanel x:Name="SCodeReset"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Visibility="Visible"
+                    Visibility="Collapsed"
                     Grid.Row="5">
 
 
@@ -121,7 +125,7 @@
                                Margin="10"/>
 
                     <xctk:WatermarkTextBox 
-                        x:Name="AnswerReset"
+                        x:Name="CodeReset"
                         Width="350"
                         Height="55"
                         Watermark="Введите код"
@@ -152,12 +156,84 @@
                     Height="55"
                     Content="Далее"
                     FontSize="20"
-                Visibility="Visible"
-                x:Name="BSingIN"
+                Visibility="Collapsed"
+                x:Name="BNextPass"
                     Style="{StaticResource StuleButton}" Click="BSingIN_Click"
                     />
 
-        <StackPanel Grid.Row="8"
+
+        <StackPanel x:Name="SPNewPass"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="Collapsed"
+                    Grid.Row="9">
+            
+            <TextBlock 
+                    Text="Пароль"
+                    Margin="12"
+                    Foreground="{DynamicResource PrimaryTextColor}" 
+                    FontSize="20"
+                    />
+            <Border 
+                    Width="406"
+                    Height="55"
+                    Background="{DynamicResource SecundaryBackgroundColor}"
+                    CornerRadius="15">
+
+                <DockPanel>
+
+                    <CheckBox
+                            Unchecked="CheckBox_Unchecked"
+                            DockPanel.Dock="Right"
+                            Style="{StaticResource  styleCustomCheckBox}" 
+                        Checked="CheckBox_Checked"  />
+
+                    <xctk:WatermarkPasswordBox
+                            DockPanel.Dock="Left"
+                            Margin="5 0 0 0"
+                            x:Name="NewPassword"
+                            Height="55"
+                            Watermark="Введите новый пароль"
+                            Foreground="{DynamicResource PrimaryTextColor}" 
+                            FontSize="20"
+                            VerticalContentAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            BorderThickness="0"  
+                            TextChanged="Password_TextChanged"  />
+                </DockPanel>
+
+
+            </Border>
+
+            <TextBox x:Name="PasswordMask"
+                         FontSize="20"
+                         IsEnabled="True"
+                         Foreground="{DynamicResource PrimaryTextColor}" 
+                         Background="Transparent"
+                         BorderBrush="Transparent"
+                         BorderThickness="0"
+                         Height="55"
+                         Width="350"
+                         Visibility="Collapsed"
+                         HorizontalAlignment="Left"
+                         VerticalContentAlignment="Center"
+                         Margin="5 -54 0 0" 
+                         TextChanged="PasswordMask_TextChanged"/>
+
+        </StackPanel>
+
+        <Button Grid.Row="11"
+                    Width="406"
+                    Height="55"
+                    Content="Готово"
+                    FontSize="20"
+                Visibility="Collapsed"
+                x:Name="BSavesPass"
+                    Style="{StaticResource StuleButton}" Click="BSingIN_Click"
+                    />
+
+        <StackPanel Grid.Row="12"
            
                         Orientation="Horizontal"
                         VerticalAlignment="Center"

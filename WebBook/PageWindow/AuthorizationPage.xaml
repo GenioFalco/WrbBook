@@ -157,7 +157,6 @@
 
 
                 </DockPanel>
-
             </Border>
 
             <TextBox x:Name="PasswordMask"
