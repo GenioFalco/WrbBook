@@ -14,6 +14,8 @@ using System.Windows.Forms;
 using WebBook.EntityFramework;
 using WebBook.ClassesApp;
 using MessageBox = System.Windows.MessageBox;
+using System.Data.Entity.Migrations;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WebBook.PageWindow
 {
@@ -22,8 +24,8 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class ResetPage : Page
     {
-
-        int randomNumber;
+        User user;
+        private int randomNumber;
 
         public ResetPage()
         {
@@ -38,10 +40,26 @@ namespace WebBook.PageWindow
 
         private void BNext_Click(object sender, RoutedEventArgs e)
         {
-            User user = DataBase.webBookEntities.User.FirstOrDefault(x => x.EmailUser == EmailReset.Text);
+            string email = EmailReset.Text;
+
+            // регулярное выражение для проверки формата e-mail
+            string emailPattern = @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
+
+            // проверяем, соответствует ли введенный адрес формату
+            if (System.Text.RegularExpressions.Regex.IsMatch(email, emailPattern))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Введенный e-mail адрес неправильный.");
+                return;
+            }
+
+            user = DataBase.webBookEntities.User.FirstOrDefault(x => x.EmailUser == EmailReset.Text);
             if (user == null)
             {
-                MessageBox.Show("Учётная запись существует");
+                MessageBox.Show("Учётная запись не существует");
                 return;
             }
             else
@@ -83,10 +101,6 @@ namespace WebBook.PageWindow
         }
 
 
-
-
-
-
         private void BSingIN_Click(object sender, RoutedEventArgs e)
         {
 
@@ -102,11 +116,11 @@ namespace WebBook.PageWindow
             SPNewPass.Visibility = Visibility.Visible;
             BSavesPass.Visibility = Visibility.Visible;
 
+            
+            user.PasswordUser = NewPassword.Password;
 
-
-
-
-
+            DataBase.webBookEntities.User.AddOrUpdate(user);
+            DataBase.webBookEntities.SaveChanges();
         }
 
         private void Password_TextChanged(object sender, TextChangedEventArgs e)

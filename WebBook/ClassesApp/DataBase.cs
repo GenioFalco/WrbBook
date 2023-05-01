@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +9,6 @@ namespace WebBook.ClassesApp
 {
    public class DataBase
     {
-        public static WebBookBDEntities webBookEntities = new WebBookBDEntities();  
+        public static WebBookBDEntities6 webBookEntities = new WebBookBDEntities6();  
     }
 }

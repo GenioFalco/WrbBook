@@ -133,46 +133,43 @@
     <Compile Include="ClassesApp\Models\TestModel.cs" />
     <Compile Include="ClassesApp\PhotoConvert.cs" />
     <Compile Include="EntityFramework\AnswerPractical.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Entity.Context.cs">
+    <Compile Include="EntityFramework\Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Entity.Context.tt</DependentUpon>
+      <DependentUpon>Model.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Entity.cs">
+    <Compile Include="EntityFramework\Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Entity.Designer.cs">
+    <Compile Include="EntityFramework\Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Entity.edmx</DependentUpon>
+      <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Percent.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Results.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Role.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\sysdiagrams.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Task.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Test.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Topic.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\User.cs">
-      <DependentUpon>Entity.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="PageWindow\AddEditTaskPage.xaml.cs">
       <DependentUpon>AddEditTaskPage.xaml</DependentUpon>
@@ -374,12 +371,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="EntityFramework\Entity.edmx">
+    <EntityDeploy Include="EntityFramework\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Entity.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EntityFramework\Entity.edmx.diagram">
-      <DependentUpon>Entity.edmx</DependentUpon>
+    <None Include="EntityFramework\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -442,15 +439,15 @@
     <Resource Include="Resources\Icons\Check.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EntityFramework\Entity.Context.tt">
+    <Content Include="EntityFramework\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Entity.edmx</DependentUpon>
-      <LastGenOutput>Entity.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EntityFramework\Entity.tt">
+    <Content Include="EntityFramework\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Entity.edmx</DependentUpon>
-      <LastGenOutput>Entity.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
