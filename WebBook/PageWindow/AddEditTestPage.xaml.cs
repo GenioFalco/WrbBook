@@ -100,7 +100,9 @@ namespace WebBook.PageWindow
                 if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
                 test.Test.TitleTest = TitleTest.Text;
 
-                test.Test.TopicTest = TopicTest.Text;
+
+                var topicId = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
+                test.Test.TopicTest = topicId;
 
                 DataBase.webBookEntities.Test.Add(test.Test);
                 DataBase.webBookEntities.SaveChanges();
@@ -121,7 +123,7 @@ namespace WebBook.PageWindow
                 if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
                 test.Test.TitleTest = TitleTest.Text;
 
-                test.Test.TopicTest = TopicTest.Text;
+                test.Test.TopicTest = Convert.ToInt32(TopicTest.Text);
 
                 DataBase.webBookEntities.Test.AddOrUpdate(test.Test);
                 DataBase.webBookEntities.SaveChanges();

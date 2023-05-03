@@ -12,11 +12,12 @@ namespace WebBook.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Percent
+    public partial class sysdiagrams
     {
-        public int IdUser { get; set; }
-        public Nullable<int> PercentTopic { get; set; }
-        public Nullable<int> PercentTest { get; set; }
-        public Nullable<int> PercentTask { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

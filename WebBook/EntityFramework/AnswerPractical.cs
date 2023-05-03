@@ -17,8 +17,9 @@ namespace WebBook.EntityFramework
         public int IdAnswer { get; set; }
         public string PracricalAnswer { get; set; }
         public int IdUser { get; set; }
-        public int TaskAnswer { get; set; }
+        public int IdTask { get; set; }
         public Nullable<int> GradeAnswer { get; set; }
+        public Nullable<int> deliveryDate { get; set; }
     
         public virtual User User { get; set; }
     }

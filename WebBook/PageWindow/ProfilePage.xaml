@@ -61,29 +61,7 @@
             <DockPanel Grid.Row="1" 
                        HorizontalAlignment="Center" >
                 
-                <Border CornerRadius="15"  
-                        Margin="5"
-                        Width="300"  
-                        Background="{DynamicResource SecundaryBackgroundColor}">
-
-
-                    <StackPanel>
-                        <ProgressBar Height="20"
-                                     Margin="10 10 10 5" 
-                                     Background="{DynamicResource TertiaryBackgroundColor}" 
-                                     x:Name="PercentTopic"
-                                     Foreground="#FF00243A"
-                                     FontSize="50"/>
-
-                        <TextBlock Text="{Binding ElementName=PercentTopic, Path=Value, StringFormat={}{0:0} Колличество пройденных тем}"  
-                                   Margin="10 5 0 5" 
-                                   Foreground="{DynamicResource PrimaryTextColor}"/>
-
-
-                    </StackPanel>
-
-
-                </Border>
+               
 
                 <Border CornerRadius="15"  
                         Margin="5"
@@ -95,11 +73,21 @@
                         <ProgressBar Height="20"
                                  Margin="10 10 10 5" 
                                  x:Name="PercentTest"
-                                 Background="{DynamicResource TertiaryBackgroundColor}"/>
+                                 Background="{DynamicResource TertiaryBackgroundColor}" 
+                                     Foreground="#FF061D2B"
+                                     BorderBrush="{DynamicResource TertiaryBackgroundColor}"/>
 
-                        <TextBlock Text="{Binding ElementName=PercentTest, Path=Value, StringFormat={}{0:0} Колличество пройденных тестов}"     
+                        <DockPanel>
+                            <TextBlock Text="Количество пройденных тестов:"     
                                Foreground="{DynamicResource PrimaryTextColor}"
                                Margin="10 5 0 5"/>
+                        
+                            <TextBlock Text="{Binding ElementName=PercentTest, Path=Value}"     
+                               Foreground="{DynamicResource PrimaryTextColor}"
+                               Margin="10 5 0 5"/>
+                       
+                            
+                        </DockPanel>
                     </StackPanel>
 
                 </Border>
@@ -114,11 +102,20 @@
                         <ProgressBar Height="20"
                                      Margin="10 10 10 5" 
                                      x:Name="PercentTask" 
-                                     Background="{DynamicResource TertiaryBackgroundColor}"/>
+                                     Foreground="#FF061D2B"
+                                     Background="#003C61" BorderBrush="{DynamicResource TertiaryBackgroundColor}"/>
 
-                        <TextBlock Text="{Binding ElementName=PercentTask, Path=Value, StringFormat={}{0:0} Колличество пройденных заданий}" 
+                        <DockPanel>
+                            <TextBlock Text="Количество пройденных задания:"     
+                               Foreground="{DynamicResource PrimaryTextColor}"
+                               Margin="10 5 0 5"/>
+
+                            <TextBlock Text="{Binding ElementName=PercentTask, Path=Value}" 
                                    Margin="10 5 0 5"
                                    Foreground="{DynamicResource PrimaryTextColor}"/>
+
+                        </DockPanel>
+                       
                     </StackPanel>
 
                 </Border>
@@ -367,46 +364,7 @@
                 </Border>
             </StackPanel>
 
-            <StackPanel HorizontalAlignment="Left"                                                                       
-                        VerticalAlignment="Center"
-                        Margin="10"
-                        Grid.Row="2"
-                        Grid.Column="1">
-
-                <TextBlock Text="Секретное слово"                                    
-                           Margin="12"                                   
-                           Foreground="{DynamicResource PrimaryTextColor}"                                    
-                           FontSize="20"/>
-
-                <Border Width="300"
-                        Height="55"
-                        
-                        Background="{DynamicResource SecundaryBackgroundColor}"
-                        CornerRadius="15">
-
-                    <DockPanel>
-                        <Image Source="{DynamicResource Answer}"                        
-                               DockPanel.Dock="Right"
-                               Height="32"
-                               Width="32"
-                               Margin="10"/>
-
-                        <xctk:WatermarkTextBox 
-                            x:Name="WordEdit"
-                            Width="250"
-                            Height="55"                 
-                            Watermark="Введите слово"                                         
-                            Foreground="{DynamicResource PrimaryTextColor}"                       
-                            FontSize="20"                
-                            HorizontalAlignment="Left"               
-                            Margin="5 0 0 0"               
-                            VerticalContentAlignment="Center"              
-                            Background="Transparent"               
-                            BorderBrush="Transparent"
-                            BorderThickness="0"/>
-                    </DockPanel>
-                </Border>
-            </StackPanel>
+            
             
             <Button x:Name="BtSave"
                     Content="Сохранить"
@@ -415,7 +373,8 @@
                     Grid.Row="3"
                     Margin="15"
                     Height="45" Width="100"
-                    Style="{DynamicResource StuleButton}" Click="BtSave_Click"/>
+                    Style="{DynamicResource StuleButton}" 
+                    Click="BtSave_Click"/>
 
             <TextBlock x:Name="PhotoVivod" 
                        Visibility="Collapsed"/>

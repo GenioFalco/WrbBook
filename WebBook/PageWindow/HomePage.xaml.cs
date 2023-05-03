@@ -91,7 +91,7 @@ namespace WebBook.PageWindow
                         testList.homePage = this;
                         testList.TitleTest.Text = item.TitleTest;   
                         testList.ImageTest.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/TestImg.png"));
-                        if (DataBase.webBookEntities.Results.Any(x => x.IdUser == user.IDUser) && DataBase.webBookEntities.Results.Any(x => x.IdTest == item.IdTest))
+                        if (DataBase.webBookEntities.Results.Any(x => x.IdUser == user.IDUser && x.IdTest == item.IdTest))
                         {
                             testList.OpenTest.Background = new SolidColorBrush(Colors.Gray);
                             testList.OpenTest.IsEnabled = false;

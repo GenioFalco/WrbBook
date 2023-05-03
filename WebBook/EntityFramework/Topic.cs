@@ -18,6 +18,5 @@ namespace WebBook.EntityFramework
         public string TitleTopic { get; set; }
         public string DescriptionTopic { get; set; }
         public string LectureTopic { get; set; }
-        public string UrlVideoTopic { get; set; }
     }
 }

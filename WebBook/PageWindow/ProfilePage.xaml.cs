@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WebBook.ClassesApp;
 using WebBook.EntityFramework;
+using WebBook.UserControlUI;
 using WebBook.WindowForm;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
@@ -27,7 +29,9 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class ProfilePage : Page
     {
-      
+        int CountTest = DataBase.webBookEntities.Test.ToList().Count;
+
+        int CountTask = DataBase.webBookEntities.Task.ToList().Count;
         public static User user  = null;
         public ProfilePage()
         {
@@ -43,7 +47,6 @@ namespace WebBook.PageWindow
                 LastNameEdit.Text = user.SurnameUser;
                 EmailEdit.Text = user.EmailUser;
                 PasswordEdit.Password = user.PasswordUser;
-                WordEdit.Text = user.SecretWordUser;
                 PatronymicEdit.Text = user.PasswordUser;
                 if (PhotoConvert.loagPhoto(user.ImageUser) == null)
                 {
@@ -53,11 +56,32 @@ namespace WebBook.PageWindow
                 {
                     PhotoUser.ImageSource = PhotoConvert.loagPhoto(user.ImageUser);
                 }
+
+                PercentTest.Maximum = CountTest;
+
+                var resultstest = DataBase.webBookEntities.Results.Where(r => r.IdUser == user.IDUser).ToList();
+
+                PercentTest.Value = resultstest.Count();
+
+
+                PercentTask.Maximum = CountTask;
+
+                var resultstask = DataBase.webBookEntities.AnswerPractical.Where(r => r.IdUser == user.IDUser).ToList();
+
+                PercentTask.Value = resultstask.Count();
+
+
+
+
+
+
             }
             else
             {
                 user = new User();
             }
+
+
         }
 
         public void Save()
@@ -74,9 +98,8 @@ namespace WebBook.PageWindow
             if (!Checks.Email(EmailEdit.Text, "Поле почта")) return;
             user.EmailUser = EmailEdit.Text;
 
-            if (!Checks.CheckNull(WordEdit.Text, "Поле сектретный код")) return;
-            user.SecretWordUser = WordEdit.Text;
-           
+        
+
             DataBase.webBookEntities.User.AddOrUpdate(user);
             DataBase.webBookEntities.SaveChanges();
             

@@ -45,14 +45,7 @@ namespace WebBook.PageWindow
                 TitleTopic.Text = topic.TitleTopic;
 
 
-                if (topic.UrlVideoTopic != null)
-                {
-                    www.Source = new Uri(topic.UrlVideoTopic, UriKind.Relative);
-                }
-                else
-                {
-                    www.Source = null;
-                }
+               
 
                 Description.Text = topic.DescriptionTopic;
 

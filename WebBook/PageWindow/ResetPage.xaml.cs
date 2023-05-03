@@ -71,7 +71,6 @@ namespace WebBook.PageWindow
                 BNext.Visibility = Visibility.Collapsed;
             }
 
-
             //string resetCode = GenerateResetCode();
             Random random = new Random();
             randomNumber = random.Next(100000, 999999);
@@ -99,8 +98,6 @@ namespace WebBook.PageWindow
             Smtp.Send(Message);//отправка
 
         }
-
-
         private void BSingIN_Click(object sender, RoutedEventArgs e)
         {
 
@@ -110,37 +107,59 @@ namespace WebBook.PageWindow
                 return;
             }
 
+
+            if (CodeReset.Text ==  null)
+            {
+                MessageBox.Show("Введbnt код");
+                return;
+            }
             SCodeReset.Visibility = Visibility.Collapsed;
             BNextPass.Visibility = Visibility.Collapsed;
 
             SPNewPass.Visibility = Visibility.Visible;
             BSavesPass.Visibility = Visibility.Visible;
 
-            
-            user.PasswordUser = NewPassword.Password;
 
-            DataBase.webBookEntities.User.AddOrUpdate(user);
-            DataBase.webBookEntities.SaveChanges();
         }
 
         private void Password_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            PasswordMask.Text = NewPassword.Password;
         }
 
         private void PasswordMask_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            NewPassword.Password = PasswordMask.Text;
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            PasswordMask.Visibility = Visibility.Collapsed;
+            NewPassword.Visibility = Visibility.Visible;
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            PasswordMask.Visibility = Visibility.Visible;
+            NewPassword.Visibility = Visibility.Hidden;
+        }
 
+        private void BSavesPass_Click(object sender, RoutedEventArgs e)
+        {
+            if (NewPassword.Password == null)
+            {
+                MessageBox.Show("Введите новый пароль");
+                return;
+            }
+
+            user.PasswordUser = NewPassword.Password;
+
+            DataBase.webBookEntities.User.AddOrUpdate(user);
+            DataBase.webBookEntities.SaveChanges();
+
+            MessageBox.Show("Пароль обновлён. Не зыбывай больше )");
+
+            Authorization.frame.Navigate(new AuthorizationPage());
         }
     }
 }

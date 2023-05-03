@@ -15,7 +15,7 @@ namespace WebBook.EntityFramework
     public partial class Test
     {
         public int IdTest { get; set; }
-        public string TopicTest { get; set; }
+        public int TopicTest { get; set; }
         public string TitleTest { get; set; }
         public string JsonFile { get; set; }
     }

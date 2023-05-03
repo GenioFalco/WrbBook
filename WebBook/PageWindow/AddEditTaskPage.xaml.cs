@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -18,7 +19,9 @@ using System.Windows.Shapes;
 using WebBook.ClassesApp;
 using WebBook.EntityFramework;
 using WebBook.WindowForm;
-
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using Path = System.IO.Path;
 
 namespace WebBook.PageWindow
 {
@@ -163,6 +166,8 @@ namespace WebBook.PageWindow
             }
 
         }
+
+
 
         private void OpenPrTask_Click(object sender, RoutedEventArgs e)
         {

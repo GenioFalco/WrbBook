@@ -29,7 +29,7 @@ namespace WebBook.EntityFramework
         public string EmailUser { get; set; }
         public string PasswordUser { get; set; }
         public int RoleUser { get; set; }
-        public string SecretWordUser { get; set; }
+        public string GroupUser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AnswerPractical> AnswerPractical { get; set; }

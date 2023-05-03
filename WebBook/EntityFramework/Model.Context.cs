@@ -13,10 +13,10 @@ namespace WebBook.EntityFramework
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WebBookBDEntities6 : DbContext
+    public partial class WebBookBDEntities8 : DbContext
     {
-        public WebBookBDEntities6()
-            : base("name=WebBookBDEntities6")
+        public WebBookBDEntities8()
+            : base("name=WebBookBDEntities8")
         {
         }
     
@@ -26,9 +26,9 @@ namespace WebBook.EntityFramework
         }
     
         public virtual DbSet<AnswerPractical> AnswerPractical { get; set; }
-        public virtual DbSet<Percent> Percent { get; set; }
         public virtual DbSet<Results> Results { get; set; }
         public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Task> Task { get; set; }
         public virtual DbSet<Test> Test { get; set; }
         public virtual DbSet<Topic> Topic { get; set; }

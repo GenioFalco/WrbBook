@@ -15,14 +15,6 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
@@ -101,7 +93,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Visibility="Collapsed"
-                    Grid.Row="5">
+                    Grid.Row="1">
 
 
             <TextBlock 
@@ -151,7 +143,7 @@
 
 
 
-        <Button Grid.Row="7"
+        <Button Grid.Row="3"
                     Width="406"
                     Height="55"
                     Content="Далее"
@@ -166,7 +158,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Visibility="Collapsed"
-                    Grid.Row="9">
+                    Grid.Row="1">
             
             <TextBlock 
                     Text="Пароль"
@@ -223,15 +215,14 @@
 
         </StackPanel>
 
-        <Button Grid.Row="11"
+        <Button Grid.Row="3"
                     Width="406"
                     Height="55"
                     Content="Готово"
                     FontSize="20"
                 Visibility="Collapsed"
                 x:Name="BSavesPass"
-                    Style="{StaticResource StuleButton}" Click="BSingIN_Click"
-                    />
+                    Style="{StaticResource StuleButton}" Click="BSavesPass_Click" />
 
         <StackPanel Grid.Row="12"
            

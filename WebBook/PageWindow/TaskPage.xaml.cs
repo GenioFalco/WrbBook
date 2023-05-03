@@ -58,7 +58,7 @@ namespace WebBook.PageWindow
 
                 LastDate.Text = "Последний срок сдачи:" + task.LastDateTask.ToString();
 
-                var graedId = DataBase.webBookEntities.AnswerPractical.Where(id => id.TaskAnswer == task.IDTask && id.IdUser == user.IDUser).Select(x => x.GradeAnswer).FirstOrDefault();
+                var graedId = DataBase.webBookEntities.AnswerPractical.Where(id => id.IdTask == task.IDTask && id.IdUser == user.IDUser).Select(x => x.GradeAnswer).FirstOrDefault();
                 Grade.Text = graedId.ToString();
 
                
@@ -136,7 +136,7 @@ namespace WebBook.PageWindow
 
             answerPractical.IdUser = user.IDUser;
 
-            answerPractical.TaskAnswer = task.IDTask;
+            answerPractical.IdTask = task.IDTask;
 
             answerPractical.PracricalAnswer = ofd.SafeFileName;
 

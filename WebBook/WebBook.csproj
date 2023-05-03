@@ -150,13 +150,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Percent.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityFramework\Results.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Role.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Task.cs">
@@ -428,6 +428,7 @@
     <Resource Include="Resources\TopicImg.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="LectureRtf\" />
     <Folder Include="PracticalTask\AnswerPracticalTask\" />
     <Folder Include="VideoMaterial\" />
   </ItemGroup>

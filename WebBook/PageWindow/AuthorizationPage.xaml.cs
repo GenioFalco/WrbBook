@@ -55,6 +55,22 @@ namespace WebBook.PageWindow
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string email = Email.Text;
+
+            // регулярное выражение для проверки формата e-mail
+            string emailPattern = @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
+
+            // проверяем, соответствует ли введенный адрес формату
+            if (System.Text.RegularExpressions.Regex.IsMatch(email, emailPattern))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Введенный e-mail адрес неправильный.");
+                return;
+            }
+
             User user = DataBase.webBookEntities.User.FirstOrDefault(x => x.EmailUser == Email.Text && x.PasswordUser == Password.Password && x.PasswordUser == PasswordMask.Text);
             if (user == null)
             {

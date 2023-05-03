@@ -81,7 +81,7 @@ namespace WebBook.PageWindow
                 {
                     TitleList.Text = "Практические студентов";
                     ListView.Children.Clear();
-                    List<AnswerPractical> answerPracticals = DataBase.webBookEntities.AnswerPractical.Where(obj => DbFunctions.Like(obj.TaskAnswer.ToString(), "%" + like + "%")).ToList();
+                    List<AnswerPractical> answerPracticals = DataBase.webBookEntities.AnswerPractical.Where(obj => DbFunctions.Like(obj.IdTask.ToString(), "%" + like + "%")).ToList();
                     foreach (var item in answerPracticals)
                     {
                         ResultPractical resultPractical = new ResultPractical(item)
@@ -91,7 +91,7 @@ namespace WebBook.PageWindow
                         var UserId = DataBase.webBookEntities.User.Where(id => id.IDUser == item.IdUser).Select(x => x.NameUser + " " + x.SurnameUser).FirstOrDefault();
                         resultPractical.NameUserList.Text = UserId;
 
-                        var TaskId = DataBase.webBookEntities.Task.Where(id => id.IDTask == item.TaskAnswer).Select(x => x.TitleTask).FirstOrDefault();
+                        var TaskId = DataBase.webBookEntities.Task.Where(id => id.IDTask == item.IdTask).Select(x => x.TitleTask).FirstOrDefault();
                         resultPractical.PracticallUserList.Text = TaskId;
 
 

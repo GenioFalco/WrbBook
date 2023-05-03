@@ -9,6 +9,6 @@ namespace WebBook.ClassesApp
 {
    public class DataBase
     {
-        public static WebBookBDEntities6 webBookEntities = new WebBookBDEntities6();  
+        public static WebBookBDEntities8 webBookEntities = new WebBookBDEntities8();  
     }
 }

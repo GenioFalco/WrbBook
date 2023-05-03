@@ -25,7 +25,7 @@ namespace WebBook.UserControlUI
     /// </summary>
     public partial class TaskList : UserControl
     {
-        public Percent percent = new Percent();
+        
 
         public static User user = null;
 
@@ -74,22 +74,12 @@ namespace WebBook.UserControlUI
 
         private void CbCheckPercent_Checked(object sender, RoutedEventArgs e)
         {
-            schet += 1;
-            percent.PercentTask = schet;
-            percent.IdUser = user.IDUser;
-
-            DataBase.webBookEntities.Percent.AddOrUpdate(percent);
-            DataBase.webBookEntities.SaveChanges();
+            
         }
 
         private void CbCheckPercent_Unchecked(object sender, RoutedEventArgs e)
         {
-            schet -= 1;
-            percent.PercentTask = schet;
-            percent.IdUser = user.IDUser;
-
-            DataBase.webBookEntities.Percent.AddOrUpdate(percent);
-            DataBase.webBookEntities.SaveChanges();
+            
         }
     }
 }

@@ -72,7 +72,7 @@ namespace WebBook.UserControlUI
 
             answerPractical.IdUser = answerPractical.IdUser;
 
-            answerPractical.TaskAnswer = answerPractical.TaskAnswer;
+            answerPractical.IdTask = answerPractical.IdTask;
             
 
 
