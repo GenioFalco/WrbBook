@@ -37,30 +37,31 @@ namespace WebBook.UserControlUI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = answerPractical.PracricalAnswer; // Имя файла по умолчанию
-            dlg.DefaultExt = ""; // Расширение файла по умолчанию
-            dlg.Filter = "(*.rtf)|*.rtf;|(*.doc)|*.doc;|Все файлы (*.*)|*.*"; // Фильтровать файлы по расширению
 
-            // Показать диалоговое окно сохранения файла
-            Nullable<bool> result = dlg.ShowDialog();
+            var taskId = DataBase.webBookEntities.Task.Where(x => x.IDTask == answerPractical.IdTask).Select(id => id.TitleTask).FirstOrDefault();
 
-            // Обработка результатов диалогового окна сохранения файла
+            var userId = DataBase.webBookEntities.User.Where(x => x.IDUser == answerPractical.IdUser).Select(id => id.SurnameUser + id.GroupUser).FirstOrDefault();
+
+            dlg.FileName = taskId + " " + userId; // Имя файла по умолчанию
+            dlg.DefaultExt = answerPractical.ExtensionAnsw; // Расширение файла по умолчанию
+
+            bool? result = dlg.ShowDialog();
+
+           
             if (result == true)
             {
-                // Сохраанение документа
-                string filename = dlg.FileName;
+                string filePath = dlg.FileName;
+
+                byte[] fileContent = ByteConverter.DecompressData(answerPractical.PracricalAnswer);
+                using (var fs = new FileStream(filePath, FileMode.Create))
+
+                {
+                    fs.Write(fileContent, 0, fileContent.Length);
+                }
+
             }
 
-            string sourcePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\PracticalTask\\AnswerPracticalTask\\", answerPractical.PracricalAnswer);
 
-            string targetPath = Path.Combine(dlg.FileName);
-
-            File.Copy(sourcePath, targetPath, true);
-
-            if (targetPath == null)
-            {
-                return;
-            }
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -74,7 +75,6 @@ namespace WebBook.UserControlUI
 
             answerPractical.IdTask = answerPractical.IdTask;
             
-
 
             DataBase.webBookEntities.AnswerPractical.AddOrUpdate(answerPractical);
             DataBase.webBookEntities.SaveChanges();

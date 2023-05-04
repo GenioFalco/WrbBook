@@ -15,11 +15,12 @@ namespace WebBook.EntityFramework
     public partial class AnswerPractical
     {
         public int IdAnswer { get; set; }
-        public string PracricalAnswer { get; set; }
+        public byte[] PracricalAnswer { get; set; }
         public int IdUser { get; set; }
         public int IdTask { get; set; }
         public Nullable<int> GradeAnswer { get; set; }
-        public Nullable<int> deliveryDate { get; set; }
+        public System.DateTime DeliveryDate { get; set; }
+        public string ExtensionAnsw { get; set; }
     
         public virtual User User { get; set; }
     }

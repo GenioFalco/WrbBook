@@ -17,7 +17,8 @@ namespace WebBook.EntityFramework
         public int IDTask { get; set; }
         public int TopicTask { get; set; }
         public string TitleTask { get; set; }
-        public string PracticalTask { get; set; }
+        public byte[] PracticalTask { get; set; }
         public System.DateTime LastDateTask { get; set; }
+        public string ExtensionTask { get; set; }
     }
 }

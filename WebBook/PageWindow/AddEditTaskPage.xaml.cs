@@ -168,18 +168,25 @@ namespace WebBook.PageWindow
         }
 
 
+        public void SaveFile(string filePath)
+        {
+            byte[] fileData = File.ReadAllBytes(filePath);
+            byte[] compressedData = ByteConverter.CompressData(fileData);
+
+            string fileExtension = Path.GetExtension(filePath);
+
+            task.ExtensionTask = fileExtension;
+
+            task.PracticalTask = compressedData;
+        }
 
         private void OpenPrTask_Click(object sender, RoutedEventArgs e)
         {
-            ofd.Filter = "Select a rtf (*.rtf)|*.rtf|doc (*.doc)|*.doc|All files (*.*)|*.*";
+            ofd.Filter = "All files (*.*)|*.*|rtf (*.rtf)|*.rtf|doc (*.doc)|*.doc";
             myResult = ofd.ShowDialog();
             if (myResult != null && myResult == true)
             {
-                OpenPrTask.Content = ofd.SafeFileName;
-                string filePath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\PracticalTask\\" + ofd.SafeFileName;
-                MessageBox.Show(filePath);
-                File.Copy(ofd.FileName, filePath, true);
-                task.PracticalTask = ofd.SafeFileName;
+                SaveFile(ofd.FileName);
 
             }
         }

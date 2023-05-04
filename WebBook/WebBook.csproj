@@ -123,6 +123,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassesApp\ByteConverter.cs" />
     <Compile Include="ClassesApp\Checks.cs" />
     <Compile Include="ClassesApp\ClassVariablesTest.cs" />
     <Compile Include="ClassesApp\ConrolerBroadCast.cs" />
@@ -428,7 +429,6 @@
     <Resource Include="Resources\TopicImg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="LectureRtf\" />
     <Folder Include="PracticalTask\AnswerPracticalTask\" />
     <Folder Include="VideoMaterial\" />
   </ItemGroup>

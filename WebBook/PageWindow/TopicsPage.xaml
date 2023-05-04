@@ -49,8 +49,10 @@
                                 DockPanel.Dock="Left"
                                 Margin="5 0 0 0"
                                 TextWrapping="Wrap"
+                                IsEnabled="False"
                                 x:Name="Description"
                                 Height="55"
+                                MinWidth="250"
                                 Watermark="Описание"
                                 Foreground="{DynamicResource PrimaryTextColor}"  
                                 FontSize="20"
@@ -67,45 +69,9 @@
 
 
 
-                <StackPanel Margin="35" Visibility="Collapsed">
 
-                    <MediaElement x:Name="www"
-                                  LoadedBehavior="Manual"/>
 
-                    <StackPanel>
-
-                        <ProgressBar x:Name="pbVolume" 
-                                     Height="20" 
-                                     Thumb.DragStarted="sliProgress_DragStarted" 
-                                     Thumb.DragCompleted="sliProgress_DragCompleted"
-                                     ValueChanged="sliProgress_ValueChanged" 
-                                     Foreground="{DynamicResource PrimaryTextColor}"/>
-                        
-                        <Slider Name="sliProgress"
-                                Margin="0 -19 0 0"
-                                Thumb.DragStarted="sliProgress_DragStarted"
-                                Thumb.DragCompleted="sliProgress_DragCompleted" 
-                                ValueChanged="sliProgress_ValueChanged"/>
-
-                        <StackPanel Orientation="Horizontal">
-
-                            <CheckBox Unchecked="RadioButton_Unchecked"
-                                      Checked="RadioButton_Checked"
-                                      Style="{DynamicResource styleCustomCheckBoxMedia}"/>
-                            
-                            <TextBlock x:Name="time"
-                                       Text="00:00:00"
-                                       FontSize="16"
-                                       VerticalAlignment="Center"
-                                       Foreground="{DynamicResource PrimaryTextColor}"/>
-
-                        </StackPanel>
-
-                    </StackPanel>
-
-                </StackPanel>
-
-                <TextBlock Text="Лекция"
+                <TextBlock Text="{Binding ElementName=TitleTopic, Path=Text}"
                        FontSize="32"
                            HorizontalAlignment="Center"
                        Foreground="{DynamicResource PrimaryTextColor}"

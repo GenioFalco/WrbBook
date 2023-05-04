@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d9b1406f008340bd8a064f769a4af81d" Name="Diagram1">
+      <Diagram DiagramId="73f458158b6d4253b47c9e30fb7d45cc" Name="Diagram1">
         <EntityTypeShape EntityType="WebBookBDModel.AnswerPractical" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBookBDModel.Results" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBookBDModel.Role" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBookBDModel.Results" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBookBDModel.Role" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WebBookBDModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WebBookBDModel.Task" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WebBookBDModel.Test" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WebBookBDModel.Topic" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebBookBDModel.User" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBookBDModel.User" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="WebBookBDModel.FK_Answer_User" ManuallyRouted="false" />
         <AssociationConnector Association="WebBookBDModel.FK_Results_User" ManuallyRouted="false" />
         <AssociationConnector Association="WebBookBDModel.FK_User_Role" ManuallyRouted="false" />

@@ -44,31 +44,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel HorizontalAlignment="Left"                                                                       
-                        VerticalAlignment="Center"
-                        Margin="10"
-                        Grid.Row="0"
-                        Visibility="Collapsed"
-                        Grid.Column="1">
-
-                <TextBlock Text="Видео урок"                                    
-                           Margin="12"                                   
-                           Foreground="{DynamicResource PrimaryTextColor}"                                    
-                           FontSize="20"/>
-
-                <Border Width="300"
-                        Height="55"
-                        
-                        Background="{DynamicResource SecundaryBackgroundColor}"
-                        CornerRadius="15">
-
-                    <DockPanel>
-                        <Button Content="Выберите видео урок"
-                                x:Name="OpenVideo"
-                                Style="{DynamicResource StuleButton}" Click="OpenVideo_Click"/>
-                    </DockPanel>
-                </Border>
-            </StackPanel>
+           
 
             <StackPanel HorizontalAlignment="Right"                                                                       
                         VerticalAlignment="Center"

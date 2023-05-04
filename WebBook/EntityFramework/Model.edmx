@@ -10,11 +10,12 @@
             <PropertyRef Name="IdAnswer" />
           </Key>
           <Property Name="IdAnswer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PracricalAnswer" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PracricalAnswer" Type="varbinary(max)" Nullable="false" />
           <Property Name="IdUser" Type="int" Nullable="false" />
           <Property Name="IdTask" Type="int" Nullable="false" />
           <Property Name="GradeAnswer" Type="int" />
-          <Property Name="deliveryDate" Type="int" />
+          <Property Name="DeliveryDate" Type="datetime" Nullable="false" />
+          <Property Name="ExtensionAnsw" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Results">
           <Key>
@@ -51,8 +52,9 @@
           <Property Name="IDTask" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TopicTask" Type="int" Nullable="false" />
           <Property Name="TitleTask" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="PracticalTask" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PracticalTask" Type="varbinary(max)" Nullable="false" />
           <Property Name="LastDateTask" Type="datetime" Nullable="false" />
+          <Property Name="ExtensionTask" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -70,7 +72,7 @@
           <Property Name="IDTopic" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TitleTopic" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="DescriptionTopic" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="LectureTopic" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="LectureTopic" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -154,11 +156,12 @@
             <PropertyRef Name="IdAnswer" />
           </Key>
           <Property Name="IdAnswer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PracricalAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PracricalAnswer" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="IdUser" Type="Int32" Nullable="false" />
           <Property Name="IdTask" Type="Int32" Nullable="false" />
           <Property Name="GradeAnswer" Type="Int32" />
-          <Property Name="deliveryDate" Type="Int32" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExtensionAnsw" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_Answer_User" FromRole="AnswerPractical" ToRole="User" />
         </EntityType>
         <EntityType Name="Results">
@@ -198,8 +201,9 @@
           <Property Name="IDTask" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TopicTask" Type="Int32" Nullable="false" />
           <Property Name="TitleTask" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PracticalTask" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PracticalTask" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="LastDateTask" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExtensionTask" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -217,7 +221,7 @@
           <Property Name="IDTopic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TitleTopic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DescriptionTopic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LectureTopic" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LectureTopic" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -272,7 +276,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WebBookBDEntities8" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WebBookBD" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AnswerPractical" EntityType="Self.AnswerPractical" />
           <EntitySet Name="Results" EntityType="Self.Results" />
           <EntitySet Name="Role" EntityType="Self.Role" />
@@ -299,7 +303,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище WebBookBDModelContainer" CdmEntityContainer="WebBookBDEntities8">
+        <EntityContainerMapping StorageEntityContainer="Хранилище WebBookBDModelContainer" CdmEntityContainer="WebBookBD">
           <EntitySetMapping Name="AnswerPractical">
             <EntityTypeMapping TypeName="WebBookBDModel.AnswerPractical">
               <MappingFragment StoreEntitySet="AnswerPractical">
@@ -308,7 +312,8 @@
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdTask" ColumnName="IdTask" />
                 <ScalarProperty Name="GradeAnswer" ColumnName="GradeAnswer" />
-                <ScalarProperty Name="deliveryDate" ColumnName="deliveryDate" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="ExtensionAnsw" ColumnName="ExtensionAnsw" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -351,6 +356,7 @@
                 <ScalarProperty Name="TitleTask" ColumnName="TitleTask" />
                 <ScalarProperty Name="PracticalTask" ColumnName="PracticalTask" />
                 <ScalarProperty Name="LastDateTask" ColumnName="LastDateTask" />
+                <ScalarProperty Name="ExtensionTask" ColumnName="ExtensionTask" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

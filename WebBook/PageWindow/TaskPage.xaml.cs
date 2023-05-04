@@ -6,6 +6,7 @@ using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ using WebBook.ClassesApp;
 using WebBook.EntityFramework;
 using WebBook.UserControlUI;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Path = System.IO.Path;
@@ -43,6 +45,10 @@ namespace WebBook.PageWindow
 
         OpenFileDialog ofd = new OpenFileDialog();
         bool? myResult;
+
+        public byte[] compressedData;
+
+        string fileExtension;
 
         public TaskPage()
         {
@@ -80,50 +86,55 @@ namespace WebBook.PageWindow
             }
         }
 
-      
-       
+
+
+     
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = task.PracticalTask; // Имя файла по умолчанию
-            dlg.DefaultExt = ""; // Расширение файла по умолчанию
-            dlg.Filter = "(*.rtf)|*.rtf;|(*.doc)|*.doc;|Все файлы (*.*)|*.*"; // Фильтровать файлы по расширению
+            dlg.FileName = task.TitleTask; // Имя файла по умолчанию
+            dlg.DefaultExt = task.ExtensionTask; // Расширение файла по умолчанию
+           
+            bool? result = dlg.ShowDialog();
 
-            // Показать диалоговое окно сохранения файла
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Обработка результатов диалогового окна сохранения файла
             if (result == true)
             {
-                // Сохраанение документа
-                string filename = dlg.FileName;
+                
+                string filePath = dlg.FileName;
+              
+                byte[] fileContent = ByteConverter.DecompressData(task.PracticalTask);
+                using (var fs = new FileStream(filePath, FileMode.Create))
+
+                {
+                    fs.Write(fileContent, 0, fileContent.Length);
+                }
+                
             }
 
-            string sourcePath = Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\PracticalTask\\", task.PracticalTask);
-
-            string targetPath = Path.Combine(dlg.FileName);
-
-            File.Copy(sourcePath, targetPath, true);
-
-            if (targetPath == null)
-            {
-                return;
-            }
         }
 
+
+        public void SaveFile(string filePath)
+        {
+            byte[] fileData = File.ReadAllBytes(filePath);
+
+            compressedData = ByteConverter.CompressData(fileData);
+
+            fileExtension = Path.GetExtension(filePath);
+
+           
+
+            
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             ofd.Filter = "Select a rtf (*.rtf)|*.rtf|doc (*.doc)|*.doc|All files (*.*)|*.*";
             myResult = ofd.ShowDialog();
             if (myResult != null && myResult == true)
             {
-                OpenReady.Content = ofd.SafeFileName;
-                string filePath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\PracticalTask\\AnswerPracticalTask\\" + ofd.SafeFileName;
-                MessageBox.Show(filePath);
-                File.Copy(ofd.FileName, filePath, true);
-                task.PracticalTask = ofd.SafeFileName;
+                SaveFile(ofd.FileName);
 
             }
 
@@ -138,8 +149,11 @@ namespace WebBook.PageWindow
 
             answerPractical.IdTask = task.IDTask;
 
-            answerPractical.PracricalAnswer = ofd.SafeFileName;
+            answerPractical.PracricalAnswer = compressedData;
 
+            answerPractical.DeliveryDate = DateTime.Now;
+
+            answerPractical.ExtensionAnsw = fileExtension;
             DataBase.webBookEntities.AnswerPractical.AddOrUpdate(answerPractical);
             DataBase.webBookEntities.SaveChanges();
         }

@@ -1,9 +1,11 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -38,10 +40,8 @@ namespace WebBook.PageWindow
         public static Topic topic = null;
 
         OpenFileDialog ofd = new OpenFileDialog();
-        OpenFileDialog ofdv = new OpenFileDialog();
 
         bool? myResult2;
-        bool? myResult3;
 
         public AddEditTopicPage()
         {
@@ -64,15 +64,7 @@ namespace WebBook.PageWindow
             }
         }
 
-        private bool Check(string str, string message)
-        {
-            if (!string.IsNullOrEmpty(str))
-            {
-                return true;
-            }
-            MessageBox.Show("Пустая строка: " + message);
-            return false;
-        }
+    
 
         public void CheckAdd() 
         {
@@ -141,7 +133,15 @@ namespace WebBook.PageWindow
         }
 
 
-        
+      
+        public void SaveFile(string filePath)
+        {
+            byte[] fileData = File.ReadAllBytes(filePath);
+            byte[] compressedData = ByteConverter.CompressData(fileData);
+          
+            topic.LectureTopic = compressedData;
+        }
+
         private void OpenDocument_Click(object sender, RoutedEventArgs e)
         {
             ofd.Filter = "Select a rtf (*.rtf)|*.rtf|All files (*.*)|*.*";
@@ -149,48 +149,12 @@ namespace WebBook.PageWindow
             myResult2 = ofd.ShowDialog();
             if (myResult2 != null && myResult2 == true)
             {
-                string relativePath = @"..\..\LectureRtf\"; // две точки - это подняться на уровень выше, затем перейти в папку LectureRtf
-
-                string fileName = Path.GetFileName(ofd.FileName);
-                string filePath = Path.Combine(relativePath, fileName);
-                File.Copy(ofd.FileName, filePath);
-
-
-                //string path = @"LectureRtf";
-                //Directory.CreateDirectory(path);
-
-                //string sourceFile = ofd.FileName;
-                //string destinationPath = @"LectureRtf\" + System.IO.Path.GetFileName(sourceFile);
-                //string absolutePath = System.IO.Path.Combine(Environment.CurrentDirectory, destinationPath);
-                //File.Copy(sourceFile, absolutePath, true);
-
-
-                //string sourceFile = ofd.FileName;
-                //string destinationFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LectureRtf");
-                //if (!Directory.Exists(destinationFolder))
-                //{
-                //    Directory.CreateDirectory(destinationFolder);
-                //}
-                //string destinationFile = System.IO.Path.Combine(destinationFolder, System.IO.Path.GetFileName(sourceFile));
-                //File.Copy(sourceFile, destinationFile, true);
-
-
-                //OpenDocument.Content = ofd.SafeFileName;
-                //string filePath = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + "\\LectureRtf\\" + ofd.SafeFileName;
-                //MessageBox.Show(filePath);
-                //File.Copy(ofd.FileName, filePath, true);
-                //topic.LectureTopic = @"LectureRtf\" + ofd.SafeFileName;
-                topic.LectureTopic = filePath;
-
+                SaveFile(ofd.FileName);
             }
 
         }
 
-        private void OpenVideo_Click(object sender, RoutedEventArgs e)
-        {
-           
-     
-        }
+      
 
       
 

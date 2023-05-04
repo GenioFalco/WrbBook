@@ -155,7 +155,8 @@
                                 Height="55"
                                 Width="300" 
                                 x:Name="OpenReady"
-                                Style="{StaticResource StuleButton}" Click="Button_Click_1"/>
+                                Style="{StaticResource StuleButton}" 
+                                Click="Button_Click_1"/>
                     </DockPanel>
                 </Border>
             </StackPanel>
