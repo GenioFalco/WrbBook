@@ -67,6 +67,7 @@ namespace WebBook.UserControlUI
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
+            if (!Checks.Number(GraedPrac.Text, "Поле оценка")) return;
             answerPractical.GradeAnswer = Convert.ToInt32(GraedPrac.Text);
 
             answerPractical.PracricalAnswer = answerPractical.PracricalAnswer;

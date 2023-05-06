@@ -1,30 +1,13 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WebBook.ClassesApp;
 using WebBook.EntityFramework;
-using WebBook.UserControlUI;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Path = System.IO.Path;
@@ -37,7 +20,7 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class TaskPage : Page
     {
-        public static EntityFramework.Task task = null;
+        public static Task task = null;
 
         public static User user = null;
 
@@ -67,9 +50,6 @@ namespace WebBook.PageWindow
                 var graedId = DataBase.webBookEntities.AnswerPractical.Where(id => id.IdTask == task.IDTask && id.IdUser == user.IDUser).Select(x => x.GradeAnswer).FirstOrDefault();
                 Grade.Text = graedId.ToString();
 
-               
-
-
                 TimeSpan TimeRemaining = task.LastDateTask - DateTime.Now;
                 LeftDate.Text = "Оставшееся время:" + TimeRemaining.Days + " : " + TimeRemaining.Hours + " : " + TimeRemaining.Minutes;
 
@@ -82,17 +62,12 @@ namespace WebBook.PageWindow
 
             else
             {
-                task = new EntityFramework.Task();
+                task = new Task();
             }
         }
 
-
-
-     
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
             dlg.FileName = task.TitleTask; // Имя файла по умолчанию
             dlg.DefaultExt = task.ExtensionTask; // Расширение файла по умолчанию
@@ -124,9 +99,6 @@ namespace WebBook.PageWindow
 
             fileExtension = Path.GetExtension(filePath);
 
-           
-
-            
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -137,25 +109,31 @@ namespace WebBook.PageWindow
                 SaveFile(ofd.FileName);
 
             }
-
-
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            if (DataBase.webBookEntities.AnswerPractical.Any(x => x.IdTask == task.IDTask))
+            {
+                MessageBox.Show("Вы уже прекрепили работу");
+                return;
+            }
+
             answerPractical = new AnswerPractical();
-
             answerPractical.IdUser = user.IDUser;
-
             answerPractical.IdTask = task.IDTask;
-
+            if (compressedData == null) 
+            {
+                MessageBox.Show("Прикрепите работу"); return;
+            }
             answerPractical.PracricalAnswer = compressedData;
-
             answerPractical.DeliveryDate = DateTime.Now;
-
             answerPractical.ExtensionAnsw = fileExtension;
+
             DataBase.webBookEntities.AnswerPractical.AddOrUpdate(answerPractical);
             DataBase.webBookEntities.SaveChanges();
+
+            MessageBox.Show("Работа прикреплена"); return;
         }
     }
 }

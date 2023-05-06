@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Sockets;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WebBook.ClassesApp;
 using WebBook.EntityFramework;
 using WebBook.WindowForm;
+using System.Windows.Media;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
+using System.Net.NetworkInformation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Net.Http;
+using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace WebBook.PageWindow
 {
@@ -37,7 +38,7 @@ namespace WebBook.PageWindow
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Authorization.frame.Navigate(new AuthorizationPage());
+            WindowForm.Authorization.frame.Navigate(new AuthorizationPage());
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -59,7 +60,6 @@ namespace WebBook.PageWindow
             AddUser();
         }
 
-       
         public void AddUser()
         {
 
@@ -71,7 +71,7 @@ namespace WebBook.PageWindow
 
             user = new User();
 
-            if (!Checks.TolkBukva(NameReg.Text,"Поле Имя")) return;
+            if (!Checks.TolkBukva(NameReg.Text, "Поле Имя")) return;
             user.NameUser = NameReg.Text;
 
 
@@ -81,16 +81,24 @@ namespace WebBook.PageWindow
             string emailPattern = @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
 
             // проверяем, соответствует ли введенный адрес формату
-            if (System.Text.RegularExpressions.Regex.IsMatch(email, emailPattern))
+            if (Regex.IsMatch(email, emailPattern))
             {
-               
+
             }
             else
             {
                 MessageBox.Show("Введенный e-mail адрес неправильный.");
                 return;
             }
+
+            if (!IsValidEmail(EmailReg.Text))
+            {
+                MessageBox.Show("Адрес электронной почты недействителен.");return;
+            }
         
+
+
+
             user.EmailUser = EmailReg.Text;
 
             if (!Checks.CheckNull(PasswordReg.Password, "Поле пароль")) return;
@@ -107,10 +115,12 @@ namespace WebBook.PageWindow
 
             MessageBox.Show("Пользователь зарегистрирован");
 
-            Authorization.frame.Navigate(new AuthorizationPage());
+            WindowForm.Authorization.frame.Navigate(new AuthorizationPage());
+
+
 
         }
-
+      
         private void PasswordReg_TextChanged(object sender, TextChangedEventArgs e)
         {
             PasswordMask.Text = PasswordReg.Password;
@@ -120,5 +130,44 @@ namespace WebBook.PageWindow
         {
             PasswordReg.Password = PasswordMask.Text;
         }
+
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                SmtpClient Smtp = new SmtpClient("smtp.mail.ru", 25);
+                Smtp.Credentials = new NetworkCredential("shoping_re_airpods@mail.ru", "u5cKGbsVmrEnt9ktBVuW");
+                Smtp.EnableSsl = true;
+                //Формирование письма
+                MailMessage Message = new MailMessage();
+                Message.From = new MailAddress("shoping_re_airpods@mail.ru");
+                Message.To.Add(new MailAddress(email));
+                Message.Subject = "Проверка действительности почты";
+                string body = "<html><head><title>Проверка действительности почты</title></head><body>";
+                body += "<div style='text-align:center;'><img src='\"/Веб Бук;component/Resources/WebBooNoText.png\"' alt='Logo'></div>";
+                body += "<p>Уважаемый пользователь,</p><p>Данное сообщение было отправлено для проверки действительности данной почты</p>";
+                body += "</p><p>Если вы не регистрировались в Веб Бук, то просто проигнорируйте это сообщение.</p><p>С уважением,<br>Команда Веб Бук</p>";
+                body += "</body></html>";
+                Message.Body = body;
+                Message.DeliveryNotificationOptions = DeliveryNotificationOptions.Never;
+                Smtp.Send(Message);
+
+                // Если адрес электронной почты существует, возвращаем true
+                return true;
+            }
+            catch (SmtpFailedRecipientException)
+            {
+                // Если адрес электронной почты не существует, возвращаем false
+                return false;
+            }
+            catch (SmtpException)
+            {
+                // Если произошла ошибка при проверке адреса электронной почты, возвращаем false
+                return false;
+            }
+        }
+
+
+
     }
 }

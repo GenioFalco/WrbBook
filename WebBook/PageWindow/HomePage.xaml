@@ -93,27 +93,19 @@
             <StackPanel Orientation="Horizontal" 
                         Margin="50 0 0 0">
                
-                <Button Content="Темы"  
-                        Width="135" 
-                        Height="45" 
-                        FontSize="16"
-                        Style="{StaticResource StuleButton}" 
-                        Click="Button_Click"/>
-
-                <Button Content="Тесты" 
-                        Width="135"
-                        Height="45"
-                        FontSize="16"
-                        Style="{StaticResource StuleButton}" 
-                        Click="Button_Click_1"/>
-
-                <Button Content="Задания" 
-                        Width="135"
-                        Height="45"
-                        x:Name="te"
-                        FontSize="16"
-                        Style="{StaticResource StuleButton}" 
-                        Click="Button_Click_3"/>
+                <RadioButton Content="Темы" 
+                             Style="{DynamicResource RadioButtonStyle}"
+                             IsChecked="True" 
+                             Margin="5"
+                             Click="RadioButton_Click"  />
+                <RadioButton Content="Тесты" 
+                             Margin="5"
+                             Style="{DynamicResource RadioButtonStyle}"
+                             IsChecked="False" Click="RadioButton_Click_1"   />
+                <RadioButton Content="Задания" 
+                             Margin="5"
+                             Style="{DynamicResource RadioButtonStyle}"
+                             IsChecked="False" Click="RadioButton_Click_2"  />
             </StackPanel>
         </DockPanel>
 

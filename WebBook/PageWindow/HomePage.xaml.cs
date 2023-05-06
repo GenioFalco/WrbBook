@@ -131,18 +131,23 @@ namespace WebBook.PageWindow
             VivodTopic();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+     
+
+       
+
+        private void RadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            choise = 0;
+            VivodTopic();
+        }
+
+        private void RadioButton_Click_1(object sender, RoutedEventArgs e)
         {
             choise = 1;
             VivodTopic();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            MainMenu.frame.Navigate(new AddEditTopicPage());
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void RadioButton_Click_2(object sender, RoutedEventArgs e)
         {
             choise = 2;
             VivodTopic();

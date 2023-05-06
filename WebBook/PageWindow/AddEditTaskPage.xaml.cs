@@ -75,7 +75,6 @@ namespace WebBook.PageWindow
                 TitleTaskName.Text = task.TitleTask;
                 LastDateTask.Value = task.LastDateTask;
                 var topicId = DataBase.webBookEntities.Topic.Where(x => x.IDTopic == task.TopicTask).Select(id => id.TitleTopic).FirstOrDefault();
-
                 TopicTask.SelectedValue = topicId;
 
             }

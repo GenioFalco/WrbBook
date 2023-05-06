@@ -89,7 +89,26 @@ namespace WebBook.ClassesApp
             }
         }
 
-       
-      
+        public static bool Number(string email, string Pole)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                MessageBox.Show(Pole + " обязательно для заполнения.");
+                return false;
+            }
+            else if (email.Contains(" ") || !Regex.IsMatch(email, @"^[a-zA-Z@._0-9]+$"))
+            {
+                MessageBox.Show(Pole + " поддерживает только цифры");
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+        }
+
+
+
     }
 }

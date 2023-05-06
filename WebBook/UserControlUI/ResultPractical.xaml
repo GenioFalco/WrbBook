@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WebBook.UserControlUI" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="832" Margin="5">
+             d:DesignHeight="70" d:DesignWidth="832" Margin="5 5 0 5">
     <Grid>
         <Border CornerRadius="15"
                 x:Name="BdSelected"

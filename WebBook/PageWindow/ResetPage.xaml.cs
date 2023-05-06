@@ -64,40 +64,55 @@ namespace WebBook.PageWindow
             }
             else
             {
-                SCodeReset.Visibility = Visibility.Visible;
-                BNextPass.Visibility = Visibility.Visible;
+                try 
+                {
+                    //string resetCode = GenerateResetCode();
+                    Random random = new Random();
+                    randomNumber = random.Next(100000, 999999);
 
-                SPMail.Visibility = Visibility.Collapsed;
-                BNext.Visibility = Visibility.Collapsed;
+                    SmtpClient Smtp = new SmtpClient("smtp.mail.ru", 25);
+                    Smtp.Credentials = new NetworkCredential("shoping_re_airpods@mail.ru", "u5cKGbsVmrEnt9ktBVuW");
+                    Smtp.EnableSsl = true;
+                    //Формирование письма
+                    MailMessage Message = new MailMessage();
+                    Message.From = new MailAddress("shoping_re_airpods@mail.ru");
+                    Message.To.Add(new MailAddress(EmailReset.Text));
+                    Message.Subject = "Сброс пароля";
+
+                    string body = "<html><head><title>Сброс пароля</title></head><body>";
+                    body += "<div style='text-align:center;'><img src='\"/WebBook;component/Resources/WebBooNoText.png\"' alt='Logo'></div>";
+                    body += "<p>Уважаемый пользователь,</p><p>Вы запросили сброс пароля в нашем приложении. Используйте следующий код для сброса пароля:</p>";
+                    body += $"<p style='font-size:18px; color:#003C61; font-weight:bold;'>{randomNumber}</p><p>Если вы не запрашивали сброс пароля, то просто проигнорируйте это сообщение.</p><p>С уважением,<br>Команда WebBook</p>";
+                    body += "</body></html>";
+                    Message.Body = body;
+
+                    Message.IsBodyHtml = true;
+
+                    Smtp.Send(Message);//отправка
+
+                    SCodeReset.Visibility = Visibility.Visible;
+                    BNextPass.Visibility = Visibility.Visible;
+
+                    SPMail.Visibility = Visibility.Collapsed;
+                    BNext.Visibility = Visibility.Collapsed;
+                }
+                catch (SmtpFailedRecipientException)
+                {
+                    MessageBox.Show("Адрес электронной почты недействителен.");
+                    return;
+                }
+                catch (SmtpException)
+                {
+                    MessageBox.Show("Адрес электронной почты недействителен.");
+                    return;
+                }
+               
             }
 
-            //string resetCode = GenerateResetCode();
-            Random random = new Random();
-            randomNumber = random.Next(100000, 999999);
-
-
-            SmtpClient Smtp = new SmtpClient("smtp.mail.ru", 25);
-            Smtp.Credentials = new NetworkCredential("shoping_re_airpods@mail.ru", "u5cKGbsVmrEnt9ktBVuW");
-            //Smtp.EnableSsl = false;
-            Smtp.EnableSsl = true;
-            //Формирование письма
-            MailMessage Message = new MailMessage();
-            Message.From = new MailAddress("shoping_re_airpods@mail.ru");
-            Message.To.Add(new MailAddress(EmailReset.Text));
-            Message.Subject = "Сброс пароля";
-
-            string body = "<html><head><title>Сброс пароля</title></head><body>";
-            body += "<div style='text-align:center;'><img src='\"/WebBook;component/Resources/WebBooNoText.png\"' alt='Logo'></div>";
-            body += "<p>Уважаемый пользователь,</p><p>Вы запросили сброс пароля в нашем приложении. Используйте следующий код для сброса пароля:</p>";
-            body += $"<p style='font-size:18px; color:#003C61; font-weight:bold;'>{randomNumber}</p><p>Если вы не запрашивали сброс пароля, то просто проигнорируйте это сообщение.</p><p>С уважением,<br>Команда WebBook</p>";
-            body += "</body></html>";
-            Message.Body = body;
-
-            Message.IsBodyHtml = true;
-
-            Smtp.Send(Message);//отправка
+           
 
         }
+
         private void BSingIN_Click(object sender, RoutedEventArgs e)
         {
 

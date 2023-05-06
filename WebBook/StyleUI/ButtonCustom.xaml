@@ -98,78 +98,44 @@
     </Style>
 
 
-    <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryWhiteColor}"/>
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Width" Value="35"/>
-        <Setter Property="MaxHeight" Value="20"/>
-        <Setter Property="MaxWidth" Value="35"/>
+    <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+        <Setter Property="Background" Value="{DynamicResource TertiaryBackgroundColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SecundaryTextColor}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Width" Value="135"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid>
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="7"
-                                Height="14"
-                                Width="35"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center">
-                            <!-- Optional -->
-                            <!--<Border.Effect>
-                                <DropShadowEffect ShadowDepth="0.5" Opacity=".2"/>
-                            </Border.Effect>-->
-                        </Border>
-                        <Ellipse x:Name="Ellipse"
-                                     Height="20"
-                                     Width="20"
-                                     VerticalAlignment="Center"
-                                     HorizontalAlignment="Left"
-                                     Fill="{DynamicResource TertiaryWhiteColor}"
-                                     Stroke="{TemplateBinding BorderBrush}"
-                                     StrokeThickness="3">
-                            <!-- Optional -->
-                            <!--<Ellipse.Effect>
-                                <DropShadowEffect ShadowDepth="0.5" Opacity=".2"/>
-                            </Ellipse.Effect>-->
-                        </Ellipse>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <!-- EventTrigger Checked -->
-                        <EventTrigger RoutedEvent="Checked">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetName="Border"
-                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                        To="#C2D1FC" Duration="0:0:0.2"/>
-                                    <ThicknessAnimation Storyboard.TargetName="Ellipse"
-                                                            Storyboard.TargetProperty="Margin"
-                                                            To="15 0 0 0" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <!-- EventTrigger UnChecked -->
-                        <EventTrigger RoutedEvent="Unchecked">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation Storyboard.TargetName="Border"
-                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                        To="#CECECE" Duration="0:0:0.2"/>
-                                    <ThicknessAnimation Storyboard.TargetName="Ellipse"
-                                                            Storyboard.TargetProperty="Margin"
-                                                            To="0 0 0 0" Duration="0:0:0.2"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Border x:Name="menuButton" CornerRadius="15"
+                            Background="{TemplateBinding Background}">
 
+                        <Grid x:Name="gridSelection">
+                            <TextBlock x:Name="txtName" 
+                                       HorizontalAlignment="Center"  
+                                       VerticalAlignment="Center"
+                                       Text="{TemplateBinding Content}"  
+                                       Foreground="{TemplateBinding Foreground}"    
+                                       FontSize="{TemplateBinding FontSize}"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="txtName"
+                                    Property="Foreground" 
+                                    Value="{DynamicResource PrimaryTextColor}"/>
+                            <Setter TargetName="menuButton"
+                                    Property="Background"
+                                    Value="{DynamicResource SecundaryBackgroundColor}"/>
+                        </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Ellipse"
-                                    Property="Fill"
-                                    Value="{DynamicResource SecundaryBlueColor}"/>
-                            <Setter TargetName="Ellipse"
-                                   Property="Stroke"
-                                   Value="{DynamicResource PrimaryTextColor}"/>
+                            <Setter TargetName="txtName"
+                                    Property="Foreground" 
+                                    Value="{DynamicResource PrimaryTextColor}"/>
+                            <Setter TargetName="menuButton"
+                                    Property="Background" 
+                                    Value="{DynamicResource SecundaryBackgroundColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
