@@ -322,6 +322,7 @@
             </StackPanel>
 
 
+            
 
             <StackPanel HorizontalAlignment="Right"                                                                       
                         VerticalAlignment="Center"
@@ -364,8 +365,49 @@
                 </Border>
             </StackPanel>
 
-            
-            
+            <StackPanel HorizontalAlignment="Left"                                                                       
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Grid.Row="2"
+                        Grid.Column="1">
+
+                <TextBlock Text="Группа"                                    
+                           Margin="12"                                   
+                           Foreground="{DynamicResource PrimaryTextColor}"                                    
+                           FontSize="20"/>
+
+                <Border Width="300"
+                        Height="55"
+                        
+                        Background="{DynamicResource SecundaryBackgroundColor}"
+                        CornerRadius="15">
+
+                    <DockPanel>
+                        <Image Source="{DynamicResource Email}"                        
+                               DockPanel.Dock="Right"
+                               Height="32"
+                               Width="32"
+                               Margin="10"/>
+
+                        <xctk:WatermarkTextBox 
+                            x:Name="GroupEdit"
+                            Width="250"
+                            Height="55"                 
+                            Watermark="Введите группу"                                         
+                            Foreground="{DynamicResource PrimaryTextColor}"                       
+                            FontSize="20"                
+                            HorizontalAlignment="Left"               
+                            Margin="5 0 0 0"               
+                            VerticalContentAlignment="Center"              
+                            Background="Transparent"               
+                            BorderBrush="Transparent"
+                            BorderThickness="0"/>
+                    </DockPanel>
+                </Border>
+
+            </StackPanel>
+
+
             <Button x:Name="BtSave"
                     Content="Сохранить"
                     HorizontalAlignment="Center"

@@ -36,7 +36,7 @@
                            Margin="10"
                            VerticalAlignment="Center"/>
 
-                    <TextBlock Text="WebBook"
+                    <TextBlock Text="Веб Бук"
                                VerticalAlignment="Center"
                                FontSize="26"
                                FontWeight="Bold"

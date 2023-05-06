@@ -102,7 +102,7 @@
                             x:Name="Description"
                             Height="55"  
                             Width="290"
-                            Watermark="Введите описани"                                         
+                            Watermark="Введите описание"                                         
                             Foreground="{DynamicResource PrimaryTextColor}"                       
                             FontSize="20"                
                             HorizontalAlignment="Left"               

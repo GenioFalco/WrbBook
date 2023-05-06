@@ -28,23 +28,11 @@ namespace WebBook.PageWindow
     {
         public User user = null;
 
-        List<string> RoleTitle;
+       
         public RegistrationPage()
         {
             InitializeComponent();
 
-            if(ConrolerBroadCast.CheckRegUser == true)
-            {
-                SPRole.Visibility = Visibility.Visible;
-                WhatLogIn.Visibility = Visibility.Collapsed;
-            }
-           
-
-            RoleTitle = DataBase.webBookEntities.Role.Select(x => x.TitleRole).Distinct().ToList();
-            foreach (var item in RoleTitle)
-            {
-                RoleReg.Items.Add(item);
-            }
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -108,30 +96,18 @@ namespace WebBook.PageWindow
             if (!Checks.CheckNull(PasswordReg.Password, "Поле пароль")) return;
             user.PasswordUser = PasswordReg.Password;
 
-            if (RoleReg.SelectedValue == null) 
-            {
-                user.RoleUser = 2;
-            }
-            else 
-            {
-                var roleId = DataBase.webBookEntities.Role.Where(x => x.TitleRole == RoleReg.SelectedValue.ToString()).Select(id => id.IDRole).FirstOrDefault();
-                user.RoleUser = Convert.ToInt32(roleId);
-            }
+            user.RoleUser = 2;
+
+
+            user.GroupUser = GroupReg.Text;
+
 
             DataBase.webBookEntities.User.AddOrUpdate(user);
             DataBase.webBookEntities.SaveChanges();
 
             MessageBox.Show("Пользователь зарегистрирован");
 
-     
-
             Authorization.frame.Navigate(new AuthorizationPage());
-
-
-
-
-
-
 
         }
 

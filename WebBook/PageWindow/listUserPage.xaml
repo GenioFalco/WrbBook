@@ -81,17 +81,6 @@
             </Border>
         </DockPanel>
 
-        <Button Content="Добавить пользователя"       
-                Width="200"      
-                Height="45" 
-                Margin="20 0 0 0"
-                HorizontalAlignment="Left"
-                FontSize="16"
-                Grid.Row="1"
-                Style="{StaticResource StuleButton}"
-                Click="Button_Click"/>
-
-
         <ScrollViewer Grid.Row="2">
             <StackPanel x:Name="UserOutput">
                 

@@ -32,11 +32,17 @@ namespace WebBook.PageWindow
         int CountTest = DataBase.webBookEntities.Test.ToList().Count;
 
         int CountTask = DataBase.webBookEntities.Task.ToList().Count;
+
         public static User user  = null;
         public ProfilePage()
         {
             InitializeComponent();
             InitilizateVivod();
+
+            if(user.RoleUser == 1) 
+            {
+                GroupEdit.Visibility = Visibility.Collapsed;
+            }
         }
 
         public void InitilizateVivod()
@@ -48,12 +54,14 @@ namespace WebBook.PageWindow
                 EmailEdit.Text = user.EmailUser;
                 PasswordEdit.Password = user.PasswordUser;
                 PatronymicEdit.Text = user.PasswordUser;
+                GroupEdit.Text = user.GroupUser;
                 if (PhotoConvert.loagPhoto(user.ImageUser) == null)
                 {
-                   PhotoUser.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/WebBooNoText.png"));
+                    PhotoUser.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Resources/WebBooNoText.png"));
                 }
                 else
                 {
+
                     PhotoUser.ImageSource = PhotoConvert.loagPhoto(user.ImageUser);
                 }
 
@@ -63,18 +71,11 @@ namespace WebBook.PageWindow
 
                 PercentTest.Value = resultstest.Count();
 
-
                 PercentTask.Maximum = CountTask;
 
                 var resultstask = DataBase.webBookEntities.AnswerPractical.Where(r => r.IdUser == user.IDUser).ToList();
 
                 PercentTask.Value = resultstask.Count();
-
-
-
-
-
-
             }
             else
             {

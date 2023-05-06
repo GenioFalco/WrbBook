@@ -21,7 +21,7 @@ namespace WebBook.ClassesApp
 
         public static bool CheckTest = false;
 
-        public static bool CheckRegUser = false;
+  
 
   
 

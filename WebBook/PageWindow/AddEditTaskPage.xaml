@@ -137,7 +137,7 @@
                         Grid.Row="1"
                         Grid.Column="1">
 
-                <TextBlock Text="Тема задния*"                                    
+                <TextBlock Text="Тема задания*"                                    
                            Margin="12"                                   
                            Foreground="{DynamicResource PrimaryTextColor}"                                    
                            FontSize="20"/>
@@ -152,7 +152,7 @@
                             x:Name="TopicTask"
                             Height="55"
                             Width="290"
-                            Watermark="Введите тему"                                         
+                            Watermark="Выберите тему"                                         
                             Foreground="{DynamicResource PrimaryTextColor}"                       
                             FontSize="20"                
                             HorizontalAlignment="Left"               

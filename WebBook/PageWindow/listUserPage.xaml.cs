@@ -92,10 +92,5 @@ namespace WebBook.PageWindow
             Vivod();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ConrolerBroadCast.CheckRegUser = true;
-            MainMenu.frame.Navigate(new RegistrationPage());
-        }
     }
 }

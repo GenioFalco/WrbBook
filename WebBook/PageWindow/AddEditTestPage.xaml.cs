@@ -27,9 +27,7 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class AddEditTestPage : Page
     {
-        List<QuestionList> questionLists = new List<QuestionList>();
-
-        public static Test tests = null;
+        public static List<QuestionList> questionLists = new List<QuestionList>();
 
         public static TestModel test = null;
 
@@ -40,8 +38,8 @@ namespace WebBook.PageWindow
         public AddEditTestPage()
         {
             InitializeComponent();
-            InitilizateVivod();
             test = ConrolerBroadCast.test;
+            InitilizateVivod();
 
             topicTitle = DataBase.webBookEntities.Topic.Select(x => x.TitleTopic).Distinct().ToList();
 
@@ -64,8 +62,10 @@ namespace WebBook.PageWindow
             if (test != null)
             {
                 TitleTest.Text = test.Test.TitleTest;
-                //var topicId = DataBase.webBookEntities.Topic.Where(x => x.IDTopic == Convert.ToInt32(test.Test.TopicTest)).Select(id => id.TitleTopic).FirstOrDefault();
-                //TopicTest.SelectedValue = topicId;
+
+                var topicId = DataBase.webBookEntities.Topic.Where(x => x.IDTopic == test.Test.TopicTest).Select(id => id.TitleTopic).FirstOrDefault();
+               
+                TopicTest.SelectedValue = topicId;
 
                 ListQuest.Children.Clear();
                 foreach (var item in test.QuestionModel)
@@ -86,8 +86,11 @@ namespace WebBook.PageWindow
 
         public void AddEdTopic()
         {
+
             if (ConrolerBroadCast.CheckAdd == false)
             {
+                test = new TestModel(new Test());
+
                 foreach (var item in questionLists)
                 {
                     item.QuestionModel.Title = item.TitleQuestion.Text;
@@ -123,7 +126,8 @@ namespace WebBook.PageWindow
                 if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
                 test.Test.TitleTest = TitleTest.Text;
 
-                test.Test.TopicTest = Convert.ToInt32(TopicTest.Text);
+                var topicId = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
+                test.Test.TopicTest = topicId;
 
                 DataBase.webBookEntities.Test.AddOrUpdate(test.Test);
                 DataBase.webBookEntities.SaveChanges();

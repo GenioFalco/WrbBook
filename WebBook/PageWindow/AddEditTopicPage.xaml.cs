@@ -1,34 +1,12 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Data.SqlClient;
+﻿using System.Data.Entity.Migrations;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WebBook.ClassesApp;
 using WebBook.EntityFramework;
-using Xceed.Wpf.Toolkit;
-using static System.Net.Mime.MediaTypeNames;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
-using Path = System.IO.Path;
 
 namespace WebBook.PageWindow
 {
