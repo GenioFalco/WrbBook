@@ -54,7 +54,7 @@ namespace WebBook.PageWindow
 
         public void Saves() 
         {
-            MessageBox.Show("fggg");
+            MessageBox.Show("");
         }
 
 
@@ -107,7 +107,7 @@ namespace WebBook.PageWindow
                 DataBase.webBookEntities.Test.Add(test.Test);
                 DataBase.webBookEntities.SaveChanges();
 
-                MessageBox.Show("Задание добавлено");
+                MessageBox.Show("Тест добавлен");
             }
             else
             {
@@ -128,7 +128,7 @@ namespace WebBook.PageWindow
                 DataBase.webBookEntities.Test.AddOrUpdate(test.Test);
                 DataBase.webBookEntities.SaveChanges();
 
-                MessageBox.Show("Задание обнавлено");
+                MessageBox.Show("Тест обновлен");
             }
 
         }

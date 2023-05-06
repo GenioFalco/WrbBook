@@ -113,19 +113,6 @@ namespace WebBook.PageWindow
             Authorization.frame.Navigate(new ResetPage());
         }
 
-        private void TextBlock_MouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)
-        {
-            if (Password.Password == "0000")
-            {
-                MainMenu mainMenu = new MainMenu();
-                mainMenu.Show();
-                var Closes = Authorization.GetWindow(this);
-                Closes.Close();
-            }
-            else
-            {
-                MessageBox.Show("Неверный код!");
-            }
-        }
+      
     }
 }
