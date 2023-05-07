@@ -97,13 +97,16 @@
                              Style="{DynamicResource RadioButtonStyle}"
                              IsChecked="True" 
                              Margin="5"
+                             Cursor="Hand"
                              Click="RadioButton_Click"  />
                 <RadioButton Content="Тесты" 
                              Margin="5"
+                             Cursor="Hand"
                              Style="{DynamicResource RadioButtonStyle}"
                              IsChecked="False" Click="RadioButton_Click_1"   />
                 <RadioButton Content="Задания" 
                              Margin="5"
+                             Cursor="Hand"
                              Style="{DynamicResource RadioButtonStyle}"
                              IsChecked="False" Click="RadioButton_Click_2"  />
             </StackPanel>

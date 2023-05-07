@@ -82,6 +82,7 @@
         <Button Grid.Row="3"
                 Width="406" 
                 Height="55"
+                Cursor="Hand"
                 Content="Далее"
                 FontSize="20"
                 Visibility="Visible"
@@ -146,6 +147,7 @@
         <Button Grid.Row="3"
                     Width="406"
                     Height="55"
+                Cursor="Hand"
                     Content="Далее"
                     FontSize="20"
                 Visibility="Collapsed"
@@ -218,6 +220,7 @@
         <Button Grid.Row="3"
                     Width="406"
                     Height="55"
+                Cursor="Hand"
                     Content="Готово"
                     FontSize="20"
                 Visibility="Collapsed"
@@ -230,7 +233,7 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
 
-            <TextBlock 
+            <TextBlock Cursor="Hand"
                     Text="Отмена"
                     FontSize="20" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
                 >

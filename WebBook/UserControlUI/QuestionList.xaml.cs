@@ -29,17 +29,12 @@ namespace WebBook.UserControlUI
     {
         public TestPage TestPage;
 
-
-
         public AddEditTestPage AddEditTestPage = null;
 
         public static User user = null;
 
-
-
         List<VariantList> variantLists = new List<VariantList>();
         public QuestionModel QuestionModel { get; set; }
-
 
         public QuestionList(QuestionModel questionModel)
         {
@@ -57,9 +52,9 @@ namespace WebBook.UserControlUI
                 QuestionModel.asnswerModels.Add(item.asnswer);
             }
         }
+
         public void VivodVariantov()
         {
-
             ListVariant.Children.Clear();
 
             foreach (var item in QuestionModel.asnswerModels)
@@ -75,15 +70,12 @@ namespace WebBook.UserControlUI
                     variantList.BtDelAnsw.Visibility = Visibility.Collapsed;
                     variantList.AnswerV.IsEnabled = false;
                 }
-                
-
             }
 
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
             VariantList variantList = new VariantList(new AsnswerModel());
             variantLists.Add(variantList);
             ListVariant.Children.Add(variantList);

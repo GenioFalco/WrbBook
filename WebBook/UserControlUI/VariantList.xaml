@@ -18,7 +18,8 @@
 
                    
                     <CheckBox VerticalAlignment="Center"
-                              x:Name="CbCheck"      
+                              x:Name="CbCheck"  
+                              Cursor="Hand"
                               Background="Transparent"
                               Margin="5"
                               BorderBrush="{DynamicResource TertiaryBackgroundColor}"
@@ -41,6 +42,7 @@
 
                     <Border Background="{DynamicResource PrimaryBackgroundColor}"
                                     Width="32"
+                            Cursor="Hand"
                                     Height="32" 
                                     CornerRadius="10"
                             x:Name="BtDelAnsw"

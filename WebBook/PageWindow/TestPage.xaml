@@ -31,9 +31,11 @@
                         Height="45" Width="150"
                         Style="{StaticResource StuleButton}" 
                         Click="Button_Click" 
-                        x:Name="over"/>
+                        x:Name="over"
+                        Cursor="Hand"/>
                 
                 <Button Content="Назад"
+                        Cursor="Hand"
                         Height="45" Width="150"
                         Style="{StaticResource StuleButton}" Click="Button_Click_1"/>
 

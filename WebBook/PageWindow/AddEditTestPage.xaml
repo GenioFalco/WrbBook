@@ -103,6 +103,7 @@
             </StackPanel>
             <Button x:Name="BtAddQuest"
                 Content="Добавить вопрос"
+                    Cursor="Hand"
                 VerticalAlignment="Bottom"
                 Margin="10 35 10 35"
                 Height="55"
@@ -112,6 +113,7 @@
 
             <Button x:Name="BtSaveTest"
                 Content="Сохранить тест"
+                    Cursor="Hand"
                 VerticalAlignment="Bottom"
                 Margin="10 35 10 35"
                 Height="55"

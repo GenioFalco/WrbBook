@@ -28,6 +28,7 @@
                          Margin="0 0 35 0">
                 
                 <Button Content="Назад"
+                        Cursor="Hand"
                         Height="45" Width="150"
                         Style="{StaticResource StuleButton}"/>
 
@@ -62,6 +63,7 @@
                     <DockPanel>
                         <Button Content="Скачать" 
                                 Height="55"
+                                Cursor="Hand"
                                 Width="300" 
                                 Style="{StaticResource StuleButton}" Click="Button_Click"/>
                     </DockPanel>
@@ -154,6 +156,7 @@
                         <Button Content="Прекрепить" 
                                 Height="55"
                                 Width="300" 
+                                Cursor="Hand"
                                 x:Name="OpenReady"
                                 Style="{StaticResource StuleButton}" 
                                 Click="Button_Click_1"/>
@@ -163,7 +166,8 @@
 
             <Button Content="Отправить" 
                     Height="55"
-                    Width="300" 
+                    Width="300"
+                    Cursor="Hand"
                     Grid.Row="4"
                     HorizontalAlignment="Center"
                     Margin="35"

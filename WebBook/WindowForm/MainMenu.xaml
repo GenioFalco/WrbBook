@@ -50,37 +50,44 @@
                 <StackPanel Grid.Row="1">
                     <RadioButton x:Name="RbHome"
                                  Content="Главная" 
+                                 Cursor="Hand"
                                  Style="{DynamicResource MenuRadioButtonStyle}"
                                  Tag="{DynamicResource Home}" 
                                  Margin="0 10 0 0"
                                  Click="rdHome_Click" IsChecked="True" />
                     <RadioButton x:Name="RbUser" 
+                                 Cursor="Hand"
                                  Content="Профиль" 
                                  Style="{DynamicResource MenuRadioButtonStyle}" 
                                  Tag="{DynamicResource User}" Margin="0 10 0 0"
                                  Click="rdUser_Click"  />
                     <RadioButton x:Name="RbUsers"
+                                 Cursor="Hand"
                                  Content="Пользователи" 
                                  Style="{DynamicResource MenuRadioButtonStyle}" 
                                  Tag="{DynamicResource Users}"
                                  Margin="0 10 0 0" Click="rdUsers_Click"/>
 
                     <RadioButton x:Name="RbRes"
+                                 Cursor="Hand"
                                  Content="Результат " 
                                  Style="{DynamicResource MenuRadioButtonStyle}" 
                                  Tag="{DynamicResource Users}"
                                  Margin="0 10 0 0" Click="RbRes_Click"/>
                     <RadioButton x:Name="RbAddTopic"
+                                 Cursor="Hand"
                                  Content="Добавить тему" 
                                  Style="{DynamicResource MenuRadioButtonStyle}" 
                                  Tag="{DynamicResource Answer}"
                                  Margin="0 10 0 0" Click="RdAddTopic_Click"/>
                     <RadioButton x:Name="RbAddTask"
+                                 Cursor="Hand"
                                  Content="Добавить задание" 
                                  Style="{DynamicResource MenuRadioButtonStyle}" 
                                  Tag="{DynamicResource Question}"
                                  Margin="0 10 0 0" Click="RdAddTask_Click"/>
                     <RadioButton x:Name="RbAddTest"
+                                 Cursor="Hand"
                                  Content="Добавить тест" 
                                  Style="{DynamicResource MenuRadioButtonStyle}" 
                                  Tag="{DynamicResource Question}"
@@ -90,7 +97,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="2">
-                    <RadioButton 
+                    <RadioButton Cursor="Hand"
                              VerticalAlignment="Bottom"
                              x:Name="RbExit"
                              Content="Выйти"

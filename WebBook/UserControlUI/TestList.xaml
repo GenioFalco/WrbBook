@@ -25,6 +25,7 @@
                 <Border Background="{DynamicResource SecundaryBackgroundColor}"
                             Width="32" Height="32" CornerRadius="10"
                             DockPanel.Dock="Right"
+                        Cursor="Hand"
                             Margin="5" MouseLeftButtonDown="Border_MouseLeftButtonDown">
                     <Image Source="{DynamicResource Delete}" 
                                Width="22" Height="22"
@@ -33,6 +34,7 @@
                 <Border Background="{DynamicResource SecundaryBackgroundColor}"
                             Width="32" Height="32" CornerRadius="10"
                             DockPanel.Dock="Right"
+                        Cursor="Hand"
                             Margin="5" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
                     <Image Source="{DynamicResource Edit}" 
                                Width="22" Height="22"
@@ -62,6 +64,7 @@
 
             <Button Content="Открыть"
                     Grid.Column="0"
+                    Cursor="Hand"
                     VerticalAlignment="Bottom"
                     Margin="10"
                     x:Name="OpenTest"

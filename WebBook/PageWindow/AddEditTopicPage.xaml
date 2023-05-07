@@ -137,6 +137,7 @@
                     <DockPanel>
                         <Button Content="Выберите документ"
                                 x:Name="OpenDocument"
+                                Cursor="Hand"
                                 Style="{DynamicResource StuleButton}" 
                                 Click="OpenDocument_Click"/>
                     </DockPanel>
@@ -149,6 +150,7 @@
                     Content="Сохранить"
                     HorizontalAlignment="Center"
                     Grid.ColumnSpan="2"
+                    Cursor="Hand"
                     Grid.Row="3"
                     Margin="15"
                     Visibility="Visible"

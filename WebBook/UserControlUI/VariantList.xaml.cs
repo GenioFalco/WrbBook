@@ -27,6 +27,7 @@ namespace WebBook.UserControlUI
     public partial class VariantList : UserControl
     {
         public QuestionList QuestionList;
+
         public AsnswerModel asnswer;
 
         public QuestionModel questionModel;
@@ -66,7 +67,6 @@ namespace WebBook.UserControlUI
         {
             ((StackPanel)this.Parent).Children.Remove(this);
             QuestionList.QuestionModel.asnswerModels.Remove(asnswer);
-
         }
     }
 }

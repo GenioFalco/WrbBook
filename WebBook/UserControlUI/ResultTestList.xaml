@@ -54,6 +54,7 @@
                     <Border Background="{DynamicResource PrimaryBackgroundColor}"
                             Width="32" Height="32" CornerRadius="10"
                             DockPanel.Dock="Right"
+                            Cursor="Hand"
                             Margin="5" MouseLeftButtonDown="Border_MouseLeftButtonDown">
                         <Image Source="{DynamicResource Delete}" 
                                Width="22" Height="22"

@@ -27,6 +27,7 @@
             <DockPanel  DockPanel.Dock="Right"
                          Margin="0 0 35 0">
                 <Button Content="Назад"
+                        Cursor="Hand"
                         Height="45" Width="150"
                         Style="{StaticResource StuleButton}" Click="Button_Click_2"/>
                 
@@ -81,6 +82,7 @@
                 <DockPanel LastChildFill="False">
                     <Button Content="Сохранить лекцию"
                             Width="150"
+                            Cursor="Hand"
                             x:Name="Save"
                             Height="45"
                             Margin="0 35 35 35"

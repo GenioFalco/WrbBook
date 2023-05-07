@@ -25,7 +25,6 @@ namespace WebBook.UserControlUI
     /// </summary>
     public partial class TestList : UserControl
     {
-
         public HomePage homePage;
         TestModel test = null;
 

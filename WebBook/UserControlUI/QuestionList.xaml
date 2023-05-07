@@ -19,6 +19,7 @@
                     <Border Background="{DynamicResource PrimaryBackgroundColor}"
                                     Width="32"
                                     Height="32" 
+                            Cursor="Hand"
                                     CornerRadius="10"
                                     DockPanel.Dock="Right"
                                     Margin="5" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
@@ -62,7 +63,8 @@
             <Border Background="{DynamicResource SecundaryBackgroundColor}"
                     HorizontalAlignment="Left"               
                     Width="32"             
-                    Height="32"           
+                    Height="32"   
+                    Cursor="Hand"
                     CornerRadius="10"            
                     Margin="10" 
                     x:Name="BtAddVariant"

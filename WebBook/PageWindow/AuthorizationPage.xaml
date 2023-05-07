@@ -190,7 +190,8 @@
 
             <TextBlock
                     Margin="230 0 0 0"
-                    Text="Зыбыли пароль?"    
+                    Text="Зыбыли пароль?"  
+                Cursor="Hand"
                     FontSize="20" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
@@ -210,6 +211,7 @@
                     Height="55"
                     Content="Войти"
                     FontSize="20"
+                Cursor="Hand"
                     Style="{StaticResource StuleButton}"
                     Click="Button_Click"/>
 
@@ -225,6 +227,7 @@
 
                 <TextBlock 
                     Text=" Регистрация"
+                    Cursor="Hand"
                     FontSize="20" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
