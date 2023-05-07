@@ -149,6 +149,8 @@ namespace WebBook.PageWindow
                 body += "</p><p>Если вы не регистрировались в Веб Бук, то просто проигнорируйте это сообщение.</p><p>С уважением,<br>Команда Веб Бук</p>";
                 body += "</body></html>";
                 Message.Body = body;
+                Message.IsBodyHtml = true;
+
                 Message.DeliveryNotificationOptions = DeliveryNotificationOptions.Never;
                 Smtp.Send(Message);
 

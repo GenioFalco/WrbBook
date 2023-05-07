@@ -27,7 +27,9 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class AddEditTestPage : Page
     {
-        public static List<QuestionList> questionLists = new List<QuestionList>();
+        List<QuestionList> questionLists = new List<QuestionList>();
+
+        public static Test tests = null;
 
         public static TestModel test = null;
 
@@ -38,11 +40,10 @@ namespace WebBook.PageWindow
         public AddEditTestPage()
         {
             InitializeComponent();
-            test = ConrolerBroadCast.test;
+            test = ConrolerBroadCast.test;          
             InitilizateVivod();
 
             topicTitle = DataBase.webBookEntities.Topic.Select(x => x.TitleTopic).Distinct().ToList();
-
             foreach (var item in topicTitle)
             {
                 TopicTest.Items.Add(item);
@@ -55,8 +56,6 @@ namespace WebBook.PageWindow
             MessageBox.Show("");
         }
 
-
-
         public void InitilizateVivod()
         {
             if (test != null)
@@ -68,6 +67,7 @@ namespace WebBook.PageWindow
                 TopicTest.SelectedValue = topicId;
 
                 ListQuest.Children.Clear();
+
                 foreach (var item in test.QuestionModel)
                 {
                     QuestionList questionList = new QuestionList(item);
@@ -81,16 +81,24 @@ namespace WebBook.PageWindow
             {
                 test = new TestModel(new Test());
             }
-
         }
 
         public void AddEdTopic()
         {
 
+            if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
+            test.Test.TitleTest = TitleTest.Text;
+
+            var topicId = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
+            test.Test.TopicTest = topicId;
+
+            test.Test.JsonFile = "[]";
+
+            DataBase.webBookEntities.Test.AddOrUpdate(test.Test);
+            DataBase.webBookEntities.SaveChanges();
+
             if (ConrolerBroadCast.CheckAdd == false)
             {
-                test = new TestModel(new Test());
-
                 foreach (var item in questionLists)
                 {
                     item.QuestionModel.Title = item.TitleQuestion.Text;
@@ -103,11 +111,10 @@ namespace WebBook.PageWindow
                 if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
                 test.Test.TitleTest = TitleTest.Text;
 
+                var topicId1 = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
+                test.Test.TopicTest = topicId1;
 
-                var topicId = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
-                test.Test.TopicTest = topicId;
-
-                DataBase.webBookEntities.Test.Add(test.Test);
+                DataBase.webBookEntities.Test.AddOrUpdate(test.Test);
                 DataBase.webBookEntities.SaveChanges();
 
                 MessageBox.Show("Тест добавлен");
@@ -126,8 +133,8 @@ namespace WebBook.PageWindow
                 if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
                 test.Test.TitleTest = TitleTest.Text;
 
-                var topicId = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
-                test.Test.TopicTest = topicId;
+                var topicId1 = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
+                test.Test.TopicTest = topicId1;
 
                 DataBase.webBookEntities.Test.AddOrUpdate(test.Test);
                 DataBase.webBookEntities.SaveChanges();

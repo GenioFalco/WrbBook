@@ -29,7 +29,7 @@ namespace WebBook.UserControlUI
     {
         public TestPage TestPage;
 
-   
+
 
         public AddEditTestPage AddEditTestPage = null;
 
@@ -40,7 +40,7 @@ namespace WebBook.UserControlUI
         List<VariantList> variantLists = new List<VariantList>();
         public QuestionModel QuestionModel { get; set; }
 
-        
+
         public QuestionList(QuestionModel questionModel)
         {
             InitializeComponent();
@@ -69,12 +69,13 @@ namespace WebBook.UserControlUI
                 variantList.questionModel = QuestionModel;
                 variantList.AnswerV.Text = item.Title;
                 ListVariant.Children.Add(variantList);
-
-                if (user.RoleUser == 2)
+                
+                if(ConrolerBroadCast.CheckTest == true)
                 {
                     variantList.BtDelAnsw.Visibility = Visibility.Collapsed;
                     variantList.AnswerV.IsEnabled = false;
                 }
+                
 
             }
 
@@ -82,11 +83,11 @@ namespace WebBook.UserControlUI
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            
             VariantList variantList = new VariantList(new AsnswerModel());
             variantLists.Add(variantList);
             ListVariant.Children.Add(variantList);
         }
-       
 
         private void Border_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {

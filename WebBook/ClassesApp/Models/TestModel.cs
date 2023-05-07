@@ -28,11 +28,12 @@ namespace WebBook.ClassesApp.Models
 
         private void GetJS() 
         {
-            if(Test.JsonFile == null) 
+            if (Test.JsonFile == null)
             {
                 QuestionModel = new List<QuestionModel>();
                 return;
             }
+
             QuestionModel = JSONConverter.ConvertJSOut<List<QuestionModel>>(Test.JsonFile);
 
         }

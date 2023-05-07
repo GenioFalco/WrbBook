@@ -30,18 +30,12 @@ namespace WebBook.UserControlUI
         public AsnswerModel asnswer;
 
         public QuestionModel questionModel;
-
         public VariantList(AsnswerModel asnswerModel)
         {
             InitializeComponent();
             asnswer = asnswerModel;
 
-
-            
         }
-
-
-
 
         private void CbCheck_Checked_1(object sender, RoutedEventArgs e)
         {
@@ -71,7 +65,8 @@ namespace WebBook.UserControlUI
         private void BtDelAnsw_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ((StackPanel)this.Parent).Children.Remove(this);
-           
+            QuestionList.QuestionModel.asnswerModels.Remove(asnswer);
+
         }
     }
 }

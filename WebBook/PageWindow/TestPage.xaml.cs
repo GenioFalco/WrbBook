@@ -57,14 +57,10 @@ namespace WebBook.PageWindow
                 questionList.TestPage = this;
                 questionList.TitleQuestion.Text = item.Title;
                 ListQuest.Children.Add(questionList);
-
-                if (user.RoleUser == 2)
-                {
-                    questionList.BtAddVariant.Visibility = Visibility.Collapsed;
-                    questionList.DpContQuest.Visibility = Visibility.Collapsed;
-
-                    questionList.TitleQuestion.IsEnabled = false;
-                }
+                
+                questionList.BtAddVariant.Visibility = Visibility.Collapsed;
+                questionList.DpContQuest.Visibility = Visibility.Collapsed;
+                questionList.TitleQuestion.IsEnabled = false;
             }
         }
 
