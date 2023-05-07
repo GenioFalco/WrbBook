@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,10 +33,21 @@ namespace WebBook.PageWindow
         string like = "";
         int choise = 0;
 
+
+        List<string> groupUser;
+        string groupUserF = "Все группы";
+
         public ResultStudent()
         {
             InitializeComponent();
             VivodResult();
+            groupUser = DataBase.webBookEntities.User.Select(x => x.GroupUser).Distinct().ToList();
+            foreach (var item in groupUser)
+            {
+                SortGroup.Items.Add(item);
+            }
+            SortGroup.Items.Add("Все группы");
+            SortGroup.SelectedItem = "Все группы";
         }
 
         public void VivodResult()
@@ -54,13 +66,17 @@ namespace WebBook.PageWindow
             {
                 TitleList.Text = "Пройденные тесты студентов";
                 ListView.Children.Clear();
+              
                 List<Results> results = DataBase.webBookEntities.Results.Where(obj => DbFunctions.Like(obj.IdUser.ToString(), "%" + like + "%")).ToList();
+
+                if (groupUserF != "Все группы")
+                {
+                    results = results.Where(r => DataBase.webBookEntities.User.Any(g => g.IDUser == r.IdUser && g.GroupUser == groupUserF)).ToList();
+                }
                 foreach (var item in results)
                 {
-                    ResultTestList resultTestList = new ResultTestList(item)
-                    {
-                        resultStudent = this
-                    };
+                    ResultTestList resultTestList = new ResultTestList(item);
+                    resultTestList.resultStudent = this;
 
                     var UserId = DataBase.webBookEntities.User.Where(id => id.IDUser == item.IdUser).Select(x => x.NameUser + " " + x.SurnameUser).FirstOrDefault();
                     resultTestList.NameUserList.Text = UserId;
@@ -82,6 +98,10 @@ namespace WebBook.PageWindow
                     TitleList.Text = "Практические студентов";
                     ListView.Children.Clear();
                     List<AnswerPractical> answerPracticals = DataBase.webBookEntities.AnswerPractical.Where(obj => DbFunctions.Like(obj.IdTask.ToString(), "%" + like + "%")).ToList();
+                    if (groupUserF != "Все группы")
+                    {
+                        answerPracticals = answerPracticals.Where(r => DataBase.webBookEntities.User.Any(g => g.IDUser == r.IdUser && g.GroupUser == groupUserF)).ToList();
+                    }
                     foreach (var item in answerPracticals)
                     {
                         ResultPractical resultPractical = new ResultPractical(item)
@@ -119,6 +139,12 @@ namespace WebBook.PageWindow
         private void Search_TextChanged(object sender, TextChangedEventArgs e)
         {
             like = Search.Text;
+            VivodResult();
+        }
+
+        private void SortGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            groupUserF = SortGroup.SelectedItem.ToString();
             VivodResult();
         }
     }

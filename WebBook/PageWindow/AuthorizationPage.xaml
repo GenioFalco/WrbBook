@@ -25,29 +25,7 @@
 
 
 
-        <!--<StackPanel Grid.Row="0"
-                        Orientation="Horizontal"
-                        Margin="10"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Right">
-
-                <Image Source="/Resources/Icons/Minimazed.png"
-                       Width="15"
-                       Height="15"
-                       Margin="5"
-                       Style="{StaticResource ImageApp}" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
-                
-                <CheckBox VerticalAlignment="Center" 
-                          Style="{StaticResource styleCustomCheckBox2}" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1"/>
-                
-                <Image Source="/Resources/Icons/Close.png"
-                       Width="15"
-                       Height="15"
-                       Margin="5"
-                       Style="{StaticResource ImageApp}" MouseLeftButtonDown="Image_MouseLeftButtonDown_1"/>
-            
-            </StackPanel>-->
-
+      
 
 
 

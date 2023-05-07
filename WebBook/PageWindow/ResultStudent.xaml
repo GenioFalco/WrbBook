@@ -112,6 +112,35 @@
 
              
             </StackPanel>
+
+            <StackPanel HorizontalAlignment="Left"                                                                       
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Grid.Row="1"
+                        Grid.Column="1">
+
+                <Border Width="300"
+                        Height="55"
+                        Background="{DynamicResource SecundaryBackgroundColor}"
+                        CornerRadius="15">
+                    <DockPanel>
+                        <xctk:WatermarkComboBox 
+                            x:Name="SortGroup"
+                            Height="55"
+                            Width="290"
+                            Watermark="Выберите группу"                                         
+                            Foreground="{DynamicResource PrimaryTextColor}"                       
+                            FontSize="20"                
+                            HorizontalAlignment="Left"               
+                            Margin="5 0 0 0"               
+                            VerticalContentAlignment="Center"              
+                            Background="Transparent"               
+                            BorderBrush="Transparent"
+                            WatermarkBackground="Transparent"
+                            BorderThickness="0" SelectionChanged="SortGroup_SelectionChanged"/>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
         </DockPanel>
 
         <Border Grid.Row="2" 
