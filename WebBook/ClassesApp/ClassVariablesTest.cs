@@ -9,8 +9,8 @@ namespace WebBook.ClassesApp
 {
     public class ClassVariablesTest
     {
-        public static List<QuestionModel> questionModels = new List<QuestionModel>();
-
+        public static List<AnswerModel> answerModelsTrue = new List<AnswerModel>();
         
+
     }
 }

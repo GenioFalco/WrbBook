@@ -63,7 +63,8 @@
           <Property Name="IdTest" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TopicTest" Type="int" Nullable="false" />
           <Property Name="TitleTest" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="JsonFile" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JsonFileQuestion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="JsonFileAnswer" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -212,7 +213,8 @@
           <Property Name="IdTest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TopicTest" Type="Int32" Nullable="false" />
           <Property Name="TitleTest" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="JsonFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JsonFileQuestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JsonFileAnswer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="Topic">
           <Key>
@@ -276,7 +278,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WebBookBD" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WebBookBDEntities12" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AnswerPractical" EntityType="Self.AnswerPractical" />
           <EntitySet Name="Results" EntityType="Self.Results" />
           <EntitySet Name="Role" EntityType="Self.Role" />
@@ -303,7 +305,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище WebBookBDModelContainer" CdmEntityContainer="WebBookBD">
+        <EntityContainerMapping StorageEntityContainer="Хранилище WebBookBDModelContainer" CdmEntityContainer="WebBookBDEntities12">
           <EntitySetMapping Name="AnswerPractical">
             <EntityTypeMapping TypeName="WebBookBDModel.AnswerPractical">
               <MappingFragment StoreEntitySet="AnswerPractical">
@@ -366,7 +368,8 @@
                 <ScalarProperty Name="IdTest" ColumnName="IdTest" />
                 <ScalarProperty Name="TopicTest" ColumnName="TopicTest" />
                 <ScalarProperty Name="TitleTest" ColumnName="TitleTest" />
-                <ScalarProperty Name="JsonFile" ColumnName="JsonFile" />
+                <ScalarProperty Name="JsonFileQuestion" ColumnName="JsonFileQuestion" />
+                <ScalarProperty Name="JsonFileAnswer" ColumnName="JsonFileAnswer" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

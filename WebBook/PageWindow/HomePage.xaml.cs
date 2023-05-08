@@ -87,7 +87,7 @@ namespace WebBook.PageWindow
                     List<Test> tests = DataBase.webBookEntities.Test.Where(obj => DbFunctions.Like(obj.TitleTest, "%" + like + "%")).ToList();
                     foreach (var item in tests)
                     {
-                        TestList testList = new TestList(new ClassesApp.Models.TestModel(item));
+                        TestList testList = new TestList(item);
                         testList.homePage = this;
                         testList.TitleTest.Text = item.TitleTest;   
                         testList.ImageTest.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/TestImg.png"));

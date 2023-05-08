@@ -33,58 +33,64 @@ namespace WebBook.UserControlUI
 
         public static User user = null;
 
-        List<VariantList> variantLists = new List<VariantList>();
-        public QuestionModel QuestionModel { get; set; }
 
-        public QuestionList(QuestionModel questionModel)
+        public QuestionModel questionModel = new QuestionModel();
+
+        public QuestionList()
         {
             InitializeComponent();
-            this.QuestionModel = questionModel;
+           
             VivodVariantov();
 
         }
 
-        public void Saves() 
-        {
-            foreach (var item in variantLists)
-            {
-                item.asnswer.Title = item.AnswerV.Text;
-                QuestionModel.asnswerModels.Add(item.asnswer);
-            }
-        }
-
+       
         public void VivodVariantov()
         {
             ListVariant.Children.Clear();
-
-            foreach (var item in QuestionModel.asnswerModels)
+            foreach (var item in ConrolerBroadCast.answerModels.Where(p=> p.IdQuestion == questionModel.Id))
             {
-                VariantList variantList = new VariantList(item);
-                variantList.QuestionList = this;
-                variantList.questionModel = QuestionModel;
+                VariantList variantList = new VariantList();
                 variantList.AnswerV.Text = item.Title;
+                variantList.answerModel = item;
                 ListVariant.Children.Add(variantList);
-                
-                if(ConrolerBroadCast.CheckTest == true)
-                {
-                    variantList.BtDelAnsw.Visibility = Visibility.Collapsed;
-                    variantList.AnswerV.IsEnabled = false;
-                }
             }
-
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            VariantList variantList = new VariantList(new AsnswerModel());
-            variantLists.Add(variantList);
+            AnswerModel answerModel = new AnswerModel();
+            if (ConrolerBroadCast.answerModels.Count == 0)
+            {
+                answerModel.Id = 1;
+            }
+            else
+            {
+                answerModel.Id = ConrolerBroadCast.answerModels.Max(p => p.Id) + 1;
+            }
+            answerModel.IdQuestion = questionModel.Id;
+            VariantList variantList = new VariantList();
+            variantList.answerModel= answerModel;
+            ConrolerBroadCast.answerModels.Add(answerModel);
             ListVariant.Children.Add(variantList);
         }
 
         private void Border_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             ((StackPanel)this.Parent).Children.Remove(this);
-            ConrolerBroadCast.test.QuestionModel.Remove(QuestionModel);
+            ConrolerBroadCast.questionModel.Remove(questionModel);
+            List<AnswerModel> answerModels = ConrolerBroadCast.answerModels.Where(p => p.IdQuestion == questionModel.Id).ToList(); 
+           
+            foreach (var item in answerModels)
+            {
+                ConrolerBroadCast.answerModels.Remove(item); 
+            }
+        }
+
+        private void TitleQuestion_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (questionModel.Id == 0) return;
+            ConrolerBroadCast.questionModel.First(p=> p.Id == questionModel.Id).Title = TitleQuestion.Text;
         }
     }
 }

@@ -26,26 +26,24 @@ namespace WebBook.UserControlUI
     public partial class TestList : UserControl
     {
         public HomePage homePage;
-        TestModel test = null;
 
-        public TestList(TestModel testModel)
+        public Test test;
+        public TestList(Test test)
         {
             InitializeComponent();
-            this.test = testModel;
+            this.test = test;
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TestPage.test = test;
+            ConrolerBroadCast.test = test;
             ConrolerBroadCast.CheckTest = true;
             MainMenu.frame.Navigate(new TestPage());
         }
 
         private void Border_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
-            AddEditTestPage.test = test;
-            ConrolerBroadCast.CheckAdd = true;
-            ConrolerBroadCast.CheckTest = false;
             ConrolerBroadCast.test = test;
             MainMenu.frame.Navigate(new AddEditTestPage());
         }
@@ -54,7 +52,7 @@ namespace WebBook.UserControlUI
         {
             try
             {
-                List<Test> tests = DataBase.webBookEntities.Test.Where(x => x.IdTest == test.Test.IdTest).ToList();
+                List<Test> tests = DataBase.webBookEntities.Test.Where(x => x.IdTest == test.IdTest).ToList();
                 DataBase.webBookEntities.Test.Remove(tests[0]);
                 DataBase.webBookEntities.SaveChanges();
                 homePage.VivodTopic();

@@ -9,22 +9,7 @@ namespace WebBook.ClassesApp.Models
 {
     public class QuestionModel
     {
+        public int Id { get; set; }
         public string Title { get; set; }
-        public List<AsnswerModel> asnswerModels { get; set; } = new List<AsnswerModel>();
-
-
-        [JsonIgnore]
-
-        public List<AsnswerModel> Vibran { get; set; } = new List<AsnswerModel>();
-
-        public void AddA(AsnswerModel asnswerModel)
-        {
-            asnswerModels.Add(asnswerModel);
-        }
-
-        public void DelA(AsnswerModel asnswerModel)
-        {
-            asnswerModels.Remove(asnswerModel);
-        }
     }
 }

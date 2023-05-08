@@ -13,10 +13,10 @@ namespace WebBook.EntityFramework
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WebBookBD : DbContext
+    public partial class WebBookBDEntities12 : DbContext
     {
-        public WebBookBD()
-            : base("name=WebBookBD")
+        public WebBookBDEntities12()
+            : base("name=WebBookBDEntities12")
         {
         }
     

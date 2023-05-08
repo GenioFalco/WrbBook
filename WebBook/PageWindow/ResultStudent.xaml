@@ -96,19 +96,19 @@
 
             <StackPanel Orientation="Horizontal" 
                         Margin="50 0 0 0">
-                <Button Content="Тесты"  
-                        Width="150" 
-                        Cursor="Hand"
-                        Height="45" 
-                        FontSize="16"
-                        Style="{StaticResource StuleButton}" Click="Button_Click"/>
-
-                <Button Content="Практические" 
-                        Width="135"
-                        Height="45"
-                        Cursor="Hand"
-                        FontSize="16"
-                        Style="{StaticResource StuleButton}" Click="Button_Click_1"/>
+                <RadioButton Content="Тесты" 
+                             Style="{DynamicResource RadioButtonStyle}"
+                             IsChecked="True" 
+                             Margin="5"
+                             Cursor="Hand"
+                             Click="Button_Click"  />
+                <RadioButton Content="Практические" 
+                             Style="{DynamicResource RadioButtonStyle}"
+                             IsChecked="False" 
+                             Margin="5"
+                             Cursor="Hand"
+                             Click="Button_Click_1"  />
+                
 
              
             </StackPanel>
@@ -119,15 +119,15 @@
                         Grid.Row="1"
                         Grid.Column="1">
 
-                <Border Width="300"
-                        Height="55"
+                <Border Width="210"
+                        Height="45"
                         Background="{DynamicResource SecundaryBackgroundColor}"
                         CornerRadius="15">
                     <DockPanel>
                         <xctk:WatermarkComboBox 
                             x:Name="SortGroup"
-                            Height="55"
-                            Width="290"
+                            Height="45"
+                            Width="200"
                             Watermark="Выберите группу"                                         
                             Foreground="{DynamicResource PrimaryTextColor}"                       
                             FontSize="20"                

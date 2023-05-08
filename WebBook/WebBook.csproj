@@ -125,10 +125,8 @@
     <Compile Include="ClassesApp\ClassVariablesTest.cs" />
     <Compile Include="ClassesApp\ConrolerBroadCast.cs" />
     <Compile Include="ClassesApp\DataBase.cs" />
-    <Compile Include="ClassesApp\JSONConverter.cs" />
-    <Compile Include="ClassesApp\Models\AsnswerModel.cs" />
+    <Compile Include="ClassesApp\Models\AnswerModel.cs" />
     <Compile Include="ClassesApp\Models\QuestionModel.cs" />
-    <Compile Include="ClassesApp\Models\TestModel.cs" />
     <Compile Include="ClassesApp\PhotoConvert.cs" />
     <Compile Include="EntityFramework\AnswerPractical.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -425,14 +423,6 @@
     <Resource Include="Resources\TestImg.png" />
     <Resource Include="Resources\TopicImg.png" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Plus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Camera.png" />
-    <Resource Include="Resources\Icons\Check.png" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="EntityFramework\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -444,6 +434,13 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Camera.png" />
+    <Resource Include="Resources\Icons\Check.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

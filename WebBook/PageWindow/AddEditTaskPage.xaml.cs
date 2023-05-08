@@ -52,7 +52,6 @@ namespace WebBook.PageWindow
             {
                 TopicTask.Items.Add(item);
             }
-
         }
 
         public void CheckAdd()

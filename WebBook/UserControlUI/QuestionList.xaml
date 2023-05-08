@@ -49,7 +49,7 @@
                             VerticalContentAlignment="Center"              
                             Background="Transparent"   
                             BorderThickness="0"
-                            BorderBrush="Transparent"/>
+                            BorderBrush="Transparent" TextChanged="TitleQuestion_TextChanged"/>
 
                     </DockPanel>
                 </Border>

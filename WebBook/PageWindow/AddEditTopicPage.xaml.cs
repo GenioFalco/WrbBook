@@ -116,7 +116,6 @@ namespace WebBook.PageWindow
         {
             byte[] fileData = File.ReadAllBytes(filePath);
             byte[] compressedData = ByteConverter.CompressData(fileData);
-          
             topic.LectureTopic = compressedData;
         }
 

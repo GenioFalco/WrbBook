@@ -38,7 +38,7 @@
                         VerticalContentAlignment="Center" 
                         BorderThickness="0"
                         Background="Transparent"               
-                        BorderBrush="Transparent"/>
+                        BorderBrush="Transparent" TextChanged="AnswerV_TextChanged"/>
 
                     <Border Background="{DynamicResource PrimaryBackgroundColor}"
                                     Width="32"

@@ -17,6 +17,7 @@ namespace WebBook.EntityFramework
         public int IdTest { get; set; }
         public int TopicTest { get; set; }
         public string TitleTest { get; set; }
-        public string JsonFile { get; set; }
+        public string JsonFileQuestion { get; set; }
+        public string JsonFileAnswer { get; set; }
     }
 }

@@ -28,25 +28,26 @@ namespace WebBook.UserControlUI
     {
         public QuestionList QuestionList;
 
-        public AsnswerModel asnswer;
+        public AnswerModel answerModel = new AnswerModel();
 
-        public QuestionModel questionModel;
-        public VariantList(AsnswerModel asnswerModel)
+       
+        public VariantList()
         {
             InitializeComponent();
-            asnswer = asnswerModel;
+            
 
         }
 
         private void CbCheck_Checked_1(object sender, RoutedEventArgs e)
         {
-            if(ConrolerBroadCast.CheckTest == false) 
+               
+            if (ConrolerBroadCast.CheckTest == false)
             {
-                asnswer.IsTrue = true;  
+                answerModel.IsTrue = true;
             }
-            else 
+            else
             {
-                ClassVariablesTest.questionModels.Where(p => p == questionModel).First().Vibran.Add(asnswer);
+                ClassVariablesTest.answerModelsTrue.Add(answerModel);
             }
         }
 
@@ -54,19 +55,25 @@ namespace WebBook.UserControlUI
         {
             if (ConrolerBroadCast.CheckTest == false)
             {
-                asnswer.IsTrue = false;
+                answerModel.IsTrue = false;
             }
-            else 
+            else
             {
-                ClassVariablesTest.questionModels.Where(p => p == questionModel).First().Vibran.Remove(asnswer);
+                ClassVariablesTest.answerModelsTrue.Remove(answerModel);
             }
-            
+
         }
 
         private void BtDelAnsw_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ((StackPanel)this.Parent).Children.Remove(this);
-            QuestionList.QuestionModel.asnswerModels.Remove(asnswer);
+            ConrolerBroadCast.answerModels.Remove(answerModel);
+        }
+
+        private void AnswerV_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (answerModel.Id == 0) return;
+            ConrolerBroadCast.answerModels.First(p => p.Id == answerModel.Id).Title = AnswerV.Text;
         }
     }
 }

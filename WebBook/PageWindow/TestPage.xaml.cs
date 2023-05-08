@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -20,6 +21,7 @@ using WebBook.EntityFramework;
 using WebBook.UserControlUI;
 using WebBook.WindowForm;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WebBook.PageWindow
 {
@@ -28,62 +30,52 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class TestPage : Page
     {
-        public static TestModel test = null;
+       
 
         public static Results results = null;
 
         public static User user = null;
 
-        public static Test tests = null;
+        public static Test test = null;
 
         public int CountTrue = 0;
 
         public TestPage()
         {
             InitializeComponent();
+            test = ConrolerBroadCast.test;
             InitilizateVivod();
-
-           
         }
 
         public void InitilizateVivod()
         {
-            TitleTest.Text = test.Test.TitleTest;
-            ClassVariablesTest.questionModels = test.QuestionModel;
+            ConrolerBroadCast.questionModel = JsonConvert.DeserializeObject<List<QuestionModel>>(test.JsonFileQuestion);
+            ConrolerBroadCast.answerModels = JsonConvert.DeserializeObject<List<AnswerModel>>(test.JsonFileAnswer);
+
             ListQuest.Children.Clear();
-            foreach (var item in test.QuestionModel)
+            foreach (var item in ConrolerBroadCast.questionModel)
             {
-                QuestionList questionList = new QuestionList(item);
-                questionList.TestPage = this;
+                QuestionList questionList = new QuestionList();
                 questionList.TitleQuestion.Text = item.Title;
+                questionList.questionModel = item;
+                questionList.VivodVariantov();
                 ListQuest.Children.Add(questionList);
-                
-                questionList.BtAddVariant.Visibility = Visibility.Collapsed;
-                questionList.DpContQuest.Visibility = Visibility.Collapsed;
-                questionList.TitleQuestion.IsEnabled = false;
             }
+
+            TitleTest.Text = test.TitleTest;
         }
 
        
         public void OverTest() 
         {
-            foreach (var item in ClassVariablesTest.questionModels)
+
+            List<AnswerModel> TrueAnswer = ConrolerBroadCast.answerModels.Where(p => p.IsTrue == true).ToList();
+            foreach (var item in ClassVariablesTest.answerModelsTrue)
             {
-                bool qqq = false;
-                List<AsnswerModel> TrueAnswer = item.asnswerModels.Where(p => p.IsTrue == true).ToList();
-                int i = TrueAnswer.Count();
-                if (i != item.Vibran.Count()) continue;
-                foreach (var item1 in item.Vibran)
+                if (TrueAnswer.FirstOrDefault(p => p == item) == default(AnswerModel))
                 {
-                    if (TrueAnswer.Where(p => p == item1).FirstOrDefault() == default(AsnswerModel)) 
-                    {
-                        qqq = true; break; 
-                    }
-                       
+                    CountTrue++;
                 }
-                if (qqq) continue;
-                CountTrue++;
-                
             }
         }
         
@@ -91,7 +83,7 @@ namespace WebBook.PageWindow
         {
             double resch = 0;
 
-            resch = Convert.ToDouble(CountTrue) / Convert.ToDouble(ClassVariablesTest.questionModels.Count()) * 100;
+            resch = Convert.ToDouble(CountTrue) / Convert.ToDouble(ClassVariablesTest.answerModelsTrue.Count()) * 100;
 
             
             if(resch >= 80) 
@@ -127,7 +119,8 @@ namespace WebBook.PageWindow
                     MessageBoxImage.Question) == MessageBoxResult.Yes)
 
                 OverTest();
-            falseA.Text = (ClassVariablesTest.questionModels.Count() - CountTrue).ToString();
+
+            falseA.Text = (ClassVariablesTest.answerModelsTrue.Count() - CountTrue).ToString();
             trueA.Text = CountTrue.ToString();
             Graed();
             TcTest.SelectedItem = TcTest.Items[1];
@@ -137,11 +130,11 @@ namespace WebBook.PageWindow
 
             results.IdUser = user.IDUser;
 
-            results.IdTest = test.Test.IdTest;
+            results.IdTest = test.IdTest;
 
             results.TrueAnswerTest = CountTrue;
 
-            results.FalseAnswerTest = (ClassVariablesTest.questionModels.Count() - CountTrue);
+            results.FalseAnswerTest = (ClassVariablesTest.answerModelsTrue.Count() - CountTrue);
 
             results.GradeTest = Convert.ToInt32(graed.Text);
 

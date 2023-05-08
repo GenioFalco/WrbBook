@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using EllipticCurve.Utils;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WebBook.ClassesApp;
@@ -16,21 +18,16 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class AddEditTestPage : Page
     {
-        List<QuestionList> questionLists = new List<QuestionList>();
+        public static Test test = null;
 
-       
-        public static Test tests = null;
-
-        public static TestModel test = null;
-
-        List<string> topicTitle;
+        readonly List<string> topicTitle;
 
         public static User user = null;
 
         public AddEditTestPage()
         {
             InitializeComponent();
-            test = ConrolerBroadCast.test;       
+            test = ConrolerBroadCast.test;
             InitilizateVivod();
 
             topicTitle = DataBase.webBookEntities.Topic.Select(x => x.TitleTopic).Distinct().ToList();
@@ -38,102 +35,72 @@ namespace WebBook.PageWindow
             {
                 TopicTest.Items.Add(item);
             }
-
-        }
-
-        public void Saves() 
-        {
-            MessageBox.Show("");
         }
 
         public void InitilizateVivod()
         {
-            if (test != null)
+           
+            if (test == null) return;
+
+            ConrolerBroadCast.questionModel = JsonConvert.DeserializeObject<List<QuestionModel>>(test.JsonFileQuestion);
+            ConrolerBroadCast.answerModels = JsonConvert.DeserializeObject<List<AnswerModel>>(test.JsonFileAnswer);
+
+            ListQuest.Children.Clear();
+            foreach (var item in ConrolerBroadCast.questionModel)
             {
-                TitleTest.Text = test.Test.TitleTest;
-
-                var topicId = DataBase.webBookEntities.Topic.Where(x => x.IDTopic == test.Test.TopicTest).Select(id => id.TitleTopic).FirstOrDefault();
-               
-                TopicTest.SelectedValue = topicId;
-
-                ListQuest.Children.Clear();
-
-                foreach (var item in test.QuestionModel)
-                {
-                    QuestionList questionList = new QuestionList(item);
-                    questionList.AddEditTestPage = this;
-                    questionList.TitleQuestion.Text = item.Title;
-                    ListQuest.Children.Add(questionList);
-                }
-
+                QuestionList questionList = new QuestionList();
+                questionList.TitleQuestion.Text = item.Title;
+                questionList.questionModel = item;
+                questionList.VivodVariantov();
+                ListQuest.Children.Add(questionList);
             }
-            else
-            {
-                test = new TestModel(new Test());
-            }
+
+            TitleTest.Text = test.TitleTest;
+            TopicTest.SelectedValue = DataBase.webBookEntities.Topic.Where(x => x.IDTopic == test.TopicTest).Select(id => id.TitleTopic).FirstOrDefault();
+
         }
 
-        public void AddEdTopic()
+        public void AddEdTest()
         {
-
-            if (ConrolerBroadCast.CheckAdd == false)
+            if(test == null) 
             {
-                foreach (var item in questionLists)
-                {
-                    item.QuestionModel.Title = item.TitleQuestion.Text;
-                    item.Saves();
-                    test.QuestionModel.Add(item.QuestionModel);
-                }
-
-                test.SaveJs();
-
-                if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
-                test.Test.TitleTest = TitleTest.Text;
-
-                var topicId = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
-                test.Test.TopicTest = topicId;
-
-                DataBase.webBookEntities.Test.AddOrUpdate(test.Test);
-                DataBase.webBookEntities.SaveChanges();
-
-                MessageBox.Show("Тест добавлен");
+                test= new Test();
             }
-            else
-            {
-                foreach (var item in questionLists)
-                {
-                    item.QuestionModel.Title = item.TitleQuestion.Text;
-                    item.Saves();
-                    test.QuestionModel.Add(item.QuestionModel);
-                }
+            test.TitleTest = TitleTest.Text;
+            test.TopicTest = DataBase.webBookEntities.Topic.Where(x => x.TitleTopic == TopicTest.SelectedValue.ToString()).Select(id => id.IDTopic).FirstOrDefault();
 
-                test.SaveJs();
+            test.JsonFileQuestion = JsonConvert.SerializeObject(ConrolerBroadCast.questionModel);
+            test.JsonFileAnswer = JsonConvert.SerializeObject(ConrolerBroadCast.answerModels);
+            
+            DataBase.webBookEntities.Test.AddOrUpdate(test);
+            DataBase.webBookEntities.SaveChanges();
 
-                if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
-                test.Test.TitleTest = TitleTest.Text;
-
-                var topicId = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
-               
-                test.Test.TopicTest = topicId;
-
-                DataBase.webBookEntities.Test.AddOrUpdate(test.Test);
-                DataBase.webBookEntities.SaveChanges();
-
-                MessageBox.Show("Тест обновлен");
-            }
+            MessageBox.Show("Тест сохранён");
 
         }
 
         private void BtAddQuest_Click(object sender, RoutedEventArgs e)
         {
-            QuestionList questionList = new QuestionList(new QuestionModel());
-            questionLists.Add(questionList);
+            QuestionModel questionModel =new QuestionModel();   
+            if(ConrolerBroadCast.questionModel.Count == 0)
+            {
+                questionModel.Id = 1;
+            }
+            else 
+            {
+                questionModel.Id = ConrolerBroadCast.questionModel.Max(p => p.Id) + 1;
+            }
+            QuestionList questionList = new QuestionList();
+            questionList.questionModel = questionModel;
+            ConrolerBroadCast.questionModel.Add(questionModel);
             ListQuest.Children.Add(questionList);
         }
 
         private void BtSaveTest_Click(object sender, RoutedEventArgs e)
         {
-            AddEdTopic();
+            AddEdTest();
+            ConrolerBroadCast.questionModel = new List<QuestionModel>();
+            ConrolerBroadCast.answerModels = new List<AnswerModel>();
         }
     }
 }

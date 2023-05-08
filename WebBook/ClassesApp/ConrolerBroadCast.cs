@@ -13,21 +13,16 @@ namespace WebBook.ClassesApp
     {
         public static Topic topic = new Topic();
 
-        public static TestModel test = new TestModel(new Test());
-
         public static EntityFramework.Task task = new EntityFramework.Task();
 
-        public static  bool CheckAdd = false;
+        public static bool CheckAdd = false;
 
         public static bool CheckTest = false;
 
-  
+        public static Test test = new Test();
 
-  
+        public static List<QuestionModel> questionModel = new List<QuestionModel>();
 
-
-
-
-
+        public static List<AnswerModel> answerModels = new List<AnswerModel>();
     }
 }
