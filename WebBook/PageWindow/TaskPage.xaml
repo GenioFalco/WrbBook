@@ -168,7 +168,7 @@
                     Width="300"
                     VerticalAlignment="Bottom"
                     Cursor="Hand"
-                    Margin="0 0 100 35"
+                    Margin="35"
                     Grid.Row="3"
                     HorizontalAlignment="Center"
                     Style="{StaticResource StuleButton}" 
