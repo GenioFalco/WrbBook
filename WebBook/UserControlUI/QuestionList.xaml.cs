@@ -54,6 +54,12 @@ namespace WebBook.UserControlUI
                 variantList.AnswerV.Text = item.Title;
                 variantList.answerModel = item;
                 ListVariant.Children.Add(variantList);
+
+                if (ConrolerBroadCast.CheckTest == true)
+                {
+                    variantList.BtDelAnsw.Visibility = Visibility.Collapsed;
+                    variantList.AnswerV.IsEnabled = false;
+                }
             }
         }
 

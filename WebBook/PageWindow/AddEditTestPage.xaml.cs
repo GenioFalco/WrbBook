@@ -18,7 +18,7 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class AddEditTestPage : Page
     {
-        public static Test test = null;
+        public  Test test = new Test();
 
         readonly List<string> topicTitle;
 
@@ -27,9 +27,18 @@ namespace WebBook.PageWindow
         public AddEditTestPage()
         {
             InitializeComponent();
-            test = ConrolerBroadCast.test;
-            InitilizateVivod();
+            ConrolerBroadCast.questionModel = new List<QuestionModel>();
+            ConrolerBroadCast.answerModels = new List<AnswerModel>();
 
+            if (ConrolerBroadCast.test == null) 
+            {
+                test = new Test();
+            }
+            else 
+            {
+                test = ConrolerBroadCast.test;
+            }
+            InitilizateVivod();
             topicTitle = DataBase.webBookEntities.Topic.Select(x => x.TitleTopic).Distinct().ToList();
             foreach (var item in topicTitle)
             {
@@ -40,13 +49,13 @@ namespace WebBook.PageWindow
         public void InitilizateVivod()
         {
            
-            if (test == null) return;
+            if (test.IdTest == 0) return;
 
             ConrolerBroadCast.questionModel = JsonConvert.DeserializeObject<List<QuestionModel>>(test.JsonFileQuestion);
             ConrolerBroadCast.answerModels = JsonConvert.DeserializeObject<List<AnswerModel>>(test.JsonFileAnswer);
 
             ListQuest.Children.Clear();
-            foreach (var item in ConrolerBroadCast.questionModel)
+            foreach (var item in ConrolerBroadCast.questionModel.Where(p=> p.IdtTest == test.IdTest).ToList())
             {
                 QuestionList questionList = new QuestionList();
                 questionList.TitleQuestion.Text = item.Title;
@@ -62,12 +71,22 @@ namespace WebBook.PageWindow
 
         public void AddEdTest()
         {
-            if(test == null) 
+            
+
+            if (test == null) 
             {
                 test= new Test();
             }
+
+            if (!Checks.LetteLatinAndCyrillic(TitleTest.Text, "Поле наименование теста")) return;
             test.TitleTest = TitleTest.Text;
-            test.TopicTest = DataBase.webBookEntities.Topic.Where(x => x.TitleTopic == TopicTest.SelectedValue.ToString()).Select(id => id.IDTopic).FirstOrDefault();
+
+            if (TopicTest.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите тему задания"); return;
+            }
+            test.TopicTest = DataBase.webBookEntities.Topic.Where(id => id.TitleTopic == TopicTest.Text).Select(x => x.IDTopic).FirstOrDefault();
+            
 
             test.JsonFileQuestion = JsonConvert.SerializeObject(ConrolerBroadCast.questionModel);
             test.JsonFileAnswer = JsonConvert.SerializeObject(ConrolerBroadCast.answerModels);
@@ -75,13 +94,30 @@ namespace WebBook.PageWindow
             DataBase.webBookEntities.Test.AddOrUpdate(test);
             DataBase.webBookEntities.SaveChanges();
 
+
+           
+            int id1 = DataBase.webBookEntities.Test.Max(p=> p.IdTest);
+            foreach (var item in ConrolerBroadCast.questionModel)
+            {
+                item.IdtTest = id1;
+            }
+
+            test.JsonFileQuestion = JsonConvert.SerializeObject(ConrolerBroadCast.questionModel);
+            DataBase.webBookEntities.Test.AddOrUpdate(test);
+            DataBase.webBookEntities.SaveChanges();
+
+                
+            
             MessageBox.Show("Тест сохранён");
 
+            ConrolerBroadCast.questionModel = new List<QuestionModel>();
+            ConrolerBroadCast.answerModels = new List<AnswerModel>();
+            ConrolerBroadCast.test = new Test();
         }
 
         private void BtAddQuest_Click(object sender, RoutedEventArgs e)
         {
-            QuestionModel questionModel =new QuestionModel();   
+            QuestionModel questionModel = new QuestionModel();   
             if(ConrolerBroadCast.questionModel.Count == 0)
             {
                 questionModel.Id = 1;
@@ -90,6 +126,7 @@ namespace WebBook.PageWindow
             {
                 questionModel.Id = ConrolerBroadCast.questionModel.Max(p => p.Id) + 1;
             }
+            questionModel.IdtTest = test.IdTest;
             QuestionList questionList = new QuestionList();
             questionList.questionModel = questionModel;
             ConrolerBroadCast.questionModel.Add(questionModel);
@@ -99,8 +136,8 @@ namespace WebBook.PageWindow
         private void BtSaveTest_Click(object sender, RoutedEventArgs e)
         {
             AddEdTest();
-            ConrolerBroadCast.questionModel = new List<QuestionModel>();
-            ConrolerBroadCast.answerModels = new List<AnswerModel>();
+            
+
         }
     }
 }

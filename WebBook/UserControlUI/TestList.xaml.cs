@@ -44,6 +44,7 @@ namespace WebBook.UserControlUI
 
         private void Border_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
+            ConrolerBroadCast.CheckTest = false;
             ConrolerBroadCast.test = test;
             MainMenu.frame.Navigate(new AddEditTestPage());
         }

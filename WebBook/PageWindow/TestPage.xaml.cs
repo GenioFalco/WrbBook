@@ -60,6 +60,10 @@ namespace WebBook.PageWindow
                 questionList.questionModel = item;
                 questionList.VivodVariantov();
                 ListQuest.Children.Add(questionList);
+
+                questionList.BtAddVariant.Visibility = Visibility.Collapsed;
+                questionList.DpContQuest.Visibility = Visibility.Collapsed;
+                questionList.TitleQuestion.IsEnabled = false;
             }
 
             TitleTest.Text = test.TitleTest;
@@ -72,7 +76,7 @@ namespace WebBook.PageWindow
             List<AnswerModel> TrueAnswer = ConrolerBroadCast.answerModels.Where(p => p.IsTrue == true).ToList();
             foreach (var item in ClassVariablesTest.answerModelsTrue)
             {
-                if (TrueAnswer.FirstOrDefault(p => p == item) == default(AnswerModel))
+                if (TrueAnswer.FirstOrDefault(p => p == item) != default(AnswerModel))
                 {
                     CountTrue++;
                 }
@@ -123,6 +127,7 @@ namespace WebBook.PageWindow
             falseA.Text = (ClassVariablesTest.answerModelsTrue.Count() - CountTrue).ToString();
             trueA.Text = CountTrue.ToString();
             Graed();
+
             TcTest.SelectedItem = TcTest.Items[1];
 
 
@@ -135,14 +140,23 @@ namespace WebBook.PageWindow
             results.TrueAnswerTest = CountTrue;
 
             results.FalseAnswerTest = (ClassVariablesTest.answerModelsTrue.Count() - CountTrue);
-
-            results.GradeTest = Convert.ToInt32(graed.Text);
+            if (graed.Text == "" ) 
+            {
+                graed.Text = 2.ToString();
+                results.GradeTest = Convert.ToInt32(graed.Text);
+            }
+            else 
+            {
+                results.GradeTest = Convert.ToInt32(graed.Text);
+            }
 
             DataBase.webBookEntities.Results.AddOrUpdate(results);
             DataBase.webBookEntities.SaveChanges();
             TabIResult.Visibility = Visibility.Visible;
             TabITest.Visibility = Visibility.Collapsed;
             over.Visibility = Visibility.Collapsed;
+
+            ClassVariablesTest.answerModelsTrue = new List<AnswerModel>();
 
         }
 

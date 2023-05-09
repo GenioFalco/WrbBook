@@ -11,5 +11,7 @@ namespace WebBook.ClassesApp.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
+
+        public int IdtTest { get; set; }    
     }
 }
