@@ -59,7 +59,7 @@ namespace WebBook.PageWindow
         public void Vivod()
         {
             UserOutput.Children.Clear();
-            List<User> users = DataBase.webBookEntities.User.Where(obj => DbFunctions.Like(obj.NameUser, "%" + like + "%")).ToList();
+            List<User> users = DataBase.webBookEntities.User.Where(obj => DbFunctions.Like(obj.NameUser + obj.SurnameUser, "%" + like + "%")).ToList();
             foreach (var item in users)
             {
                 UserList userList = new UserList(item);

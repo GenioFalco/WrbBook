@@ -1,7 +1,9 @@
-﻿using EllipticCurve.Utils;
+﻿
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -90,7 +92,37 @@ namespace WebBook.PageWindow
 
             test.JsonFileQuestion = JsonConvert.SerializeObject(ConrolerBroadCast.questionModel);
             test.JsonFileAnswer = JsonConvert.SerializeObject(ConrolerBroadCast.answerModels);
-            
+
+            if (ConrolerBroadCast.questionModel.Count <= 4) 
+            {
+                MessageBox.Show("Добавьте не менее 5 вопросов"); return;
+            }
+
+
+
+
+
+            // Группировка ответов по idQuestion и выборка групп с одним элементом
+            var nonPairedAnswers = ConrolerBroadCast.answerModels
+                .GroupBy(a => a.IdQuestion)
+                .Where(g => g.Count() < 2)
+                .ToList();
+
+            // Проверка наличия непарных ответов
+            if (nonPairedAnswers.Count > 0)
+            {
+                MessageBox.Show("Ошибка: Непарные ответы с idQuestion:");
+                foreach (var group in nonPairedAnswers)
+                {
+                    Console.WriteLine(group.Key);
+                    
+                }
+                return;
+            }
+
+
+
+
             DataBase.webBookEntities.Test.AddOrUpdate(test);
             DataBase.webBookEntities.SaveChanges();
 
@@ -106,13 +138,16 @@ namespace WebBook.PageWindow
             DataBase.webBookEntities.Test.AddOrUpdate(test);
             DataBase.webBookEntities.SaveChanges();
 
-                
-            
+
             MessageBox.Show("Тест сохранён");
 
             ConrolerBroadCast.questionModel = new List<QuestionModel>();
             ConrolerBroadCast.answerModels = new List<AnswerModel>();
             ConrolerBroadCast.test = new Test();
+
+            ListQuest.Children.Clear();
+            TitleTest.Text = "";
+            TopicTest.SelectedValue = null;
         }
 
         private void BtAddQuest_Click(object sender, RoutedEventArgs e)
@@ -131,12 +166,12 @@ namespace WebBook.PageWindow
             questionList.questionModel = questionModel;
             ConrolerBroadCast.questionModel.Add(questionModel);
             ListQuest.Children.Add(questionList);
+           
         }
 
         private void BtSaveTest_Click(object sender, RoutedEventArgs e)
         {
             AddEdTest();
-            
 
         }
     }

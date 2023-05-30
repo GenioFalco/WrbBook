@@ -39,6 +39,7 @@
 
                 <Border Width="100"          
                         Height="35"
+                        
                         Background="{DynamicResource SecundaryBackgroundColor}"
                         Margin="10"           
                         CornerRadius="15">
@@ -49,7 +50,8 @@
                         <xctk:WatermarkTextBox 
                                         x:Name="GraedPrac"
                                         Height="35"   
-                                        Watermark="Оценка"                                         
+                                        Watermark="Оценка"       
+                            MaxLength="1"
                                         Foreground="{DynamicResource PrimaryTextColor}"                       
                                         FontSize="20"                 
                                         HorizontalAlignment="Left"               

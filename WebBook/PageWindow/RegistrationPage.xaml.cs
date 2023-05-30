@@ -81,22 +81,17 @@ namespace WebBook.PageWindow
             string emailPattern = @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
 
             // проверяем, соответствует ли введенный адрес формату
-            if (Regex.IsMatch(email, emailPattern))
-            {
-
-            }
-            else
+            if (!Regex.IsMatch(email, emailPattern))
             {
                 MessageBox.Show("Введенный e-mail адрес неправильный.");
                 return;
             }
 
+
             if (!IsValidEmail(EmailReg.Text))
             {
                 MessageBox.Show("Адрес электронной почты недействителен.");return;
             }
-        
-
 
 
             user.EmailUser = EmailReg.Text;
@@ -106,7 +101,7 @@ namespace WebBook.PageWindow
 
             user.RoleUser = 2;
 
-
+            if (!Checks.WordAndNumber(GroupReg.Text, "Поле группа")) return;
             user.GroupUser = GroupReg.Text;
 
 
@@ -116,9 +111,6 @@ namespace WebBook.PageWindow
             MessageBox.Show("Пользователь зарегистрирован");
 
             WindowForm.Authorization.frame.Navigate(new AuthorizationPage());
-
-
-
         }
       
         private void PasswordReg_TextChanged(object sender, TextChangedEventArgs e)

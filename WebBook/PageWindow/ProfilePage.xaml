@@ -102,7 +102,7 @@
                         <ProgressBar Height="20"
                                      Margin="10 10 10 5" 
                                      x:Name="PercentTask" 
-                                     Foreground="#FF061D2B"
+                                     Foreground="White"
                                      Background="#003C61" BorderBrush="{DynamicResource TertiaryBackgroundColor}"/>
 
                         <DockPanel>
@@ -368,6 +368,7 @@
             <StackPanel HorizontalAlignment="Left"                                                                       
                         VerticalAlignment="Center"
                         Margin="10"
+                        x:Name="spgr"
                         Grid.Row="2"
                         Grid.Column="1">
 

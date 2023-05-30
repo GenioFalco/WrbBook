@@ -113,7 +113,7 @@ namespace WebBook.PageWindow
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (DataBase.webBookEntities.AnswerPractical.Any(x => x.IdUser == user.IDUser))
+            if (DataBase.webBookEntities.AnswerPractical.Any(x => x.IdTask == task.IDTask && x.IdUser == user.IDUser))
             {
                 MessageBox.Show("Вы уже прекрепили работу");
                 return;

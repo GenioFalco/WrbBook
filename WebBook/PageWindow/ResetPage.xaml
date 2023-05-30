@@ -120,6 +120,7 @@
                     <xctk:WatermarkTextBox 
                         x:Name="CodeReset"
                         Width="350"
+                        MaxLength="6"
                         Height="55"
                         Watermark="Введите код"
                         Foreground="{DynamicResource PrimaryTextColor}" 

@@ -36,34 +36,37 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel HorizontalAlignment="Left"                                                                       
+
+           
+                <StackPanel HorizontalAlignment="Left"                                                                       
                         VerticalAlignment="Center"
                         Margin="10"
                         Grid.Row="0"
                         Grid.Column="1">
 
-                <TextBlock Text="Практическое задание*"                                    
+                    <TextBlock Text="Практическое задание*"                                    
                            Margin="12"                                   
                            Foreground="{DynamicResource PrimaryTextColor}"                                    
                            FontSize="20"/>
 
-                <Border Width="300"
+                    <Border Width="300"
                         Height="55"
                         
                         Background="{DynamicResource SecundaryBackgroundColor}"
                         CornerRadius="15">
 
-                    <DockPanel>
-                        <Button Content="Выберите файл"
+                        <DockPanel>
+                            <Button Content="Выберите файл"
                                 x:Name="OpenPrTask"
                                 Cursor="Hand"
                                 Style="{DynamicResource StuleButton}"
                                 Click="OpenPrTask_Click"/>
-                    </DockPanel>
-                </Border>
-            </StackPanel>
+                        </DockPanel>
+                    </Border>
+                </StackPanel>
 
-            <StackPanel HorizontalAlignment="Right"                                                                       
+
+                <StackPanel HorizontalAlignment="Right"                                                                       
                         VerticalAlignment="Center"
                         Margin="10"
                         Grid.Row="0"

@@ -119,7 +119,7 @@ namespace WebBook.PageWindow
 
                 task.TopicTask = Convert.ToInt32(topicId);
 
-                if (myResult == null)
+                if (myResult == null || myResult == false)
                 {
                     MessageBox.Show("Выберите файл"); return;
                 }
@@ -128,6 +128,10 @@ namespace WebBook.PageWindow
                 DataBase.webBookEntities.SaveChanges();
 
                 MessageBox.Show("Задание добавлено");
+                TitleTaskName.Text = "";
+                LastDateTask.Value = null;
+                TopicTask.SelectedValue = null;
+                myResult = null;
             }
             else
             {
@@ -163,6 +167,7 @@ namespace WebBook.PageWindow
                 MessageBox.Show("Задание обновлено"); return;
             }
 
+            
         }
 
 
@@ -187,11 +192,15 @@ namespace WebBook.PageWindow
                 SaveFile(ofd.FileName);
 
             }
+
+            OpenPrTask.Content = ofd.SafeFileName;
         }
 
         private void BtSave_Click(object sender, RoutedEventArgs e)
         {
             AddEdTopic();
+          
+
         }
     }
 }

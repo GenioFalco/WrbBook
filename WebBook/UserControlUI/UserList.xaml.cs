@@ -37,7 +37,7 @@ namespace WebBook.UserControlUI
             {
                 if (DataBase.webBookEntities.User.Any(x => user.RoleUser == 1))
                 {
-                    MessageBox.Show("Администратора удалить нельзя");
+                    MessageBox.Show("Преподавателя удалить нельзя");
                     return;
                 }
                 List<User> users = DataBase.webBookEntities.User.Where(p => p.IDUser == user.IDUser).ToList();

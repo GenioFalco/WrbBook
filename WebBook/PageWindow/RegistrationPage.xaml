@@ -203,6 +203,7 @@
                             DockPanel.Dock="Left"
                             Margin="5 0 0 0"
                             x:Name="NameReg"
+                        MaxLength="50"
                             Height="55"
                             Watermark="Введите имя"
                             Foreground="{DynamicResource PrimaryTextColor}"  

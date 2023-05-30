@@ -44,6 +44,7 @@ namespace WebBook.UserControlUI
 
         }
 
+      
        
         public void VivodVariantov()
         {
@@ -53,12 +54,25 @@ namespace WebBook.UserControlUI
                 VariantList variantList = new VariantList();
                 variantList.AnswerV.Text = item.Title;
                 variantList.answerModel = item;
+                
                 ListVariant.Children.Add(variantList);
 
                 if (ConrolerBroadCast.CheckTest == true)
                 {
                     variantList.BtDelAnsw.Visibility = Visibility.Collapsed;
                     variantList.AnswerV.IsEnabled = false;
+
+                    
+                }
+
+                if (ConrolerBroadCast.CheckTest == false)
+                {
+                    if (item.IsTrue == true)
+                    {
+                        variantList.CbCheck.IsChecked = true;
+                    }
+
+
                 }
             }
         }
@@ -96,6 +110,7 @@ namespace WebBook.UserControlUI
         private void TitleQuestion_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (questionModel.Id == 0) return;
+            if (!Checks.WordAndNumber2(TitleQuestion.Text, "Поле наименование вопроса")) return;
             ConrolerBroadCast.questionModel.First(p=> p.Id == questionModel.Id).Title = TitleQuestion.Text;
         }
     }

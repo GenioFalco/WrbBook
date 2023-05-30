@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:WebBook.WindowForm"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Height="832" Width="1280" Background="{DynamicResource PrimaryBackgroundColor}"   WindowStartupLocation="CenterOwner" >
+        Height="832" Width="1280" Background="{DynamicResource PrimaryBackgroundColor}"   WindowStartupLocation="CenterOwner" 
+        Title="ВЕБ БУК">
     
  
     
@@ -36,7 +37,7 @@
                            Margin="10"
                            VerticalAlignment="Center"/>
 
-                    <TextBlock Text="Веб Бук"
+                    <TextBlock Text="ВЕБ БУК"
                                VerticalAlignment="Center"
                                FontSize="26"
                                FontWeight="Bold"

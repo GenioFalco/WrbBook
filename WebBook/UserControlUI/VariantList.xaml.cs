@@ -73,6 +73,7 @@ namespace WebBook.UserControlUI
         private void AnswerV_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (answerModel.Id == 0) return;
+            if (!Checks.WordAndNumber2(AnswerV.Text, "Поле наименование ответа")) return;
             ConrolerBroadCast.answerModels.First(p => p.Id == answerModel.Id).Title = AnswerV.Text;
         }
     }

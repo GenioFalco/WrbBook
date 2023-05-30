@@ -2,11 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using WebBook.ClassesApp;
 using WebBook.EntityFramework;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using Page = System.Windows.Controls.Page;
+
 
 namespace WebBook.PageWindow
 {
@@ -15,6 +16,7 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class AddEditTopicPage : Page
     {
+
         public static Topic topic = null;
 
         OpenFileDialog ofd = new OpenFileDialog();
@@ -77,7 +79,7 @@ namespace WebBook.PageWindow
                 if (!Checks.LetteLatinAndCyrillic(Description.Text, "Поле описание")) return;
                 topic.DescriptionTopic = Description.Text;
 
-                if (myResult2 == null)
+                if (myResult2 == null || myResult2 == false)
                 {
                     MessageBox.Show("Выберите документ"); return;
                 }
@@ -86,6 +88,13 @@ namespace WebBook.PageWindow
                 DataBase.webBookEntities.SaveChanges();
 
                 MessageBox.Show("Тема добавлена");
+
+                Title1.Text = "";
+                Description.Text = "";
+                myResult2 = null;
+
+                topic = new Topic();
+
             }
             else 
             {
@@ -111,7 +120,6 @@ namespace WebBook.PageWindow
         }
 
 
-      
         public void SaveFile(string filePath)
         {
             byte[] fileData = File.ReadAllBytes(filePath);
@@ -128,13 +136,7 @@ namespace WebBook.PageWindow
             {
                 SaveFile(ofd.FileName);
             }
-
+            OpenDocument.Content = ofd.SafeFileName;
         }
-
-      
-
-      
-
-     
     }
 }

@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,7 +44,7 @@ namespace WebBook.PageWindow
 
             if(user.RoleUser == 1) 
             {
-                GroupEdit.Visibility = Visibility.Collapsed;
+                spgr.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -53,7 +56,7 @@ namespace WebBook.PageWindow
                 LastNameEdit.Text = user.SurnameUser;
                 EmailEdit.Text = user.EmailUser;
                 PasswordEdit.Password = user.PasswordUser;
-                PatronymicEdit.Text = user.PasswordUser;
+                PatronymicEdit.Text = user.PatronymicUser;
                 GroupEdit.Text = user.GroupUser;
                 if (PhotoConvert.loagPhoto(user.ImageUser) == null)
                 {
@@ -93,13 +96,36 @@ namespace WebBook.PageWindow
             if (!Checks.TolkBukva(LastNameEdit.Text, "Поле фамилия")) return;
             user.SurnameUser = LastNameEdit.Text;
 
+            if (!Checks.TolkBukva(PatronymicEdit.Text, "Поле отчество")) return;
+            user.PatronymicUser = PatronymicEdit.Text;
+
             if (!Checks.CheckNull(PasswordMaskEdit.Text, "Поле пароль")) return;
             user.PasswordUser = PasswordMaskEdit.Text;
 
-            if (!Checks.Email(EmailEdit.Text, "Поле почта")) return;
-            user.EmailUser = EmailEdit.Text;
+            if (!Checks.WordAndNumber(GroupEdit.Text, "Поле группа")) return;
+            user.GroupUser = GroupEdit.Text;
 
-        
+
+            string email = EmailEdit.Text;
+
+            // регулярное выражение для проверки формата e-mail
+            string emailPattern = @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
+
+            // проверяем, соответствует ли введенный адрес формату
+            if (!Regex.IsMatch(email, emailPattern))
+            {
+                MessageBox.Show("Введенный e-mail адрес неправильный.");
+                return;
+            }
+
+
+            if (!IsValidEmail(EmailEdit.Text))
+            {
+                MessageBox.Show("Адрес электронной почты недействителен."); return;
+            }
+
+
+            user.EmailUser = EmailEdit.Text;
 
             DataBase.webBookEntities.User.AddOrUpdate(user);
             DataBase.webBookEntities.SaveChanges();
@@ -166,6 +192,43 @@ namespace WebBook.PageWindow
      
         }
 
-      
+
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                SmtpClient Smtp = new SmtpClient("smtp.mail.ru", 25);
+                Smtp.Credentials = new NetworkCredential("shoping_re_airpods@mail.ru", "u5cKGbsVmrEnt9ktBVuW");
+                Smtp.EnableSsl = true;
+                //Формирование письма
+                MailMessage Message = new MailMessage();
+                Message.From = new MailAddress("shoping_re_airpods@mail.ru");
+                Message.To.Add(new MailAddress(email));
+                Message.Subject = "Проверка действительности почты";
+                string body = "<html><head><title>Проверка действительности почты</title></head><body>";
+                body += "<div style='text-align:center;'><img src='\"/Веб Бук;component/Resources/WebBooNoText.png\"' alt='Logo'></div>";
+                body += "<p>Уважаемый пользователь,</p><p>Данное сообщение было отправлено для проверки действительности данной почты</p>";
+                body += "</p><p>Если вы не регистрировались в Веб Бук, то просто проигнорируйте это сообщение.</p><p>С уважением,<br>Команда Веб Бук</p>";
+                body += "</body></html>";
+                Message.Body = body;
+                Message.IsBodyHtml = true;
+
+                Message.DeliveryNotificationOptions = DeliveryNotificationOptions.Never;
+                Smtp.Send(Message);
+
+                // Если адрес электронной почты существует, возвращаем true
+                return true;
+            }
+            catch (SmtpFailedRecipientException)
+            {
+                // Если адрес электронной почты не существует, возвращаем false
+                return false;
+            }
+            catch (SmtpException)
+            {
+                // Если произошла ошибка при проверке адреса электронной почты, возвращаем false
+                return false;
+            }
+        }
     }
 }

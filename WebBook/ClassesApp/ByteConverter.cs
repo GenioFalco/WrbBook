@@ -11,6 +11,18 @@ namespace WebBook.ClassesApp
     public class ByteConverter
     {
 
+        public static byte[] CompressDataOne(byte[] data)
+        {
+            using (MemoryStream output = new MemoryStream())
+            {
+                using (DeflateStream deflateStream = new DeflateStream(output, CompressionMode.Compress, leaveOpen: true))
+                {
+                    deflateStream.Write(data, 0, data.Length);
+                }
+                return output.ToArray();
+            }
+        }
+
         public static byte[] CompressData(byte[] data)
         {
             using (var compressedStream = new MemoryStream())

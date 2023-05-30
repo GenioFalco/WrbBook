@@ -92,10 +92,11 @@
                 </DockPanel>
                 <RichTextBox Background="Transparent"
                              Margin="35"
+                             BorderThickness="0"
                              Foreground="{DynamicResource PrimaryTextColor}"
                              x:Name="TopicsText"
                              BorderBrush="Transparent" 
-                             IsEnabled="False"
+                             IsReadOnly="True"
                              SelectionBrush="Transparent"/>
 
             </StackPanel>

@@ -67,9 +67,7 @@ namespace WebBook.PageWindow
                 using (FileStream fs = File.Create(sfd.FileName))
                 {
                     if (Path.GetExtension(sfd.FileName).ToLower() == ".rtf")
-                        doc.Save(fs, DataFormats.Rtf);
-
-                    
+                        doc.Save(fs, DataFormats.Rtf); 
                 }
             }
          

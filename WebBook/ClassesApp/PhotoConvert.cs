@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 namespace WebBook.ClassesApp
 {
      class PhotoConvert
-    {
+     {
         public static BitmapImage loagPhoto(byte[] imagebate)
         {
             if (imagebate == null || imagebate.Length == 0) return null;
@@ -27,5 +27,5 @@ namespace WebBook.ClassesApp
             image.Freeze();
             return image;
         }
-    }
+     }
 }

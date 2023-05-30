@@ -5,44 +5,81 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Media3D;
 using WebBook.EntityFramework;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace WebBook.ClassesApp
 {
     class Checks
     {
-        public static bool CheckNull(string str, string Pole)
+        public static bool CheckNull(string TolkBukva, string Pole, int lenght = 50)
         {
-            if (!string.IsNullOrEmpty(str))
+            if (TolkBukva.Length > lenght)
+            {
+                MessageBox.Show(Pole + $" не должно превышать {lenght} символов");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(TolkBukva))
+            {
+                MessageBox.Show(Pole + " не должно быть пустое.");
+                return false;
+            }
+
+            if (!Regex.IsMatch(TolkBukva, @"^(?!.*\s$)(?!.*\s{2})(?!^\s).*$"))
+            {
+                MessageBox.Show(Pole + " уберите лишние пробелы.");
+                return false;
+            }
+
+            else
             {
                 return true;
             }
-            MessageBox.Show(Pole + " обязательно для заполнения.");
-            return false;
         }
 
-        public static bool ValidateEmail(string emailAddress)
+        public static bool ValidateEmail(string emailAddress, int lenght = 250)
         {
+            if (emailAddress.Length > lenght)
+            {
+                MessageBox.Show($" не должно превышать {lenght} символов");
+                return false;
+            }
             string pattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
             Match match = Regex.Match(emailAddress, pattern);
             return match.Success;
-
         }
 
-        public static bool TolkBukva(string TolkBukva , string Pole)
+        public static bool TolkBukva(string TolkBukva , string Pole, int lenght = 30)
         {
-            if (string.IsNullOrEmpty(TolkBukva))
+
+            if (TolkBukva.Length > lenght)
             {
-                MessageBox.Show(Pole + " обязательно для заполнения.");
+                MessageBox.Show(Pole + $" не должно превышать {lenght} символов");
                 return false;
             }
-            else if (TolkBukva.Contains(" ") || !Regex.IsMatch(TolkBukva, @"^[а-яА-Я]+$"))
+
+           
+            if (!Regex.IsMatch(TolkBukva, @"^[а-я' 'А-Я]+$"))
             {
                 MessageBox.Show(Pole + " поддерживает только символы кирилического алфавита.");
                 return false;
             }
 
+            if (string.IsNullOrWhiteSpace(TolkBukva))
+            {
+                MessageBox.Show(Pole + " не должно быть пустое.");
+                return false;
+            }
+
+            if (!Regex.IsMatch(TolkBukva, @"^(?!.*\s$)(?!.*\s{2})(?!^\s).*$"))
+            {
+                MessageBox.Show(Pole + " уберите лишние пробелы.");
+                return false;
+            }
+
             else
             {
                 return true;
@@ -50,18 +87,31 @@ namespace WebBook.ClassesApp
         }
 
 
-        public static bool LetteLatinAndCyrillic(string TolkBukva, string Pole)
+
+        public static bool LetteLatinAndCyrillic(string TolkBukva, string Pole, int lenght = 100)
         {
-            if (string.IsNullOrEmpty(TolkBukva))
+            if (TolkBukva.Length > lenght)
             {
-                MessageBox.Show(Pole + " обязательно для заполнения.");
+                MessageBox.Show(Pole + $" не должно превышать {lenght} символов");
                 return false;
             }
-            else if (!Regex.IsMatch(TolkBukva, @"^[а-яА-Я' 'a-zA-Z]+$"))
+          
+            if (!Regex.IsMatch(TolkBukva, @"^[а-яА-Я' 'a-zA-Z,.-]+$"))
             {
                 MessageBox.Show(Pole + " не поддерживает ввод цифр.");
                 return false;
             }
+            if(string.IsNullOrWhiteSpace(TolkBukva))
+            {
+                MessageBox.Show(Pole + " не должно быть пустое.");
+                return false;
+            }
+
+            if (!Regex.IsMatch(TolkBukva, @"^(?!.*\s$)(?!.*\s{2})(?!^\s).*$"))
+            {
+                MessageBox.Show(Pole + " уберите лишние пробелы.");
+                return false;
+            }
 
             else
             {
@@ -70,8 +120,14 @@ namespace WebBook.ClassesApp
         }
 
 
-        public static bool Email(string email, string Pole)
+        public static bool Email(string email, string Pole, int lenght = 250)
         {
+            if (email.Length > lenght)
+            {
+                MessageBox.Show(Pole + $" не должно превышать {lenght} символов");
+                return false;
+            }
+
             if (string.IsNullOrEmpty(email))
             {
                 MessageBox.Show(Pole + " обязательно для заполнения.");
@@ -89,16 +145,60 @@ namespace WebBook.ClassesApp
             }
         }
 
-        public static bool Number(string email, string Pole)
+        public static bool Number(string email, string Pole,int lenght = 1)
         {
-            if (string.IsNullOrEmpty(email))
+            if (email.Length > lenght)
             {
-                MessageBox.Show(Pole + " обязательно для заполнения.");
+                MessageBox.Show(Pole + $" не должно превышать {lenght} символов");
                 return false;
             }
-            else if (email.Contains(" ") || !Regex.IsMatch(email, @"^[a-zA-Z@._0-9]+$"))
+
+            if (!Regex.IsMatch(email, @"^[0-9]+$"))
             {
                 MessageBox.Show(Pole + " поддерживает только цифры");
+                return false;
+            }
+
+             if(string.IsNullOrWhiteSpace(email))
+            {
+                MessageBox.Show(Pole + " не должно быть пустое.");
+                return false;
+            }
+
+            if (!Regex.IsMatch(email, @"^(?!.*\s$)(?!.*\s{2})(?!^\s).*$"))
+            {
+                MessageBox.Show(Pole + " уберите лишние пробелы.");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        public static bool WordAndNumber(string TolkBukva, string Pole, int lenght = 15)
+        {
+            if (TolkBukva.Length > lenght)
+            {
+                MessageBox.Show(Pole + $" не должно превышать {lenght} символов");
+                return false;
+            }
+
+            if (!Regex.IsMatch(TolkBukva, @"^[0-9а-яА-Я' 'a-zA-Z-]+$"))
+            {
+                MessageBox.Show(Pole + " не поддерживает ввод цифр.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(TolkBukva))
+            {
+                MessageBox.Show(Pole + " не должно быть пустое.");
+                return false;
+            }
+
+            if (!Regex.IsMatch(TolkBukva, @"^(?!.*\s$)(?!.*\s{2})(?!^\s).*$"))
+            {
+                MessageBox.Show(Pole + " уберите лишние пробелы.");
                 return false;
             }
 
@@ -107,6 +207,38 @@ namespace WebBook.ClassesApp
                 return true;
             }
         }
+
+        public static bool WordAndNumber2(string TolkBukva, string Pole, int lenght = 50)
+        {
+            if (TolkBukva.Length > lenght)
+            {
+                MessageBox.Show(Pole + $" не должно превышать {lenght} символов");
+                return false;
+            }
+
+            if (!Regex.IsMatch(TolkBukva, @"^[0-9а-яА-Я' 'a-zA-Z-()/.,-]+$"))
+            {
+                MessageBox.Show(Pole + " не поддерживает ввод цифр.");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(TolkBukva))
+            {
+                MessageBox.Show(Pole + " не должно быть пустое.");
+                return false;
+            }
+
+            if (!Regex.IsMatch(TolkBukva, @"^(?!.*\s$)(?!.*\s{2})(?!^\s).*$"))
+            {
+                MessageBox.Show(Pole + " уберите лишние пробелы.");
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+        }
+
 
 
 
