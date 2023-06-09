@@ -66,8 +66,13 @@ namespace WebBook.UserControlUI
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
             if (!Checks.Number(GraedPrac.Text, "Поле оценка")) return;
+
+            if (Convert.ToInt32(GraedPrac.Text) < 2 || Convert.ToInt32(GraedPrac.Text) > 5)
+            {
+                MessageBox.Show("Введите оценку от 2 до 5");return;
+            }
+
             answerPractical.GradeAnswer = Convert.ToInt32(GraedPrac.Text);
 
             answerPractical.PracricalAnswer = answerPractical.PracricalAnswer;
@@ -83,16 +88,24 @@ namespace WebBook.UserControlUI
 
         private void Border_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
-            try
+ 
+
+            if (MessageBox.Show("Вы точно хотите удалить?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                List<AnswerPractical> answerPracticals = DataBase.webBookEntities.AnswerPractical.Where(p => p.IdAnswer == answerPractical.IdAnswer).ToList();
-                DataBase.webBookEntities.AnswerPractical.Remove(answerPracticals[0]);
-                DataBase.webBookEntities.SaveChanges();
-                resultStudent.VivodResult();
+                try
+                {
+                    DataBase.webBookEntities.AnswerPractical.Remove(answerPractical);
+                    DataBase.webBookEntities.SaveChanges();
+                    resultStudent.VivodResult();
+                }
+                catch
+                {
+                    MessageBox.Show("Нельзя удалить");
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show("Удалить нельзя");
+                return;
             }
         }
     }

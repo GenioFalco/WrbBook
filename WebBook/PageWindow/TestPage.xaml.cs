@@ -40,6 +40,8 @@ namespace WebBook.PageWindow
 
         public int CountTrue = 0;
 
+        int currentNumber = 1;
+
         public TestPage()
         {
             InitializeComponent();
@@ -58,6 +60,9 @@ namespace WebBook.PageWindow
                 QuestionList questionList = new QuestionList();
                 questionList.TitleQuestion.Text = item.Title;
                 questionList.questionModel = item;
+                questionList.NumberStack.Text = currentNumber.ToString();
+                // Увеличение номера элемента
+                currentNumber++;
                 questionList.VivodVariantov();
                 ListQuest.Children.Add(questionList);
 
@@ -117,12 +122,15 @@ namespace WebBook.PageWindow
         
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы точно хотите завершить тест? вернуться нельзя",
-                    "",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Question) == MessageBoxResult.Yes)
-
+            if (MessageBox.Show("Вы точно хотите завершить тест? вернуться нельзя","Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
                 OverTest();
+            }
+            else
+            {
+                return; 
+            }
+
 
             falseA.Text = (ClassVariablesTest.answerModelsTrue.Count() - CountTrue).ToString();
             trueA.Text = CountTrue.ToString();

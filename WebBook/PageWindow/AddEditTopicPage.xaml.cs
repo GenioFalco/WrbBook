@@ -17,7 +17,7 @@ namespace WebBook.PageWindow
     public partial class AddEditTopicPage : Page
     {
 
-        public static Topic topic = null;
+        public static Topic topic = new Topic();
 
         OpenFileDialog ofd = new OpenFileDialog();
 
@@ -92,7 +92,7 @@ namespace WebBook.PageWindow
                 Title1.Text = "";
                 Description.Text = "";
                 myResult2 = null;
-
+                OpenDocument.Content = "Выберите документ";
                 topic = new Topic();
 
             }

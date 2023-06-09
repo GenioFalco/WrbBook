@@ -9,10 +9,16 @@
     <Grid>
         <StackPanel>
             <StackPanel Margin="10">
+                <TextBlock Text="Номер вопроса"                                    
+                               Margin="5"                                   
+                               Foreground="{DynamicResource PrimaryTextColor}"                                    
+                               FontSize="18"
+                               x:Name="NumberStack"/>
 
                 <DockPanel LastChildFill="False" x:Name="DpContQuest">
+
                     <TextBlock Text="Текст вопроса*"                                    
-                           Margin="12"                                   
+                           Margin="5"                                   
                            Foreground="{DynamicResource PrimaryTextColor}"                                    
                            FontSize="20"/>
 

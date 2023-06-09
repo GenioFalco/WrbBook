@@ -16,6 +16,7 @@ using WebBook.ClassesApp;
 using WebBook.EntityFramework;
 using WebBook.PageWindow;
 using WebBook.WindowForm;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WebBook.UserControlUI
 {
@@ -26,7 +27,7 @@ namespace WebBook.UserControlUI
     {
         public TopicsPage topicsPage;
         public HomePage homePage;
-        Topic topic = null;
+        public Topic topic = new Topic();
 
         public AddEditTopicPage addEditTopicPage = null;
         public TopicList(Topic topic)
@@ -38,17 +39,38 @@ namespace WebBook.UserControlUI
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (MessageBox.Show("Вы точно хотите удалить тему?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                List<Topic> topics = DataBase.webBookEntities.Topic.Where(x => x.IDTopic == topic.IDTopic).ToList();
-                DataBase.webBookEntities.Topic.Remove(topics[0]);
-                DataBase.webBookEntities.SaveChanges();
-                homePage.VivodTopic();
+                try 
+                {
+                    if (DataBase.webBookEntities.Test.Any(x => x.TopicTest == topic.IDTopic))
+                    {
+                        MessageBox.Show("Нельзя удалить");
+                        return;
+                    }
+
+                    if (DataBase.webBookEntities.Task.Any(x => x.TopicTask == topic.IDTopic))
+                    {
+                        MessageBox.Show("Нельзя удалить");
+                        return;
+                    }
+
+                    DataBase.webBookEntities.Topic.Remove(topic);
+                    DataBase.webBookEntities.SaveChanges();
+                    homePage.VivodTopic();
+                }
+                catch
+                {
+                    MessageBox.Show("Нельзя удалить");
+                }
+
             }
-            catch
+            else
             {
-                MessageBox.Show("Удалить нельзя");
+                return;
             }
+
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

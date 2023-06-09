@@ -2,9 +2,11 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,13 +27,17 @@ namespace WebBook.PageWindow
         readonly List<string> topicTitle;
 
         public static User user = null;
+        
+        int currentNumber = 1;
+
 
         public AddEditTestPage()
         {
             InitializeComponent();
             ConrolerBroadCast.questionModel = new List<QuestionModel>();
             ConrolerBroadCast.answerModels = new List<AnswerModel>();
-
+            
+            
             if (ConrolerBroadCast.test == null) 
             {
                 test = new Test();
@@ -47,6 +53,10 @@ namespace WebBook.PageWindow
                 TopicTest.Items.Add(item);
             }
         }
+
+  
+
+      
 
         public void InitilizateVivod()
         {
@@ -99,28 +109,33 @@ namespace WebBook.PageWindow
             }
 
 
+            if (!Checks.WordAndNumber2(ConrolerBroadCast.questionModel, "Поле текст вопроса")) return;
+
+            if (!Checks.WordAndNumber3(ConrolerBroadCast.answerModels, "Поля ответов")) return;
 
 
-
-            // Группировка ответов по idQuestion и выборка групп с одним элементом
-            var nonPairedAnswers = ConrolerBroadCast.answerModels
-                .GroupBy(a => a.IdQuestion)
-                .Where(g => g.Count() < 2)
-                .ToList();
-
-            // Проверка наличия непарных ответов
-            if (nonPairedAnswers.Count > 0)
+            foreach (var question in ConrolerBroadCast.questionModel)
             {
-                MessageBox.Show("Ошибка: Непарные ответы с idQuestion:");
-                foreach (var group in nonPairedAnswers)
+                var count = ConrolerBroadCast.answerModels.Count(a => a.IdQuestion == question.Id);
+                if (count < 2)
                 {
-                    Console.WriteLine(group.Key);
-                    
+                    MessageBox.Show("Проверьте у каждого ли вопроса есть как минимум 2 ответа"); return;
                 }
-                return;
             }
 
 
+
+            var groupedAnswers = ConrolerBroadCast.answerModels.GroupBy(a => a.IdQuestion);
+
+            // Проверка наличия хотя бы одного значения IsTrue = true в каждой группе
+            bool allGroupsHaveTrueAnswer = groupedAnswers.All(g => g.Any(a => a.IsTrue));
+
+            if (!allGroupsHaveTrueAnswer)
+            {
+                MessageBox.Show("Проверьте у всех ли вопросов отмечен правильный ответ"); return;
+            }
+          
+            
 
 
             DataBase.webBookEntities.Test.AddOrUpdate(test);
@@ -133,6 +148,8 @@ namespace WebBook.PageWindow
             {
                 item.IdtTest = id1;
             }
+
+          
 
             test.JsonFileQuestion = JsonConvert.SerializeObject(ConrolerBroadCast.questionModel);
             DataBase.webBookEntities.Test.AddOrUpdate(test);
@@ -150,6 +167,8 @@ namespace WebBook.PageWindow
             TopicTest.SelectedValue = null;
         }
 
+        
+
         private void BtAddQuest_Click(object sender, RoutedEventArgs e)
         {
             QuestionModel questionModel = new QuestionModel();   
@@ -165,6 +184,12 @@ namespace WebBook.PageWindow
             QuestionList questionList = new QuestionList();
             questionList.questionModel = questionModel;
             ConrolerBroadCast.questionModel.Add(questionModel);
+
+            // Установка номера элемента в текстовом блоке внутри user control
+            questionList.NumberStack.Text = currentNumber.ToString();
+            // Увеличение номера элемента
+            currentNumber++;
+
             ListQuest.Children.Add(questionList);
            
         }

@@ -30,9 +30,9 @@ namespace WebBook.PageWindow
     /// </summary>
     public partial class AddEditTaskPage : Page
     {
-        public static EntityFramework.Task task = null;
+        public static EntityFramework.Task task = new EntityFramework.Task();
 
-        public static Topic topic = null;
+        public static Topic topic = new Topic();
 
         OpenFileDialog ofd = new OpenFileDialog();
         bool? myResult;
@@ -132,6 +132,8 @@ namespace WebBook.PageWindow
                 LastDateTask.Value = null;
                 TopicTask.SelectedValue = null;
                 myResult = null;
+                task = new EntityFramework.Task();
+                OpenPrTask.Content = "Выберите файл";
             }
             else
             {

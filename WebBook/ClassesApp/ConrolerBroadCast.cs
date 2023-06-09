@@ -24,5 +24,7 @@ namespace WebBook.ClassesApp
         public static List<QuestionModel> questionModel = new List<QuestionModel>();
 
         public static List<AnswerModel> answerModels = new List<AnswerModel>();
+
+        public static int Number { get; set; }
     }
 }

@@ -52,17 +52,30 @@ namespace WebBook.UserControlUI
         
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (MessageBox.Show("Вы точно хотите удалить задание?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                List<EntityFramework.Task> tasks = DataBase.webBookEntities.Task.Where(x => x.IDTask == task.IDTask).ToList();
-                DataBase.webBookEntities.Task.Remove(tasks[0]);
-                DataBase.webBookEntities.SaveChanges();
-                homePage.VivodTopic();
+                try
+                {
+                    if (DataBase.webBookEntities.AnswerPractical.Any(x => x.IdTask == task.IDTask))
+                    {
+                        MessageBox.Show("Нельзя удалить");
+                        return;
+                    }
+                    DataBase.webBookEntities.Task.Remove(task);
+                    DataBase.webBookEntities.SaveChanges();
+                    homePage.VivodTopic();
+                }
+                catch
+                {
+                    MessageBox.Show("Нельзя удалить");
+                }
+
             }
-            catch
+            else
             {
-                MessageBox.Show("Удалить нельзя");
+                return;
             }
+           
         }
 
         private void Border_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)

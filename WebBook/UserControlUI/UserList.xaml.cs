@@ -33,22 +33,41 @@ namespace WebBook.UserControlUI
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (DataBase.webBookEntities.User.Any(x => user.RoleUser == 1))
             {
-                if (DataBase.webBookEntities.User.Any(x => user.RoleUser == 1))
+                MessageBox.Show("Преподавателя удалить нельзя");
+                return;
+            }
+
+            if (MessageBox.Show("Вы точно хотите удалить пользователя?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                try
                 {
-                    MessageBox.Show("Преподавателя удалить нельзя");
-                    return;
+                    if (DataBase.webBookEntities.Results.Any(x => x.IdUser == user.IDUser))
+                    {
+                        MessageBox.Show("Нельзя удалить");
+                        return;
+                    }
+                    if (DataBase.webBookEntities.AnswerPractical.Any(x => x.IdUser == user.IDUser))
+                    {
+                        MessageBox.Show("Нельзя удалить");
+                        return;
+                    }
+
+                    DataBase.webBookEntities.User.Remove(user);
+                    DataBase.webBookEntities.SaveChanges();
+                    listUserPage.Vivod();
                 }
-                List<User> users = DataBase.webBookEntities.User.Where(p => p.IDUser == user.IDUser).ToList();
-                DataBase.webBookEntities.User.Remove(users[0]);
-                DataBase.webBookEntities.SaveChanges();
-                listUserPage.Vivod();
+                catch
+                {
+                    MessageBox.Show("Удалить нельзя");
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show("Удалить нельзя");
+                return;
             }
+            
         }
     }
 }

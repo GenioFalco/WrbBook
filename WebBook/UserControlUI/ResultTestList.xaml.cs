@@ -33,16 +33,23 @@ namespace WebBook.UserControlUI
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            try
+            if (MessageBox.Show("Вы точно хотите удалить?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                List<Results> result = DataBase.webBookEntities.Results.Where(p => p.IdResult == results.IdResult).ToList();
-                DataBase.webBookEntities.Results.Remove(result[0]);
-                DataBase.webBookEntities.SaveChanges();
-                resultStudent.VivodResult();
+                try
+                {
+                    DataBase.webBookEntities.Results.Remove(results);
+                    DataBase.webBookEntities.SaveChanges();
+                    resultStudent.VivodResult();
+                }
+                catch
+                {
+                    MessageBox.Show("Нельзя удалить");
+                }
+
             }
-            catch
+            else
             {
-                MessageBox.Show("Удалить нельзя");
+                return;
             }
         }
     }

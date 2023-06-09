@@ -110,7 +110,6 @@ namespace WebBook.UserControlUI
         private void TitleQuestion_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (questionModel.Id == 0) return;
-            if (!Checks.WordAndNumber2(TitleQuestion.Text, "Поле наименование вопроса")) return;
             ConrolerBroadCast.questionModel.First(p=> p.Id == questionModel.Id).Title = TitleQuestion.Text;
         }
     }
